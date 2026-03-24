@@ -74,7 +74,7 @@ been lost. The CPU has fast registers (like xmm0, xmm1), and simulating a
 RAM-based stack is slow. 
 
 The AST, however, retains the full context. By combining the AST with the 
-'Visitor Pattern' (see Pattern 23), you can achieve this leap:
+'Visitor Pattern' (see Pattern 28_Visitor), you can achieve this leap:
 1. Optimizer Visitor: Traverses the tree to fold constants (e.g., turning 
    an AddNode(2, 3) directly into a NumberNode(5) before execution).
 2. Register Allocator Visitor: Analyzes the tree to assign specific CPU 
