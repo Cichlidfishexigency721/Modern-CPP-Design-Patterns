@@ -22,7 +22,7 @@ methods that act as factories. Because these are standard methods, they can
 have descriptive names (Named Constructors).
 
 ## Our Examples
-## This folder demonstrates two distinct use cases for this idiom
+This folder demonstrates two distinct use cases for this idiom
 
 1. SameParameters/:
 Demonstrates how to solve the constructor overloading ambiguity. A 'Point' 

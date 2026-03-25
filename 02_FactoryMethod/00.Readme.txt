@@ -18,7 +18,7 @@ increases as the player advances. The game generates meteorites that are
 larger and faster as the player reaches higher levels. 
 
 ## Our Examples
-## This folder contains two approaches to creating objects
+This folder contains two approaches to creating objects
 
 1. FactoryMethod_GoF/:
 Demonstrates the classic "Gang of Four" Factory Method. It uses an 

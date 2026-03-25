@@ -21,7 +21,7 @@ Context-specific data that varies between instances. This is passed to
 the Flyweight methods by the client object when needed.
 
 ## Our Examples
-## This folder illustrates two different approaches to implementing this pattern
+This folder illustrates two different approaches to implementing this pattern
 
 1. Flyweight/:
 A manual implementation using a 'FlyweightFactory'. It shows how to use 

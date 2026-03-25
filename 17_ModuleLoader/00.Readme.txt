@@ -22,12 +22,15 @@ inside a compiled Shared Object (.so) or Dynamic Link Library (.dll).
 The Solution & The <dlfcn.h> API:
 To solve this, we use the POSIX standard C library `<dlfcn.h>` (Dynamic 
 Linking API), which provides four main functions:
+
+```bash
 - dlopen()  : Loads a dynamic library (.so) into memory.
 - dlsym()   : Looks up a memory address for a specific symbol (name).
 - dlclose() : Unloads the library from memory.
 - dlerror() : Returns human-readable error messages.
+```
 
-Since dlsym() expects standard, unmangled C names, we use a C++ feature 
+Since `dlsym()` expects standard, unmangled C names, we use a C++ feature 
 called `extern "C"`. We expose simple C functions (factories) from our 
 module that return pointers to our complex C++ objects.
 
@@ -52,18 +55,19 @@ methods (e.g., processData), and finally destroys it.
 ## The Golden Rule of Memory across ABIs
 Notice that the Host does NOT call `delete` on the module pointer. Instead, 
 it passes the pointer back to the Plugin's `destroy_module()` function. 
-## Rule "He who allocates, deallocates." Memory allocated inside a .so file 
-must be deallocated by the same .so file to prevent heap corruption, 
-especially on Windows or across different compiler versions.
 
-Modern C++ Note:
+## Rule "He who allocates, deallocates."
+Memory allocated inside a .so file must be deallocated by the same .so file
+to prevent heap corruption, especially on Windows or across different compiler
+versions.
+
+## Modern C++ Note:
 In our implementation, we will use modern C++ features (RAII and Smart 
 Pointers with custom deleters) to domesticate the dangerous C API, ensuring 
 that libraries are closed and modules are destroyed perfectly and automatically.
 
----
-CROSS-PLATFORM CONSIDERATIONS (POSIX vs. Windows)
----
+## CROSS-PLATFORM CONSIDERATIONS (POSIX vs. Windows)
+
 Dynamic loading is not currently part of the standard C++ language (up to 
 C++23) because binary executable formats vary drastically between Operating 
 Systems. We must rely on the native OS APIs to load dynamic code.

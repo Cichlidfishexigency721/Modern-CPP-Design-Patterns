@@ -27,7 +27,7 @@ same level (Parallel). Ideal for composing a final type with a fixed set
 of features at compile-time (see 26_Strategy/03_Static_Strategy).
 
 ## Our Examples
-## This folder contains two levels of complexity
+This folder contains two levels of complexity
 
 1. Simple/:
 Demonstrates basic horizontal composition. We define features like 'Fly', 

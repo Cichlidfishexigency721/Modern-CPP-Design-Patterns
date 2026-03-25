@@ -13,7 +13,7 @@ a change, all client objects need to be modified accordingly. This approach
 creates tight coupling and violates the open/closed principle.
 
 ## The Solution
-## The Builder pattern introduces a level of separation to address this problem
+The Builder pattern introduces a level of separation to address this problem
 1. Builders: The different steps in the construction process are declared 
 as methods of a common interface, to be implemented by different concrete 
 builders.
@@ -28,7 +28,7 @@ the fully constructed object from the builder (often facilitated by a
 'getObject' or 'build' method declared in the Builder interface).
 
 ## Our Examples
-## This folder illustrates two approaches to implementing the Builder
+This folder illustrates two approaches to implementing the Builder
 
 1. Static_example/:
 Shows a "Fluent Builder" where the builder manages a complicated 

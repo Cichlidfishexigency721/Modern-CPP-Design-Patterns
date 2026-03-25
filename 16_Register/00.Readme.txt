@@ -49,9 +49,8 @@ patterns in this repository:
 - 05_Singleton/Singleton_with_register/: A registry for Singleton instances.
 - 25_FiniteStateMachine/: Dynamic state registration for modular machines.
 
----
-# STRATEGY CONFIGURATION (Singleton vs. Prototype)
----
+## STRATEGY CONFIGURATION (Singleton vs. Prototype)
+
 In 'Register.h', you can choose how the Registry instantiates your services:
 
 1. REGISTRY_SINGLETON:
@@ -67,12 +66,13 @@ the object to maintain its own unique state or when the object
 is lightweight.
 
 To configure, uncomment one of these lines at the very top of 'Register.h':
+```cpp
 //#define REGISTRY_SINGLETON
 //#define REGISTRY_PROTOTYPE
+```
 
----
 ## THE POWER OF std:function AND LAZY INITIALIZATION
----
+
 The Registry does not store ready-made objects; it stores 'Creator' objects 
 defined as 'std::function<std::shared_ptr<Processor>()>'. 
 
