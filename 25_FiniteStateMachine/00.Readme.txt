@@ -58,10 +58,12 @@ This is the simplest form, but it requires 'registerState' to return
 a value that can be assigned.
 
 2. Lambda-based initialization (Used here):
+```cpp
 static inline bool registered_ = []() {
    FSM:registerState<T>("Name");
    return true;
 }();
+```
 
 ## This is preferred for two reasons
 - Memory Efficiency: We only store a 'bool' (1 byte) in the static segment, 

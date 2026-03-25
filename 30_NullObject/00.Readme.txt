@@ -12,9 +12,11 @@ object is missing, we use 'nullptr' or special sentinel values to represent
 its absence. This forces the client code to constantly check if the object 
 is null before calling its methods:
 
+```cpp
 if (logger != nullptr) {
    logger->log("Something happened");
 }
+```
 
 Scattered throughout a large codebase, these checks increase complexity, 
 decrease readability, and introduce the risk of NullPointerExceptions.

@@ -24,7 +24,8 @@ method on the root of the tree, which recursively calls its children.
 We have built a terminal calculator (calc) that interprets mathematical 
 expressions.
 
-## Usage 
+Usage:
+````bash
 ./calc "sin(0.3) + (5 * 2.1)"
 ./calc -p "sin(0.3) + (5 * 2.1)"
 
@@ -37,9 +38,8 @@ If you pass '-p' as the first argument, the program will print its internal
 representation of the formula before evaluating it. This is crucial for 
 understanding the architectural differences in this folder.
 
----
 ## TWO ARCHITECTURES OOP vs PERFORMANCE
----
+
 This directory contains two sub-folders solving the exact same problem 
 (following the exact same Grammar.txt), but using different paradigms:
 

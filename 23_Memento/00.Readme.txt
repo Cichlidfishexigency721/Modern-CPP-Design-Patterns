@@ -46,9 +46,8 @@ string (e.g., generated using std::stringstream). The Caretaker just
 holds opaque strings. The Originator knows how to pack its variables 
 into the string and unpack them later.
 
----
 ## INDUSTRY NOTE BOOST & ADVANCED SERIALIZATION
----
+
 In this repository, the 'Memento_String' example uses manual string 
 serialization to keep the code pure standard C++ with zero dependencies. 
 
