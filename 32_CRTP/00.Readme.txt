@@ -13,6 +13,7 @@ is a template that knows the exact type of the derived class at compile-time.
 
 Here is a minimal, non-compilable example of the CRTP structure:
 
+```cpp
 // 1. The Base class is a template expecting the Derived type 'T'
 template <class T>
 class Base 
@@ -47,6 +48,7 @@ int main()
    Base<Derived>* b = d;           // Upcast to Base pointer (Static transition)
    execute(b);                     // Logic executed through Base interface
 }
+```
 
 ## How it acts like Polymorphism
 As seen in point 5, the program uses a pointer to the Base class ('b'). When 
@@ -78,7 +80,7 @@ the cloning logic once in the base class, and it automatically handles
 the correct return types for every subclass.
 
 ## Other Examples
-## See 19_Observer/02_CRTP_Basic and 19_Observer/03_CRTP_Topics
+See 19_Observer/02_CRTP_Basic and 19_Observer/03_CRTP_Topics
 
 ## Key Benefits
 - Zero Runtime Overhead: No virtual tables, enabling aggressive inlining.
