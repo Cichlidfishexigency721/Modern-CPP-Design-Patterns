@@ -16,7 +16,7 @@ strip libModule.so && \
 chmod 644 libModule.so && \
 
 # Create the Program that uses the Module:
-c++ -std=c++2a -O3 -Wfatal-errors -Wall -Wextra -Wpedantic -o ModuleLoader ModuleLoader.cpp -ldl && \
+c++ -std=c++23 -O3 -Wfatal-errors -Wall -Wextra -Wpedantic -o ModuleLoader ModuleLoader.cpp -ldl && \
 
 # strip the program:
 strip ModuleLoader && \
