@@ -25,9 +25,10 @@ We have built a terminal calculator (calc) that interprets mathematical
 expressions.
 
 Usage:
-````bash
+```bash
 ./calc "sin(0.3) + (5 * 2.1)"
 ./calc -p "sin(0.3) + (5 * 2.1)"
+```
 
 * Note on quotes: Quotes are mandatory. They prevent the Linux shell from 
 interpreting special characters (like '*' or '()') as shell commands or 
