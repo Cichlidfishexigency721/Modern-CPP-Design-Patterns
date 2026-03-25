@@ -1,22 +1,20 @@
-============================================================================
-                          BRIDGE PATTERN (STRUCTURAL)
-============================================================================
+# BRIDGE PATTERN (STRUCTURAL)
 
-Intent:
+## Intent
 The Bridge pattern is designed to decouple an abstraction from its 
 implementation so that the two can vary independently. It separates the 
 "logic" hierarchy from the "platform" hierarchy.
 
-The Problem:
+## The Problem
 Imagine you have a class 'Shape' with subclasses 'Circle' and 'Square'. 
-Now you want to support two rendering platforms: 'Vector' and 'Raster'.
+## Now you want to support two rendering platforms 'Vector' and 'Raster'.
 Without Bridge, you would need 4 classes: 
 (VectorCircle, RasterCircle, VectorSquare, RasterSquare).
 If you add a 'Triangle', you need 2 more. If you add '3D' rendering, you 
 need another 3. This leads to an exponential "Cartesian Product" explosion 
 of classes.
 
-The Solution:
+## The Solution
 Instead of using inheritance in a single hierarchy, we split the code into 
 two independent dimensions:
 1. Abstraction: The high-level logic (What it IS - e.g., a Circle).
@@ -24,19 +22,20 @@ two independent dimensions:
 
 The Abstraction contains a reference (the "Bridge") to an Implementer object.
 
-Our Example Scenario:
+## Our Example Scenario
 - Abstraction: 'Shape' (Circle, Square). It knows about its size or radius.
 - Implementer: 'Renderer' (VectorRenderer, RasterRenderer). It knows how 
-  to draw lines or pixels on a screen.
+to draw lines or pixels on a screen.
 
 By connecting them through a Bridge, a 'Circle' can work with ANY 'Renderer' 
 without needing a specific class for every combination.
 
-Key Benefits:
+## Key Benefits
 - Independence: You can develop new shapes without touching the renderers, 
-  and vice versa.
+and vice versa.
 - Runtime Switching: You can change the implementation (e.g., switch from 
-  OpenGL to DirectX) at runtime by simply swapping the implementer object.
+OpenGL to DirectX) at runtime by simply swapping the implementer object.
 - Hiding Complexity: The client only interacts with the Abstraction; 
-  implementation details are completely hidden.
-============================================================================
+implementation details are completely hidden.
+
+---

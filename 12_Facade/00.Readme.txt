@@ -27,11 +27,9 @@ Please note that, a Facade same as an Adapter can wrap multiple classes, but a f
 an interface to simplify the use of the complex interface, whereas, an adapter is used to convert
 the interface to an interface the client expects.
 
-============================================================================
-                         FACADE PATTERN (STRUCTURAL)
-============================================================================
+# FACADE PATTERN (STRUCTURAL)
 
-Intent:
+## Intent
 The Facade pattern provides a simplified interface to a complex subsystem. 
 It hides the internal complexity of the subsystem and makes it easier 
 for clients to interact with the system.
@@ -51,32 +49,33 @@ the facade rather than the subsystem, your client code doesn’t need to be
 change, just the facade required to be changed, that’s would be delivered
 with a new version to the client.
 
-The Problem:
+## The Problem
 When working with a complex subsystem (e.g., a computer, a car engine, a 
 video player), clients must interact with many different classes and 
 interfaces. This can lead to:
-   - Increased complexity for the client.
-   - Tight coupling between the client and the subsystem.
-   - Difficulty in modifying or extending the system.
+- Increased complexity for the client.
+- Tight coupling between the client and the subsystem.
+- Difficulty in modifying or extending the system.
 
-The Solution:
+## The Solution
 Create a "Facade" class that provides a simplified, high-level interface 
 to the subsystem. The Facade:
 1. Knows how to access the subsystem.
 2. Provides a simplified set of methods for the client.
 3. Decouples the client from the internal complexity of the subsystem.
 
-Our Example:
+## Our Example
 In this example, we are creating a simplified interface to start a 
 computer:
 - The Facade is the 'ComputerFacade'.
 - The Subsystem consists of 'CPU', 'HardDrive', and 'Memory'.
 - The Client (main) calls 'ComputerFacade::Start()'. The Facade then 
-  manages the steps to boot the computer.
+manages the steps to boot the computer.
 
-Key Benefits:
+## Key Benefits
 - Simplification: Reduces the complexity for clients.
 - Decoupling: Reduces the dependency between the client and the subsystem.
 - Flexibility: You can change the subsystem without affecting the client, 
-  as long as the Facade's interface remains the same.
-============================================================================
+as long as the Facade's interface remains the same.
+
+---
