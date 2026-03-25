@@ -5,7 +5,7 @@ This is a C++ specific implementation of the Bridge pattern, commonly
 referred to as the "Pimpl" (Pointer to Implementation) idiom. Its primary 
 goal is to hide a class's internal data members from its interface.
 
-Why use it?
+## Why use it?
 1. Compilation Firewall: If you change the private members of 'Impl', 
 only 'Employee.cpp' needs to be recompiled. Any code that uses 
 'Employee.h' does NOT need to be recompiled.

@@ -14,7 +14,7 @@ concrete type of the element.
 type, allowing the Visitor to perform specific operations based on the 
 element type.
 
-The OCP (Open/Closed Principle) Trade-off:
+## The OCP (Open/Closed Principle) Trade-off:
 This pattern illustrates a classic architectural trade-off:
 
 1. Open for Extension (Operations):
@@ -26,7 +26,7 @@ It is NOT open to adding new Visitable elements easily. If you add a
 'VideoElement', you MUST update the base 'Visitor' interface, which 
 forces the recompilation of all existing Visitor classes.
 
-Why is this acceptable?
+## Why is this acceptable?
 In many real-world scenarios, the object hierarchy is stable (e.g., 
 elements in a document), while the operations are volatile (exporting, 
 indexing, rendering). In these cases, the stability of the hierarchy 

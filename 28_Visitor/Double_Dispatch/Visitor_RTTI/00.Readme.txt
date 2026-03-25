@@ -27,7 +27,7 @@ hierarchies. The base Visitor is now an empty interface. We use specific
 template interfaces (Visit<T>) for each operation and 'dynamic_cast' 
 to verify at runtime if a visitor can handle a specific element.
 
-Key C++ RTTI Elements used in this example:
+## Key C++ RTTI Elements used in this example:
 
 1. dynamic_cast: 
 This operator performs a safe downcast or cross-cast within the 
@@ -39,7 +39,7 @@ allowing us to handle the failure gracefully.
 
 2. typeid: 
 This operator returns a reference to a 'std::type_info' object. 
-## In this implementation
+In this implementation:
 - It is used within our 'dispatch_error' exception to identify the 
 exact types that caused the dispatch failure.
 - It provides the human-readable (or mangled) name of the classes 
