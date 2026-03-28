@@ -14,15 +14,15 @@ is a template that knows the exact type of the derived class at compile-time.
 Here is a minimal, non-compilable example of the CRTP structure:
 
 ```cpp
-// 1. The Base class is a template expecting the Derived type 'T'
-template <class T>
+// 1. The Base class is a template expecting the 'Derived' type
+template <class Derived>
 class Base 
 {
 public:
 void interfaceMethod() 
 {
    // 2. We safely downcast 'this' to the Derived type 'T' at compile-time
-   static_cast<T*>(this)->implementationMethod();
+   static_cast<Derived*>(this)->implementationMethod();
    }
 };
 
