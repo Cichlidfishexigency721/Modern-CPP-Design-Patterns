@@ -15,15 +15,19 @@ The Memento Pattern delegates the creation of the state snapshot to the
 actual owner of that state. It defines three distinct roles:
 
 1. Originator:
+
 - Creates a memento containing a snapshot of its current internal state.
 - Uses the memento to restore its internal state later.
 
 2. Memento:
+
 - Stores the internal state of the Originator object. 
 - Protects against access by objects other than the originator. Mementos 
 have effectively two interfaces:
+
 a) The Caretaker sees a "narrow" interface—it can only pass the 
 memento to other objects.
+
 b) The Originator sees a "wide" interface, allowing it to access all 
 the data necessary to restore itself.
 
@@ -36,11 +40,13 @@ Stack for Undo operations).
 This folder demonstrates two different architectural approaches
 
 1. Memento_Classic_GoF/
+
 The traditional Gang of Four (GoF) implementation. It uses polymorphic 
 base classes and nested structs to ensure that only the Originator can 
 access the Memento's data (strict encapsulation).
 
 2. Memento_String/ (Manual Serialization)
+
 A modern, pragmatic approach where the "Memento" is simply a serialized 
 string (e.g., generated using std::stringstream). The Caretaker just 
 holds opaque strings. The Originator knows how to pack its variables 

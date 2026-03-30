@@ -43,16 +43,19 @@ execution skeleton for console-based applications. It handles the lifecycle
 of the application, leaving the specific logic to the user:
 
 1. Framework/:
+
 Contains the 'App' base class and the framework's 'main' entry point. 
 It implements the "Hollywood Principle" by calling the user's methods 
 (start, read, compute, write, result, final).
 
 2. up/:
+
 A client application that uses our framework to convert text files to 
 UPPERCASE. It implements only the specific logic required by the 
 framework skeleton.
 
 3. wc/:
+
 A client application that uses our framework to count lines, words, 
 and characters in a file. It demonstrates how different tools can 
 share the same architectural skeleton.
