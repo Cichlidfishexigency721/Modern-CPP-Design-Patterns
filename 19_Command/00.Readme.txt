@@ -18,16 +18,23 @@ any parameters). This transformation lets you:
 2. Store commands in a collection (queue, undo stack).
 3. Execute commands at a later time (deferred execution).
 
-## Key Components
-- Command Interface: Declares an 'execute' method.
-- Concrete Commands: Bind a receiver object with an action.
-- Receiver: The object that performs the actual business logic.
-- Invoker: Asks the command to carry out the request. It does not know 
-the concrete command class, only the interface.
+## Our Examples
+This directory illustrates the evolution of the Command pattern from the 
+classic object-oriented approach to modern functional-style C++:
+
+1. **01_Command_GoF/**:
+   The traditional implementation using class inheritance. Each command is 
+   a class that implements a virtual 'execute()' method. It uses 
+   'std::unique_ptr' to manage the lifecycle of commands in a queue.
+
+2. **02_Modern_Variant/**:
+   A modern C++17 approach. Commands are simple data structures (structs), 
+   and the execution logic is centralized in a Visitor. This version is 
+   "non-intrusive" and uses value semantics (no pointers/heap).
 
 ## Key Benefits
 - Decoupling: The Invoker is separated from the Receiver.
 - Extensibility: Adding new commands doesn't require changing existing code.
-- Composability: Commands can be assembled into 'MacroCommands' (composite).
+- Composability: Commands can be assembled into 'MacroCommands'.
 
 ---
