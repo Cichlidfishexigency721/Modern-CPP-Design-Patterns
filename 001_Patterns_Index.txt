@@ -45,5 +45,6 @@ IV. C++ SPECIFIC TECHNIQUES & FRAMEWORKS
 30_NullObject: Provides a "do-nothing" object to eliminate explicit null checks.
 31_Variant: Type-safe unions for non-intrusive polymorphism and modern dispatch.
 32_CRTP: Static polymorphism using the Curiously Recurring Template Pattern.
+33_ErrorHandling: Manages operation outcomes via the 'Result' pattern (std::expected).
 
-============================================================================ END
+================================================================================== END

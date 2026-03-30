@@ -38,11 +38,12 @@ see: 30_NullObject/02_Modern_Variant.
 3. Command Pattern: 
 Commands can be stored as a variant of different function objects, 
 making it easy to store them in a history buffer (vector) and 
-execute them using a visitor.
+execute them using a visitor, see 19_Command/02_Modern_Variant.
 
 4. Error Handling (Result/Either Pattern): 
 Commonly used to return either a 'Success' value or an 'Error' 
-struct from a function, replacing exceptions for logic flow.
+struct from a function, replacing exceptions for logic flow,
+see 33_ErrorHandling/01_ErrorHandling_Variant.
 
 ## Key Advantages
 - Non-Intrusive: You can "visit" classes without modifying their code 
