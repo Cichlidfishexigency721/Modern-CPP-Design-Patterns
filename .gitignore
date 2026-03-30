@@ -14,3 +14,6 @@
 # Ignorar objetos y librerías
 *.so
 *.o
+
+# Ignorar commit shell
+do_git_commit.sh
