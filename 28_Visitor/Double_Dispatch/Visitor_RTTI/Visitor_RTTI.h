@@ -27,7 +27,7 @@ public:
    {
       message_ = "dispatch_error: ";
       message_ += className;
-      message_ += " not visited As<";
+      message_ += " not visitable As<";
       message_ += className;
       message_ += ">";
    }

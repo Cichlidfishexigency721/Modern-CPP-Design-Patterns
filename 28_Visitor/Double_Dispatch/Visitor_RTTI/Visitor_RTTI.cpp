@@ -66,13 +66,13 @@ void dispatchAllCombinations(
    std::vector<Visitable_ptr>& colors, 
    std::vector<Visitor_ptr>& shapes)
 {
-   for (auto& visited : colors)
+   for (auto& visitable : colors)
    {
       for (auto& visitor : shapes)
       {
          try
          {
-            double_dispatch(*visited, *visitor);
+            double_dispatch(*visitable, *visitor);
          }
          catch (const Dispatch_error& e)
          {

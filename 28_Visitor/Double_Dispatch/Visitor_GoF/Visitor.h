@@ -54,14 +54,14 @@ public:
  * the handshake via the Visitable's accept method.
  */
 
-inline void double_dispatch(Visitable& visited, Visitor& visitor)
+inline void double_dispatch(Visitable& visitable, Visitor& visitor)
 {
-   visited.accept(visitor);
+   visitable.accept(visitor);
 }
 
-inline void double_dispatch(Visitor& visitor, Visitable& visited)
+inline void double_dispatch(Visitor& visitor, Visitable& visitable)
 {
-   visited.accept(visitor);
+   visitable.accept(visitor);
 }
 
 #endif 

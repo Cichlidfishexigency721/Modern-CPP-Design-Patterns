@@ -8,9 +8,9 @@
  * the operations (Visitor).
  * 
  * --- RECOMPILATION ANALYSIS:
- * 1. Incrementing a new Visitor -> Neither existing Visitors nor Visited 
+ * 1. Incrementing a new Visitor -> Neither existing Visitors nor Visitable 
  *    classes need to be recompiled.
- * 2. Incrementing a new Visited -> Visited classes do not need to be 
+ * 2. Incrementing a new Visitable -> Visitable classes do not need to be 
  *    recompiled, BUT ALL existing Visitor classes MUST be recompiled!
  * ============================================================================
  */
@@ -35,7 +35,7 @@ protected:
 public:
    virtual ~Visitor() = default;
 
-   // Visitor depends upon Visited types. 
+   // Visitor depends upon Visitable types. 
    // Default implementation throws an error to ensure safety.
    virtual void visit(Red&)  { throw dispatch_error(typeid(*this).name(), "Red"); } 
    virtual void visit(Blue&) { throw dispatch_error(typeid(*this).name(), "Blue"); } 
@@ -97,14 +97,14 @@ void dispatch_all_combinations(
    std::vector<Visitable_ptr>& colors, 
    std::vector<Visitor_ptr>& shapes)
 {
-   for (auto& visited : colors)
+   for (auto& visitable : colors)
    {
       for (auto& visitor : shapes)
       {
          try
          {
             // Handshake starts here!
-            double_dispatch(*visited, *visitor); 
+            double_dispatch(*visitable, *visitor); 
          }
          catch (const dispatch_error& e)
          {
