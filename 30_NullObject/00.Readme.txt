@@ -22,26 +22,43 @@ Scattered throughout a large codebase, these checks increase complexity,
 decrease readability, and introduce the risk of NullPointerExceptions.
 
 ## The Solution
-Instead of using 'null', we provide a concrete class that implements the 
-same interface as the real object but performs no action (a "no-op"). 
-The client code then treats the Null Object exactly like a real one, 
-completely eliminating the need for conditional null-checks.
+Instead of using 'null', we provide an object that represents the "nothingness"
+but still responds to the same interface. In C++, there are two main ways to
+implement this:
 
-## Our Example The Logger System
-We simulate an application that requires a 'Logger'. 
-- Logger (Interface): Defines the 'log' method.
-- ConsoleLogger (Real Object): Performs the actual logging to the console.
-- NullLogger (Null Object): Implements the interface but does absolutely 
-nothing. It is a "silent" logger used when we want to suppress logging.
+  - Inheritance-based (GoF): A concrete class implements the interface but its
+    methods are empty. The client uses a pointer to the base class.
+
+  - Type-based (Modern C++17): Using std::variant with std::monostate. The type
+    'std::monostate' acts as the explicit "Null" type, and the compiler ensures
+    it is handled through std::visit.
+
+## Our Examples
+This directory illustrates the evolution of the pattern:
+
+    - 01_Classic_GoF/:
+      Uses an abstract 'Logger' interface and a 'NullLogger' class. It demuestra
+      how a Singleton Null Object can replace nullptr to simplify client loops.
+
+    - 02_Modern_Variant/:
+      Uses std::variant<std::monostate, ConsoleLogger>. In this version,
+      std::monostate IS the Null Object. It provides "Value Semantics" (no
+      pointers/heap) and "Static Safety", as the compiler forces the handling of
+      the empty case.
 
 ## Key Benefits
-- Uniformity: Clients can interact with the object without knowing if it 
-is "real" or "null".
-- Reduced Complexity: Eliminates the need for explicit null checks throughout 
-the client code.
-- Safety: Greatly reduces the risk of runtime crashes caused by dereferencing 
-a null pointer.
-- Singleton usage: Since Null Objects usually hold no state, they are 
-perfect candidates to be implemented as a Singleton.
+
+    - Uniformity: Clients can interact with the object without knowing if it is
+      "real" or "null".
+
+    - Reduced Complexity: Eliminates the need for explicit null checks
+      throughout the client code.
+
+    - Safety: Greatly reduces the risk of runtime crashes caused by
+      dereferencing a null pointer.
+
+    - Singleton usage: Since Null Objects usually hold no state, they are
+      perfect candidates to be implemented as a Singleton (in the classic
+      version) or as a simple type (in the variant version).
 
 ---

@@ -6,8 +6,14 @@
  * Demonstrates the use of std::variant and std::visit (C++17).
  * Includes a custom 'Logger' class implementing "The Gang of Seven" to
  * trace memory lifecycle and ownership changes within the variant.
+ * 
+ * --- MANUAL ACCESS:
+ * Also demonstrates how to safely access the content of a variant without 
+ * a visitor using std::get_if, providing a pointer-based check.
  * ============================================================================
  */
+
+// Developed by MGQ at https://wandbox.org/permlink/6d5UVbWrezYijARP
 
 #include <iostream>
 #include <variant>
@@ -139,6 +145,19 @@ int main()
    std::cout << "Num Logger:      " << visitor.lo << '\n';
    std::cout << "Num const char*: " << visitor.cp << '\n';
    std::cout << "Num string:      " << visitor.st << '\n';
+
+   //------------------------------------------------- Manual access without Visitor:
+   std::cout << "\n--------------------------- Manual Access (std::get_if):\n";
+   var_t manualVar = 3.1415;
+
+   // get_if returns a pointer if the type matches, or nullptr otherwise
+   if (auto* dVal = std::get_if<double>(&manualVar))
+      std::cout << " Found double value: " << *dVal << "\n";
+   
+   if ([[maybe_unused]] auto* iVal = std::get_if<int>(&manualVar))
+      std::cout << " This won't print, since manualVar is not an int.\n";
+   else
+      std::cout << " Confirmed: manualVar does not contain an int.\n";
     
    std::cout << "\n--------------------------------------- END\n";
 }

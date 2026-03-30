@@ -25,14 +25,15 @@ automatically generates the dispatch table at compile-time.
 Yes! 'std::variant' is a powerhouse in modern C++ architecture and is 
 frequently used to implement or simplify other patterns:
 
-1. Finite State Pattern: 
-Instead of a complex hierarchy of State classes, you can define 
-states as simple structs and store the current state in a variant. 
-Transitions are handled by updating the variant.
+1. Finite State Pattern:
+Instead of a complex hierarchy of State classes, you can define states as simple
+structs and store the current state in a variant.  Transitions are handled by
+updating the variant, see 25_FiniteStateMachine/03_CDPlayer_Variant/.
 
 2. Null Object Pattern: 
 By including 'std::monostate' in a variant, you can represent the 
-absence of a value in a type-safe way, avoiding null pointer issues.
+absence of a value in a type-safe way, avoiding null pointer issues,
+see: 30_NullObject/02_Modern_Variant.
 
 3. Command Pattern: 
 Commands can be stored as a variant of different function objects, 
