@@ -18,9 +18,7 @@ Sentences are parsed into an Abstract Syntax Tree (AST) made of these
 objects. Evaluating the sentence is as simple as calling an 'evaluate()' 
 method on the root of the tree, which recursively calls its children.
 
----
 ## OUR PROJECT THE 'calc' COMMAND LINE TOOL
----
 We have built a terminal calculator (calc) that interprets mathematical 
 expressions.
 
@@ -45,6 +43,7 @@ This directory contains two sub-folders solving the exact same problem
 (following the exact same Grammar.txt), but using different paradigms:
 
 1. Interpreter_GoF_AST/
+
 The pure Gang of Four pattern. The parser builds an Abstract Syntax 
 Tree (AST) in memory. Every mathematical operation is a polymorphic 
 C++ object (e.g., AddNode, SinNode). 
@@ -52,15 +51,14 @@ C++ object (e.g., AddNode, SinNode).
 - Con: Slower execution due to recursive virtual function calls.
 
 2. Interpreter_Stack_Machine/ (Legacy Implementation)
+
 An industrial-style approach. The parser compiles the string into a 
 linear array of "Bytecode" instructions. A virtual machine uses a Stack 
 and a giant switch-statement to evaluate the bytecode.
 - Pro: Blazing fast, cache-friendly, zero virtual overhead.
 - Con: Harder to extend or manipulate once compiled.
 
----
 ## BEYOND INTERPRETATION THE ROAD TO MACHINE CODE (AOC / JIT)
----
 While the Interpreter pattern evaluates expressions directly, the GoF AST 
 architecture offers a massive hidden advantage: it is the perfect starting 
 point for building a real compiler that targets native hardware (e.g., x86 
