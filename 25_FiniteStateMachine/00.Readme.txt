@@ -25,13 +25,13 @@ specific state of the Context.
 This folder illustrates the State pattern through two different levels 
 of complexity:
 
-1. SimpleExample/:
+1. 01_SimpleExample/:
 A theoretical implementation showing the basic "handshake" between a 
 Context (FSM) and its States (State_A, State_B). It demonstrates how 
 transition actions and entry/exit behaviors are triggered during 
 state changes.
 
-2. BigExample (CD Player):
+2. 02_CDPlayer_GoF (CD Player):
 A realistic scenario simulating a CD Player. This version showcases how 
 complex systems (with states like 'Playing', 'Paused', 'Closed_with_CD') 
 can be managed cleanly. By encapsulating logic in separate files for 

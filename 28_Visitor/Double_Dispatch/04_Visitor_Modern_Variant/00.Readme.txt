@@ -25,7 +25,7 @@ automatically generates the dispatch table at compile-time.
 Yes! 'std::variant' is a powerhouse in modern C++ architecture and is 
 frequently used to implement or simplify other patterns:
 
-1. State Pattern: 
+1. Finite State Pattern: 
 Instead of a complex hierarchy of State classes, you can define 
 states as simple structs and store the current state in a variant. 
 Transitions are handled by updating the variant.
