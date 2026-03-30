@@ -65,16 +65,16 @@ compilation, allowing it to inline the function calls (Zero-Overhead Principle).
 ## Our Examples
 This folder is divided into three classic industry use cases for CRTP
 
-1. 01_StaticPolymorphism/:
+1. **01_StaticPolymorphism/:**
 Demonstrates how to emulate virtual function calls at compile-time. 
 Ideal for performance-critical systems that need polymorphic flexibility.
 
-2. 02_ObjectCounter/:
+2. **02_ObjectCounter/:**
 Shows how to inject static state into unrelated classes. It tracks how 
 many instances of a specific derived class are alive without sharing 
 the count between different types.
 
-3. 03_PolymorphicClone/:
+3. **03_PolymorphicClone/:**
 Automates the 'clone()' method (Prototype pattern). Using CRTP, we write 
 the cloning logic once in the base class, and it automatically handles 
 the correct return types for every subclass.
