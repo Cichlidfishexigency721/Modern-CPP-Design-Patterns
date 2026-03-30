@@ -8,11 +8,15 @@ of traditional error codes.
 
 ## The Problem
 In traditional C++, we have two main ways to handle failures, both with significant drawbacks:
+
     1. Error Codes (C-style): Usually an 'int' returned by the function.
+    
         - Drawback: They are easily ignored by developers.
         - Drawback: They force the use of output parameters (e.g., passing a
                     pointer to get the actual result), which makes the API clunky.
+
     2- Exceptions:
+    
         - Drawback: They introduce a hidden control flow that is hard to follow.
         - Drawback: They have a performance cost due to "stack unwinding" when an
                     error actually occurs.
@@ -33,6 +37,7 @@ else        { handle_error(result.error()); }
 ## Our Examples
 This directory demonstrates the transition from a manual implementation to the
 official C++ standard:
+
     1. 01_ErrorHandling_Variant/ (C++17):
        Uses std::variant<Result, Error> to manually implement the "Either"
        pattern. It is the foundation of modern error handling and works on any
