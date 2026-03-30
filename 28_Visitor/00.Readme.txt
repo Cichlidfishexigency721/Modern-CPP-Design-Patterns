@@ -18,18 +18,18 @@ both its mechanical and architectural facets:
 1. Double_Dispatch/:
 Focuses on the "handshake" mechanism. These examples solve the problem of 
 resolving types for two interacting objects (e.g., shape collisions).
-- Visitor_Simple/: Basic recursive virtual call approach.
-- Visitor_GoF/: The classic Gang of Four implementation.
-- Visitor_RTTI/: Acyclic Visitor using dynamic_cast to break dependencies.
-- Visitor_Modern_Variant/: C++17 'std::variant' and 'std::visit' approach.
+- 01_Visitor_Simple/: Basic recursive virtual call approach.
+- 02_Visitor_GoF/: The classic Gang of Four implementation.
+- 03_Visitor_RTTI/: Acyclic Visitor using dynamic_cast to break dependencies.
+- 04_Visitor_Modern_Variant/: C++17 'std::variant' and 'std::visit' approach.
 
 2. Extending_Behaviors/:
 Focuses on the architectural power of the pattern. These examples use 
 Visitor to add new operations (Export, Text Extraction) to a stable 
 Document structure, demonstrating how to keep object classes clean and 
 focused while centralizing algorithmic logic.
-- Visitor_Traditional_GoF/: Classic approach using accept() methods.
-- Visitor_Modern/: Non-intrusive approach using 'std::variant'.
+- 01_Visitor_Traditional_GoF/: Classic approach using accept() methods.
+- 02_Visitor_Modern_Variant/: Non-intrusive approach using 'std::variant'.
 
 ---
 ## SEE ALSO STATIC VISITOR (Pattern 15_Mixin)
