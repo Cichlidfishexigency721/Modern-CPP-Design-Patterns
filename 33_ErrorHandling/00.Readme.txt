@@ -33,14 +33,12 @@ else        { handle_error(result.error()); }
 ## Our Examples
 This directory demonstrates the transition from a manual implementation to the
 official C++ standard:
-1. 01_ErrorHandling_Variant/ (C++17):
-
+1. **01_ErrorHandling_Variant/ (C++17):**
    Uses std::variant<Result, Error> to manually implement the "Either"
    pattern. It is the foundation of modern error handling and works on any
    system with C++17 support.
 
-2. 02_ErrorHandling_Expected/ (C++23):
-
+2. **02_ErrorHandling_Expected/ (C++23):**
    Uses the new std::expected utility. This is the industrial standard
    introduced in C++23, providing a much more ergonomic and readable API
    specifically designed for this purpose.
