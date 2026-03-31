@@ -1,9 +1,7 @@
 # Ignore files without extensions (Linux executables)
 *
-
 # Do not ignore folders (so you can access them)
 !*/
-
 # Do not ignore specific files
 !*.cpp
 !*.h
@@ -12,7 +10,6 @@
 !*.sh
 !*.png
 !.gitignore
-
 # Ignore objects and libraries
 *.so
 *.o
