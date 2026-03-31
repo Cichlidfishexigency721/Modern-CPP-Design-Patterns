@@ -18,8 +18,9 @@
 #include <string>
 #include <utility>
 
-//--------------------------------------------------------- Features (Mixins):
+//----------------------------------------------------------- Features (Mixins):
 
+//------------------------------------------------------ Laser:
 class Laser
 {
 private:
@@ -44,6 +45,7 @@ public:
    }
 };
 
+//------------------------------------------------------- Walk:
 class Walk
 {
 private:
@@ -66,6 +68,7 @@ public:
    }
 };
 
+//-------------------------------------------------------- Gun:
 class Gun
 {
 private:
@@ -96,6 +99,7 @@ public:
    }
 };
 
+//------------------------------------------------------- Tank:
 class Tank
 {
 private:
@@ -120,6 +124,7 @@ public:
    }
 };
 
+//-------------------------------------------------------- Fly:
 class Fly
 {
 private:
@@ -127,19 +132,26 @@ private:
    int speed_{40};
 
 public:
-   // Alternative 1: Rigid dependency (Only Tank can be used)
-   // void fly(Tank& tank)
+   void fly_set_altitude_speed(int altitude, int speed)
+   {
+      altitude_= altitude;
+      speed_ = speed;
+   }
+   
+   // Alternative 1: Rigid dependency: Only class Tank (o a derived class) can be used to call fly.
+   // void fly(Tank& entity)
+   // {
 
    // Alternative 2: Generic template (The Entity type must be explicitly defined)
-   // Any class that provides 'tank_get_fuel' is accepted.
-   // The Entity type is well know inside fly() method.
+   // Any class that provides 'tank_get_fuel' is accepted at compilation time.
+   // The Entity type is well know and can be used inside fly() method.
    // template<class Entity>
    // void fly(Entity& entity)
+   // {
 
    // Alternative 3: Abbreviated Function Template (Modern C++20)
    // The Entity type is deduced at compile-time.
-   // Any class that provides 'tank_get_fuel' is accepted, achieving complete
-   // decoupling without requiring inheritance or explicit template parameters.
+   // Any class that provides 'tank_get_fuel' is accepted at compilation time.
    // The Entity type isn't know inside fly() method.
    void fly(auto& entity)
    {
@@ -153,8 +165,9 @@ public:
    }
 };
 
-//------------------------------------------------------------- Generic Entity:
+//-------------------------------------------------------------- Generic Entity:
 
+//----------------------------------------------- Basic_Entity:
 class Basic_Entity
 {
 private:
@@ -169,36 +182,39 @@ public:
    }
 };
 
+//----------------------------------------------------- Entity:
 // Variadic Template Entity inheriting from all Mixins
 template<class ... Mixins>
 class Entity : public Basic_Entity, public Mixins...
 {
 public:
-   explicit Entity(std::string name) : Basic_Entity{std::move(name)}, Mixins()... { }
+   explicit Entity(std::string name) : Basic_Entity{std::move(name)}, Mixins{}... { }
 
    // Advanced Visitor: Uses Fold Expressions to apply a function to all bases
    template<typename Visitor>
    void visitFeatures(Visitor visitor)
    {
+      this->print_name();
       // static_cast unpacks the 'this' pointer into each specific base class
-      visitor(static_cast<Mixins&>(*this)...);
+      visitor(static_cast<Mixins&>(*this) ...);
    }
 };
 
-//--------------------------------------------------------- Mixin Visitor:
+//--------------------------------------------------------------- Mixin Visitor:
 
 struct PrintVisitor
 {
-   template<typename... Mixins>
-   void operator()(Mixins&... mixins) const
+   template<class ... Mixins>
+   void operator()(Mixins& ... mixins) const
    {
       // C++17 Fold Expression: call print() on every mixin in the pack
       (mixins.print(), ...);
    }
 };
 
-//--------------------------------------------------------- Specific Entities:
+//----------------------------------------------------------- Specific Entities:
 
+//----------------------------------------------------- Dragon:
 // Extension for Dragon to use fly() without arguments:
 // using Dragon = public Entity<Fly, Tank, Laser>
 class Dragon : public Entity<Fly, Tank, Laser>
@@ -214,22 +230,24 @@ public:
 
 Dragon createDragon(std::string name, int fuel, int intensity)
 {
-   Dragon d{std::move(name)};
-   d.tank_load_fuel(fuel);
-   d.laser_set_intensity(intensity);
-   return d;
+   Dragon dragon{std::move(name)};
+   dragon.tank_load_fuel(fuel);
+   dragon.laser_set_intensity(intensity);
+   return dragon;
 }
 
+//--------------------------------------------------- Elephant:
 using Elephant = Entity<Walk, Gun>;
 
 Elephant createElephant(std::string name, int speed, int bullets)
 {
-   Elephant e{std::move(name)};
-   e.walk_set_speed(speed);
-   e.gun_set_bullets(bullets);
-   return e;
+   Elephant elephant{std::move(name)};
+   elephant.walk_set_speed(speed);
+   elephant.gun_set_bullets(bullets);
+   return elephant;
 }
 
+//--------------------------------------------------- Airplane:
 // Extension for Airplane to use fly() without arguments:
 // using Airplane = Entity<Fly, Tank, Laser, Gun>
 class Airplane : public Entity<Fly, Tank, Laser, Gun>
@@ -245,11 +263,12 @@ public:
 
 Airplane createAirplane(std::string name, int fuel, int intensity, int bullets)
 {
-   Airplane a{std::move(name)};
-   a.tank_load_fuel(fuel);
-   a.laser_set_intensity(intensity);
-   a.gun_set_bullets(bullets);
-   return a;
+   Airplane airplane{std::move(name)};
+   airplane.fly_set_altitude_speed(5000, 600);
+   airplane.tank_load_fuel(fuel);
+   airplane.laser_set_intensity(intensity);
+   airplane.gun_set_bullets(bullets);
+   return airplane;
 }
 
 //------------------------------------------------------------- Main Simulation:
@@ -257,9 +276,8 @@ int main()
 {
    std::cout << "=== MIXIN PATTERN (ADVANCED VISITOR & DEPENDENCIES) ===\n";
 
-   //------------------------------- Dragon
+   //-------------------------------------------------- Dragon:
    Dragon dragon = createDragon("Ancient Dragon", 2, 4);
-   dragon.print_name();
    dragon.visitFeatures(PrintVisitor{});
 
    std::cout << "  + Testing dragon:" << std::endl;
@@ -274,9 +292,8 @@ int main()
    dragon.fly(); // Now it should work
    dragon.laser_fire();
   
-   //----------------------------- Elephant
+   //------------------------------------------------ Elephant:
    Elephant elephant = createElephant("War Elephant", 3, 2);
-   elephant.print_name();
    elephant.visitFeatures(PrintVisitor{});
    
    std::cout << "  + Testing elephant:" << std::endl;
@@ -285,9 +302,8 @@ int main()
    elephant.gun_fire();
    elephant.gun_fire();
   
-   //----------------------------- Airplane
+   //------------------------------------------------ Airplane:
    Airplane airplane = createAirplane("Combat Jet", 2, 5, 3);
-   airplane.print_name();
    airplane.visitFeatures(PrintVisitor{});
    
    std::cout << "  + Testing ariplane:" << std::endl;
@@ -301,4 +317,4 @@ int main()
    std::cout << "\n=== SIMULATION COMPLETED ===\n";
 }
 
-//================================================================================ END
+//========================================================================== END

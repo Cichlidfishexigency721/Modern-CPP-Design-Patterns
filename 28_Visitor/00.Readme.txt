@@ -32,9 +32,9 @@ focused while centralizing algorithmic logic.
 - 02_Visitor_Modern_Variant/: Non-intrusive approach using 'std::variant'.
 
 ---
-## SEE ALSO STATIC VISITOR (Pattern 15_Mixin)
-For a compile-time version of this pattern, refer to the 'Advanced Mixin' 
-example. It demonstrates how to iterate over components with zero runtime 
-overhead using Variadic Templates and Fold Expressions (C++17).
+## SEE ALSO STATIC VISITOR
+For a compile-time version of this pattern, refer to the '15_Mixin/Advanced' 
+pattern example. It demonstrates how to iterate over components with zero
+runtime overhead using Variadic Templates and Fold Expressions (C++17).
 
 ---
