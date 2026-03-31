@@ -13,8 +13,8 @@ concerns such as:
   Polymorphism (CRTP) and Mixins.
 * **Modern Features:** Extensive use of std::variant, std::visit, if constexpr,
   and C++20 Abbreviated Templates.
-* A unique educational approach to tracing an object's full lifecycle of the **The
-  "Gang of Seven":**
+* **The "Gang of Seven":** A unique educational approach to tracing an object's
+  full lifecycle:
 - 1.DC: Default Constructor,
 - 2.CC: Copy Constructor,
 - 3.MC: Move Constructor,
