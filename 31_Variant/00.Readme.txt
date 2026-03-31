@@ -39,7 +39,7 @@ Seven" (The Gang of Seven):
 * 6.De: Destructor and
 * 7.PC: Particular Constructor
 
-to visuallytrace how the variant safely moves and destroys objects behind the scenes.
+to visually trace how the variant safely moves and destroys objects behind the scenes.
 
 3. **The Modern Visitor:** We build a 'std::stack' of variants and process it 
 using a Functor (a struct with overloaded operator()), demonstrating 

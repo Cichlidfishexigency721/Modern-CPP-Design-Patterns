@@ -13,8 +13,15 @@ concerns such as:
   Polymorphism (CRTP) and Mixins.
 * **Modern Features:** Extensive use of std::variant, std::visit, if constexpr,
   and C++20 Abbreviated Templates.
-* **The "Gang of Seven":** A unique educational approach to tracing an object's
-  full lifecycle (Constructors, Move/Copy semantics, and Destructors).
+* A unique educational approach to tracing an object's full lifecycle of the **The
+  "Gang of Seven":**
+- 1.DC: Default Constructor,
+- 2.CC: Copy Constructor,
+- 3.MC: Move Constructor,
+- 4.CA: Copy Assigment,
+- 5.MA: Move Assigment,
+- 6.De: Destructor and
+- 7.PC: Particular Constructor
 
 ## --- Repository Structure ---
 The project is organized into four logical blocks:
