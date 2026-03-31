@@ -46,7 +46,7 @@ using a Functor (a struct with overloaded operator()), demonstrating
 that we can have stateful visitors (counting occurrences) without 
 virtual inheritance.
 
-## Relation to Other Design Patterns
+## Relation to other Design Patterns
 While not a GoF pattern itself, 'std::variant' is the modern foundation for:
 - **The Modern Visitor Pattern:** handling polymorphism and dispatching that
   does not rely on traditional class inheritance or virtual tables, see
