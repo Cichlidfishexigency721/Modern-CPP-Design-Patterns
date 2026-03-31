@@ -50,8 +50,7 @@ virtual inheritance.
 While not a GoF pattern itself, 'std::variant' is the modern foundation for:
 - **The Modern Visitor Pattern**: handling polymorphism and dispatching that
   does not rely on traditional class inheritance or virtual tables, see
-  28_Visitor/Double_Dispatch/04_Visitor_Modern_Variant/ and
-  "28_Visitor/Extending_Behaviors/02_Visitor_Modern_Variant/".
+  28_Visitor/*/*Visitor_Modern_Variant/.
 - **Finite State Machines**: representing different states as variant types,
   see 25_FiniteStateMachine/03_CDPlayer_Variant/.
 - **Command Pattern**: encapsulating a request as an object, see
