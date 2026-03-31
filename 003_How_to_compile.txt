@@ -6,7 +6,6 @@ gcc3 program.cpp
 # {
 #     echo "//--------------------------------------------------------------------- Compiling (Optimized version)"
 #     local name=${1%.*}
-#     rm -f $name
 #     c++ -std=c++23 -O3 -Wfatal-errors -Wall -Wextra -Wpedantic $name.cpp -o $name -pthread && strip $name && ./$name
 # }
 
