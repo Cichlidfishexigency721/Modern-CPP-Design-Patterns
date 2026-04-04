@@ -24,17 +24,17 @@ design patterns.
 
 ## Common Design Patterns Used in Frameworks
 
-- Template Method: Defines the skeleton of an algorithm, leaving 
+- **Template Method:** Defines the skeleton of an algorithm, leaving 
 specific steps to be implemented by the user.
-- Factory Method/Abstract Factory: Used for creating objects without 
+- **Factory Method/Abstract Factory:** Used for creating objects without 
 specifying their exact, concrete class.
-- Strategy: Enables the selection of an algorithm or behavior at runtime.
-- Observer: Frequently used in reactive systems for event handling.
-- Facade: Provides a simplified, high-level interface to a complex 
+- **Strategy:** Enables the selection of an algorithm or behavior at runtime.
+- **Observer:** Frequently used in reactive systems for event handling.
+- **Facade:** Provides a simplified, high-level interface to a complex 
 underlying subsystem.
-- Dependency Injection (DI): Used to manage object lifecycles and 
+- **Dependency Injection (DI):** Used to manage object lifecycles and 
 dependencies externally.
-- Page Object Model (POM): A specific pattern for UI/automation frameworks. 
+- **Page Object Model (POM):** A specific pattern for UI/automation frameworks. 
 
 ## Our Example The 'App' Framework
 
@@ -59,10 +59,10 @@ share the same architectural skeleton.
 
 ## Benefits of Using Framework Design Patterns
 
-- Code Reusability: Established structures prevent rewriting standard code.
-- Maintainability and Scalability: Separating concerns makes systems 
+- **Code Reusability:** Established structures prevent rewriting standard code.
+- **Maintainability and Scalability:** Separating concerns makes systems 
 easier to modify.
-- Consistency: Standardized methods ensure high-quality code across 
+- **Consistency:** Standardized methods ensure high-quality code across 
 projects.
 
 ---
