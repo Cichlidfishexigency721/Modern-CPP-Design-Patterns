@@ -55,6 +55,7 @@ the Open/Closed Principle:
   prioritize memory safety and execution speed.
 
 ## Implementation Details
+
 This example unifies logic into `States.cpp` to 
 demonstrate the **high cohesion** of the Variant approach.
 ---
