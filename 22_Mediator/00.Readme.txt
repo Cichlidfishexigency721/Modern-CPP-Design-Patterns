@@ -39,9 +39,9 @@ on the heap, a combination of std::shared_ptr for ownership and std::weak_ptr
 to break circular dependencies would be required).
 
 ## Key Benefits
-- Decoupling: Colleagues are completely decoupled from one another.
-- Centralized Control: Interaction logic is isolated in one place, making 
+- **Decoupling:** Colleagues are completely decoupled from one another.
+- **Centralized Control:** Interaction logic is isolated in one place, making 
 it easier to alter or extend.
-- Simplified Protocols: Objects only need to communicate with the Mediator.
+- **Simplified Protocols:** Objects only need to communicate with the Mediator.
 
 ---
