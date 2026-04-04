@@ -1,6 +1,6 @@
 # Builder Pattern (Dynamic)
 
-$$$mermaid
+```mermaid
 classDiagram
    class Engine { -int power_ }
    class Wheel { <<interface>> }
@@ -41,11 +41,11 @@ classDiagram
    
    Builder ..> Car
    note for Builder "Nested inside Car"
-$$$
+```
 
 ### Symbology Reference
 
-$$$mermaid
+```mermaid
 classDiagram
    direction LR
    class Inheritance { Is_a }
@@ -58,6 +58,6 @@ classDiagram
    Owner_Many *-- "n" Composition
    Builder_Parts o-- "1" Aggregation
    Builder_Final ..> Dependency
-$$$
+```
 
 ================================================================================ END
