@@ -21,8 +21,8 @@ them independent of each other.
 - Colleagues only need to know about the Mediator, reducing the complexity 
 of their classes.
 
-Our Example (The Equation Cache Coordinator):
-## This example evaluates the equation (1/a) * (b+c) + d
+## Our Example (The Equation Cache Coordinator):
+This example evaluates the equation ```(1/a) * (b+c) + d```
 Assume that the mathematical operations are highly expensive. The job of 
 the Mediator (Equation) is to coordinate the changes in the Numbers (a, b, 
 c, d) to execute as few operations as possible. 
