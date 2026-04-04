@@ -1,1 +1,1 @@
-diagram.md
+diagram.uml
