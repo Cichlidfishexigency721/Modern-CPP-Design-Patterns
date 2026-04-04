@@ -42,24 +42,20 @@ classDiagram
 
 ```mermaid
 graph LR
-    A[Class A] --|> B[Class B]
-    Description1(Inheritance / public)
+    A[Class A] --|> B[Class B] -- Inheritance_Public
 ```
 
 ```mermaid
 graph LR
-    C[Class A] *-- D[Class B]
-    Description2(Composition / unique_ptr ownership)
+    C[Class A] *-- D[Class B] -- Composition_Ownership
 ```
 
 ```mermaid
 graph LR
-    E[Class A] o-- F[Class B]
-    Description3(Aggregation / Pre-build data)
+    E[Class A] o-- F[Class B] -- Aggregation_PreBuildData
 ```
 
 ```mermaid
 graph LR
-    G[Class A] ..> H[Class B]
-    Description4(Dependency / creates instance)
+    G[Class A] ..> H[Class B] -- Dependency_CreatesInstance
 ```
