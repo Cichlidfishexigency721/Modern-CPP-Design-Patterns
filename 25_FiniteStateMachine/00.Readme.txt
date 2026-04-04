@@ -22,40 +22,40 @@ a particular state.
 specific state of the Context.
 
 ## Our Examples
-This folder illustrates the State pattern through two different levels 
-of complexity:
+This folder illustrates the evolution of the State pattern across different 
+architectural paradigms:
 
 1. **01_SimpleExample/:**
-A theoretical implementation showing the basic "handshake" between a 
+A basic theoretical implementation showing the "handshake" between a 
 Context (FSM) and its States (State_A, State_B). It demonstrates how 
-transition actions and entry/exit behaviors are triggered during 
-state changes.
+transition actions and entry/exit behaviors are triggered during state changes.
 
-2. **02_CDPlayer_GoF (CD Player):**
-A realistic scenario simulating a CD Player. This version showcases how 
-complex systems (with states like 'Playing', 'Paused', 'Closed_with_CD') 
-can be managed cleanly. By encapsulating logic in separate files for 
-each state, we avoid a "God Object" anti-pattern and make the machine 
-logic modular and easy to extend.
+2. **02_CDPlayer_GoF/:**
+A realistic scenario simulating a CD Player using the classic Gang of Four 
+approach. It showcases how complex systems can be managed by encapsulating 
+logic in separate files for each state, avoiding "God Objects" and making the 
+logic modular.
+
+3. **03_CDPlayer_Variant/:**
+A modern C++17/23 implementation of the same CD Player using std::variant 
+and std::visit. This version moves away from inheritance and pointers, 
+embracing **Value Semantics**. It offers higher performance (Stack vs Heap) 
+and static safety (the compiler ensures all states are handled via 
+exhaustiveness checking).
 
 ## Key Benefits
 - **Single Responsibility Principle:** State-specific logic is localized in 
-its own class.
-- **Open/Closed Principle:** You can introduce new states without changing the 
-Context class or existing state implementations.
+its own class or structure.
+- **Open/Closed Principle:** You can introduce new states (in GoF) or new 
+operations (in Variant) with minimal impact on existing code.
 - **Complexity Reduction:** Eliminates large conditional statements, making 
-the system flow easier to understand.
+the system flow easier to understand and debug.
 
 ## NOTE ON AUTO-REGISTRATION TECHNIQUES
-In our modern implementations, we use a technique to register states 
-automatically when the program starts. You may encounter two ways to do this:
+In our GoF-based implementations, we use a technique to register states 
+automatically when the program starts. This is done using a static 
+lambda-based initialization:
 
-1. **Direct initialization:**
-static inline auto something = FSM::registerState<T>("Name");
-This is the simplest form, but it requires 'registerState' to return 
-a value that can be assigned.
-
-2. **Lambda-based initialization (Used here):**
 ```cpp
 static inline bool registered_ = []() {
    FSM:registerState<T>("Name");
@@ -63,7 +63,7 @@ static inline bool registered_ = []() {
 }();
 ```
 
-## This is preferred for two reasons
+This is preferred for two reasons:
 - **Memory Efficiency:** We only store a 'bool' (1 byte) in the static segment, 
 instead of instantiating the entire state object in the heap or static 
 memory before the main starts.
