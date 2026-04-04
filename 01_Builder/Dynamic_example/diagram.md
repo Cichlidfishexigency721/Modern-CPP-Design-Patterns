@@ -23,16 +23,20 @@ class Builder {
 -string color_
 -int power_
 -int wheelCount_
-+setWeight(float)
-+setWidth(float)
-+setDoorCount(int)
-+setColor(string)
-+build()
++setWeight(float) Builder&
++setWidth(float) Builder&
++build() unique_ptr~Car~
 }
+%% Inheritance (Solid line, empty arrow)
 Wheel <|-- StandardWheel
 Wheel <|-- HeavyDutyWheel
-Car *-- Engine : contains
-Car *-- Wheel : contains
-Builder ..> Car : creates
+%% Composition (Solid line, filled diamond) - Represents unique_ptr ownership
+Car *-- Engine : owns
+Car *-- Wheel : owns (4..n)
+%% Aggregation (Solid line, empty diamond) - Builder prepares components
+Builder o-- Engine : prepares
+Builder o-- Wheel : prepares
+%% Dependency (Dashed line, open arrow) - Builder creates the final object
+Builder ..> Car : <>
 note for Builder "Nested inside Car"
 ```
