@@ -21,23 +21,23 @@ participants.
 This folder illustrates the evolution of the pattern, from classic 
 techniques to modern functional-style C++:
 
-1. 01_Visitor_Simple/:
+1. **01_Visitor_Simple/:**
 A direct solution to the Double Dispatch problem using Shapes. It shows 
 how a 'Shape' can interact with another 'Shape' knowing their true 
 identity via recursive virtual calls.
 
-2. 02_Visitor_GoF/:
+2. **02_Visitor_GoF/:**
 The classic Gang of Four (GoF) implementation. It uses an 'accept' 
 mechanism to decouple operations from the object structure. Note This
 version is "Cyclic", meaning adding a new element requires recompiling
 all visitors.
 
-3. 03_Visitor_RTTI/:
+3. **03_Visitor_RTTI/:**
 The "Acyclic Visitor" variation. It uses Run-Time Type Information 
 (dynamic_cast) to allow adding new visited or visitor classes without 
 recompiling the entire hierarchy.
 
-4. 04_Visitor_Modern_Variant/:
+4. **04_Visitor_Modern_Variant/:**
 The modern C++17/20 approach. It uses 'std::variant' and 'std::visit' 
 to achieve visitation without inheritance or 'accept' methods. This is 
 a "non-intrusive" pattern that is usually more efficient and cleaner 
@@ -49,11 +49,11 @@ example. It demonstrates a "Static Visitor" using Variadic Templates and
 Fold Expressions (C++17) to iterate over components with zero runtime overhead.
 
 ## Key Benefits
-- Open/Closed Principle: You can add new operations (visitors) without 
+- **Open/Closed Principle:** You can add new operations (visitors) without 
 modifying the element classes.
-- Single Responsibility Principle: It gathers related operations into 
+- **Single Responsibility Principle:** It gathers related operations into 
 a single visitor class.
-- Flexibility: The Modern Variant allows visiting classes that were not 
+- **Flexibility:** The Modern Variant allows visiting classes that were not 
 originally designed to be visited. It can be implemented dynamically
 (Pattern 28_Visitor) or statically (Pattern 15_Mixin).
 
