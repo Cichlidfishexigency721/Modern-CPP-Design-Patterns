@@ -6,8 +6,8 @@ classDiagram
       -float x_
       -float y_
       -Point(float, float)
-      +rectangular(float, float)` Point
-      +polar(float, float)` Point
+      +rectangular(float, float) Point
+      +polar(float, float) Point
       +print()
    }
 
@@ -15,7 +15,7 @@ classDiagram
       +main()
    }
 
-   %% The static methods create and return a Point instance by value
-   Point ..> "1" Point : creates
+   %% Dependency: No numbers used as per our symbology
+   Point ..> Point : creates
    Client ..> Point
 ```
