@@ -31,8 +31,8 @@ class Builder {
 }
 Wheel <|-- StandardWheel
 Wheel <|-- HeavyDutyWheel
-Car *-- Engine
-Car *-- Wheel
+Car *-- Engine : contains
+Car *-- Wheel : contains
 Builder ..> Car : creates
-note for Builder "Clase anidada en Car"
+note for Builder "Nested inside Car"
 ```
