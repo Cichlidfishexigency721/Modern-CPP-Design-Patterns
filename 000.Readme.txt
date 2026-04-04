@@ -67,3 +67,28 @@ extensive comments explaining the "why" behind each architectural decision, the
 trade-offs of different implementations, and the evolution of the C++ language
 over the last four decades.
 
+## UML Symbology Reference
+
+The class diagrams in this repository use Mermaid notation to represent the relationships between classes. The following diagram explains the arrows and multiplicities used:
+
+$$$mermaid
+classDiagram
+   direction LR
+   class Inheritance { Is_a }
+   class Composition { Has_a }
+   class Aggregation { Creates_a_component }
+   class Dependency { Creates_final_object }
+
+   Base <|-- Inheritance
+   Owner *-- "1" Composition
+   Owner_Many *-- "n" Composition
+   Builder_Parts o-- "1" Aggregation
+   Builder_Final ..> Dependency
+$$$
+
+### How to read the relations:
+- **Inheritance (<|--)**: Indicates a parent-child relationship (e.g., a Square is a Shape).
+- **Composition (*--)**: Indicates that one object is part of another and its lifecycle is managed by the owner (e.g., a Car has an Engine).
+- **Aggregation (o--)**: Indicates a temporary relationship or that an object helps in the creation of another (e.g., a Builder creates a component).
+- **Dependency (..>)**: Indicates that a class relies on another to perform an action or to create a final object.
+- **Multiplicity (1 / n)**: A "1" at the end of an arrow indicates a single object, while an "n" indicates a collection or multiple objects.
