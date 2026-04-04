@@ -43,13 +43,13 @@ classDiagram
 ```mermaid
 classDiagram
     direction LR
-    class Inheritance_Public
-    class Composition_Ownership
-    class Aggregation_PreBuild
-    class Dependency_Create
+    class Inheritance_Public { Is_a_relationship }
+    class Composition_Ownership { Unique_ptr_Member }
+    class Aggregation_Reference { Configuration_Data }
+    class Dependency_Creation { Method_instantiates_class }
 
     Base <|-- Inheritance_Public
     Owner *-- Composition_Ownership
-    Config o-- Aggregation_PreBuild
-    Builder ..> Dependency_Create
+    Config o-- Aggregation_Reference
+    Builder ..> Dependency_Creation
 ```
