@@ -43,5 +43,5 @@ classDiagram
    Decorator <|-- Vanilla
 
    %% Composition (Has_a) - Multiplicity "1" at the end
-   Decorator *-- "1" Decorated : "is a" and "has a"
+   Decorator *-- "1" Decorated
 ```

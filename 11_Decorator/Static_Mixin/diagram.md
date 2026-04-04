@@ -29,7 +29,7 @@ classDiagram
    T <|-- Sugar~T~ : "is a" T
    T <|-- Vanilla~T~ : "is a" T
 
-   note for Milk~T~ "The template argument T \nbecomes the base class"
+   note for Milk~T~ "The template argument T becomes the base class"
 ```
 
 ### Design Note:
