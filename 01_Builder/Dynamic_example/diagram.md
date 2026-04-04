@@ -51,12 +51,11 @@ classDiagram
    class Inheritance { Is_a }
    class Composition { Has_a }
    class Aggregation { Creates_a_component }
-   class Dependency { Creates_final_object }
+   class Dependency  { Creates_final_object }
 
    Base <|-- Inheritance
-   Owner_One *-- "1" Composition
-   Owner_Many *-- "n" Composition
-   Builder_Parts o-- "1" Aggregation
+   Owner *-- Composition
+   Builder_Parts o-- Aggregation
    Builder_Final ..> Dependency
 ```
 
