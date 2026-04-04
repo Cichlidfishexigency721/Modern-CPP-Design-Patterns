@@ -11,13 +11,12 @@
 
 #include "FSM.h"
 
-void print(std::string_view event) { std::cout << event << ":\n"; }
+void print(std::string_view event) { std::cout << "\n" << event << ":\n"; }
 
 //--------------------------------------------------------- FSM Constructor:
-FSM::FSM(std::string name, const std::string& initialStateName) : name{std::move(name)}
+FSM::FSM(std::string name) : name{std::move(name)}
 {
-   if (initialStateName == "Closed_without_CD") state_.emplace<Closed_without_CD>(this);
-   else throw std::runtime_error("Invalid initial state");
+   std::get<Closed_without_CD>(state_).print_name();
 }
 
 //--------------------------------------------------------- FSM Dispatcher:
@@ -43,12 +42,13 @@ try
 {
    std::cout << "=== CD PLAYER (VARIANT STATE MACHINE) ===\n" << std::endl;
 
-   FSM CD_Player("    CD Player", "Closed_without_CD");
+   FSM CD_Player("    CD Player");
 
    print("open");          CD_Player.open();
    print("insert_CD");     CD_Player.insert_CD(3);
    print("close");         CD_Player.close();
    print("play");          CD_Player.play();
+   print("next_song");     CD_Player.next_song();
    print("next_song");     CD_Player.next_song();
    print("play");          CD_Player.play();
    print("previous_song"); CD_Player.previous_song();
@@ -56,7 +56,10 @@ try
    print("play");          CD_Player.play();
    print("next_song");     CD_Player.next_song();
    print("stop");          CD_Player.stop();
+   print("stop");          CD_Player.stop();
    print("open");          CD_Player.open();
+   print("open");          CD_Player.open();
+   print("play");          CD_Player.play();
    print("play");          CD_Player.play();
    print("open");          CD_Player.open();
    print("remove_CD");     CD_Player.remove_CD();

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * File: FSM.h (Modern State Machine with std::variant)
+ * File: FSM.h (Modern Finite State Machine with std::variant)
  * 
  * --- DESIGN OVERVIEW:
  * This implementation demonstrates a state machine using std::variant (C++17).
@@ -28,24 +28,28 @@
 #include <memory>
 #include <stdexcept>
 
-class FSM;
+class FSM; // Forward definition of Finite State Machine
 
 //--------------------------------------------------------- State Data Structs:
-#define STATE_METHODS \
-   void open(); void close(); void insert_CD(int n); void remove_CD(); \
-   void play(); void stop(); void next_song(); void previous_song(); void pause();
+//-------------------- Events (customise this part):
+#define EVENTS                                                                               \
+   void open(); void close();     void insert_CD(int n); void remove_CD(); void play();      \
+   void stop(); void next_song(); void previous_song();  void pause();     void print_name();
 
-struct Closed_without_CD { FSM* fsm; explicit Closed_without_CD(FSM* f); ~Closed_without_CD(); STATE_METHODS };
-struct Open_without_CD   { FSM* fsm; explicit Open_without_CD(FSM* f);   ~Open_without_CD();   STATE_METHODS };
-struct Open_with_CD      { FSM* fsm; explicit Open_with_CD(FSM* f);      ~Open_with_CD();      STATE_METHODS };
-struct Closed_with_CD    { FSM* fsm; explicit Closed_with_CD(FSM* f);    ~Closed_with_CD();    STATE_METHODS };
-struct Playing           { FSM* fsm; explicit Playing(FSM* f);           ~Playing();           STATE_METHODS };
-struct Paused            { FSM* fsm; explicit Paused(FSM* f);            ~Paused();            STATE_METHODS };
+//-------------------- States (customise this part):
+struct Closed_without_CD { FSM* fsm; explicit Closed_without_CD(FSM* f); ~Closed_without_CD(); EVENTS };
+struct Open_without_CD   { FSM* fsm; explicit Open_without_CD(FSM* f);   ~Open_without_CD();   EVENTS };
+struct Open_with_CD      { FSM* fsm; explicit Open_with_CD(FSM* f);      ~Open_with_CD();      EVENTS };
+struct Closed_with_CD    { FSM* fsm; explicit Closed_with_CD(FSM* f);    ~Closed_with_CD();    EVENTS };
+struct Playing           { FSM* fsm; explicit Playing(FSM* f);           ~Playing();           EVENTS };
+struct Paused            { FSM* fsm; explicit Paused(FSM* f);            ~Paused();            EVENTS };
 
-// The variant including all states and std::monostate for transitions
+// The variant of States, must include all states and std::monostate for transitions
 using StateVariant = std::variant<
-   std::monostate,    // Unit type intended for use as a well-behaved empty alternative in std::variant
+   std::monostate,    // Unit type intended for use as a well-behaved empty alternative in std::variant.
                       // Set as its first alternative, makes the variant itself default-constructible
+                      // (not used in this example). But also, it allows to call the destructor of state_
+                      // to execute the transition action before constructing a new state.
    Closed_without_CD, 
    Open_without_CD, 
    Open_with_CD, 
@@ -55,12 +59,13 @@ using StateVariant = std::variant<
 >;
 
 //--------------------------------------------------------- FSM (Context):
-class FSM
+class FSM // Finite State Machine
 {
 private:
-   StateVariant state_;
+   StateVariant state_{Closed_without_CD(this)};
 
 public:
+   //-------------------- State variables (customise this part):
    std::string name     {""};
    bool tray_open       {false};
    bool playing         {false};
@@ -71,32 +76,27 @@ public:
    int nSongs           {0};  // Number of songs in the CD
    int iSong            {0};  // Song that is being played
 
-   FSM(std::string name, const std::string& initialStateName);
+   FSM(std::string name);
 
    // Transition helper
-   template <typename T>
-   void transitionTo(void(FSM::*action)() = nullptr)
-   {
+   template <class NewState>
+   void transitionTo(void(FSM::*transitionAction)() = nullptr) // transitionAction is a pointer to a method of FSM
+   {                                                           // with no parameters that returns void (default = nullptr).
       // 1. Force destruction of current state (calls destructor / onExit)
       state_ = std::monostate{}; 
 
-      // 2. Execute transition action
-      if (action) (this->*action)();
+      // 2. Execute transitionAction
+      if(transitionAction != nullptr) (this->*transitionAction)();
 
       // 3. Construct new state (calls constructor / onEntry)
-      state_.emplace<T>(this);
+      state_.emplace<NewState>(this); // emplace: destroy current variant and creates a new variant value in-place.
+
+      // 4. Print current state name
+      std::get<NewState>(state_).print_name();
    }
 
    // Events (Public API)
-   void open();
-   void close();
-   void insert_CD(int n);
-   void remove_CD();
-   void play();
-   void stop();
-   void next_song();
-   void previous_song();
-   void pause();
+   EVENTS
 
    // Transition actions
    void open_tray()  { std::cout << name << ": Opening tray.\n"; tray_open = true; }
