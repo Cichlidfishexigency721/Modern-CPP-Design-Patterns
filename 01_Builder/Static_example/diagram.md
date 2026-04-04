@@ -31,10 +31,14 @@ classDiagram
 
     Wheel <|-- StandardWheel
     Wheel <|-- HeavyDutyWheel
-    Car *-- Engine
-    Car *-- Wheel
-    Builder o-- Engine
-    Builder o-- Wheel
+    
+    %% Relations with multiplicity only at the end
+    Car *-- "1" Engine
+    Car *-- "n" Wheel
+    
+    Builder o-- "1" Engine
+    Builder o-- "n" Wheel
+    
     Builder ..> Car
     note for Builder "Nested inside Car"
 ```
