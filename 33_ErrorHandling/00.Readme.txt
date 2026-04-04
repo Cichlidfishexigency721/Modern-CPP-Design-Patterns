@@ -8,11 +8,11 @@ of traditional error codes.
 
 ## The Problem
 In traditional C++, we have two main ways to handle failures, both with significant drawbacks:
-1. Error Codes (C-style): Usually an 'int' returned by the function.
+1. **Error Codes (C-style):** Usually an 'int' returned by the function.
    - Drawback: They are easily ignored by developers.
    - Drawback: They force the use of output parameters (e.g., passing a
                pointer to get the actual result), which makes the API clunky.
-2. Exceptions:
+2. **Exceptions:**
    - Drawback: They introduce a hidden control flow that is hard to follow.
    - Drawback: They have a performance cost due to "stack unwinding" when an
                error actually occurs.
