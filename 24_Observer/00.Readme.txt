@@ -33,29 +33,6 @@ evolution from classic design to high-performance C++ techniques:
 
 1. **01_Classic_GoF/:**
 The classic Gang of Four implementation using base interface pointers. 
-
-2. **02_CRTP_Basic/:**
-A high-performance implementation using the Curiously Recurring Template 
-Pattern (CRTP). Requires manual lifecycle management.
-
-3. **03_Smart_Pointers_CRTP/:**
-A memory-safe evolution of the CRTP implementation using std::shared_ptr 
-and std::weak_ptr to prevent "use-after-free" errors.
-
-4. **04_CRTP_Topics/:**
-An advanced implementation using "Topics" (Events) and CRTP to allow 
-observers to subscribe only to specific state changes.
-
-5. **05_Using_libsigc++/:**
-An industrial-grade implementation using the 'libsigc++' library. It 
-leverages sigc::trackable for automated and safe signal/slot management.
-
-## Our Examples
-This folder contains five implementations to illustrate the pattern's 
-evolution from classic design to high-performance C++ techniques:
-
-1. **01_Classic_GoF/:**
-The classic Gang of Four implementation using base interface pointers. 
 It demonstrates the fundamental "handshake" between Observable and 
 Observer. It relies on runtime type-checking (casting) to retrieve 
 the concrete observable state, serving as the baseline implementation 
@@ -66,7 +43,7 @@ A high-performance implementation using the Curiously Recurring Template
 Pattern (CRTP) (See Pattern 32_CRTP). By injecting the concrete type at
 compile-time, it eliminates the need for dynamic casts or virtual interface
 lookups. Due to the use of CRTP, it supports multiple Observables for each
-Observer.
+Observer. Requires manual lifecycle management.
 
 3. **03_CRTP_Smart_Pointers/:**
 A high-performance and memory-safe implementation using the Curiously
@@ -82,7 +59,7 @@ only to specific events (e.g., Value changes vs. Color changes), allowing
 for granular notifications. It also leverages CRTP to maintain type safety 
 and support multiple Observables per Observer efficiently.
 
-5. **05_Using_libsic++/:**
+5. **05_Using_libsigc++/:**
 An industrial-grade implementation using the 'libsigc++' library. It 
 leverages sigc::trackable for automated and safe signal/slot management.
 The 'libsigc++' library provides built-in signal/slot mechanisms. While
