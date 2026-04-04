@@ -58,5 +58,3 @@ classDiagram
    Builder_Parts o-- Aggregation
    Builder_Final ..> Dependency
 ```
-
-#================================================================================ END
