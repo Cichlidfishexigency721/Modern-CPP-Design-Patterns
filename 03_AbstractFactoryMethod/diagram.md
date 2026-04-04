@@ -57,19 +57,3 @@ classDiagram
     Client ..> "1" Player
     Client ..> "n" Hazard
 ```
-
-### Symbology Reference
-
-```mermaid
-classDiagram
-    direction LR
-    class Inheritance { Is_a }
-    class Composition { Has_a }
-    class Aggregation { Creates_a_component }
-    class Dependency { Creates_final_object }
-
-    Base <|-- Inheritance
-    Owner *-- Composition
-    Builder_Parts o-- Aggregation
-    Builder_Final ..> Dependency
-```
