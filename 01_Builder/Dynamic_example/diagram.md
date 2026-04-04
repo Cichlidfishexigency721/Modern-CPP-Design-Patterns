@@ -1,3 +1,5 @@
+# Builder Pattern (Dynamic)
+
 ```mermaid
 classDiagram
     class Engine { -int power_ }
@@ -11,6 +13,8 @@ classDiagram
         -int doorCount_
         -string color_
         -Type type_
+        -unique_ptr~Engine~ engine_
+        -vector~unique_ptr~Wheel~~ wheels_
         +print()
     }
 
@@ -21,9 +25,8 @@ classDiagram
         -string color_
         -int power_
         -int wheelCount_
-        +setWeight(float)
-        +setWidth(float)
-        +build()
+        +setWeight(float) Builder&
+        +build() unique_ptr~Car~
     }
 
     Wheel <|-- StandardWheel
