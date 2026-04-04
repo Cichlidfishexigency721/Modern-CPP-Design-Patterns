@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     class Car {
         -float weight_
@@ -41,3 +42,4 @@ classDiagram
     %% Relación de clase anidada y amistad
     Car +-- Builder : Nesting
     Builder ..> Car : <<create>>
+```
