@@ -45,7 +45,7 @@ classDiagram
 
 | Symbol | Meaning | C++ Implementation |
 | :--- | :--- | :--- |
-| **` <|-- `** | **Inheritance** | `public Wheel` |
-| **` *--  `** | **Composition** | `std::unique_ptr` (Ownership) |
-| **` o--  `** | **Aggregation** | Configuration / Pre-build data |
-| **` ..>  `** | **Dependency** | `build()` method creates `Car` |
+| <\|-- | Inheritance | public Wheel |
+| *-- | Composition | std::unique_ptr (Ownership) |
+| o-- | Aggregation | Pre-build configuration |
+| ..> | Dependency | build() method creates Car |
