@@ -41,21 +41,15 @@ classDiagram
 ### Symbology Reference
 
 ```mermaid
-graph LR
-    A[Class A] --|> B[Class B] -- Inheritance_Public
-```
+classDiagram
+    direction LR
+    class Inheritance_Public
+    class Composition_Ownership
+    class Aggregation_PreBuild
+    class Dependency_Create
 
-```mermaid
-graph LR
-    C[Class A] *-- D[Class B] -- Composition_Ownership
-```
-
-```mermaid
-graph LR
-    E[Class A] o-- F[Class B] -- Aggregation_PreBuildData
-```
-
-```mermaid
-graph LR
-    G[Class A] ..> H[Class B] -- Dependency_CreatesInstance
+    Base <|-- Inheritance_Public
+    Owner *-- Composition_Ownership
+    Config o-- Aggregation_PreBuild
+    Builder ..> Dependency_Create
 ```
