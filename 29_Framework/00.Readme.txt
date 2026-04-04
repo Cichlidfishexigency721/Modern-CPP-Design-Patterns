@@ -10,16 +10,16 @@ application's architecture and follows the "Hollywood Principle"
 
 ## Key Characteristics and Components
 
-- Hollywood Principle: The framework controls the flow, calling 
+- **Hollywood Principle:** The framework controls the flow, calling 
 user-implemented code to perform specific tasks.
 
-- Inversion of Control (IoC): Frameworks manage the flow and lifecycle 
+- **Inversion of Control (IoC):** Frameworks manage the flow and lifecycle 
 of objects, unlike libraries where the user controls the flow.
 
-- Extensibility: Frameworks are designed to be extended by users 
+- **Extensibility:** Frameworks are designed to be extended by users 
 (e.g., via inheritance or implementing specific methods).
 
-- Containment: A single framework often contains multiple, cooperating 
+- **Containment:** A single framework often contains multiple, cooperating 
 design patterns. 
 
 ## Common Design Patterns Used in Frameworks
