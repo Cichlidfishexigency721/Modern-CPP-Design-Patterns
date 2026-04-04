@@ -28,5 +28,5 @@ classDiagram
    Interface <|-- Singleton_B
 
    %% The Registry Map: Singleton manages multiple instances of itself
-   Singleton *-- "n" Singleton : 1 singletonMap
+   Singleton *-- Singleton : n instances in singletonMap
 ```
