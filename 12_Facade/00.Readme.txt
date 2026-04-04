@@ -44,9 +44,9 @@ computer:
 manages the steps to boot the computer.
 
 ## Key Benefits
-- Simplification: Reduces the complexity for clients.
-- Decoupling: Reduces the dependency between the client and the subsystem.
-- Flexibility: You can change the subsystem without affecting the client, 
+- **Simplification:** Reduces the complexity for clients.
+- **Decoupling:** Reduces the dependency between the client and the subsystem.
+- **Flexibility:** You can change the subsystem without affecting the client, 
 as long as the Facade's interface remains the same.
 
 ---

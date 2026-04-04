@@ -26,17 +26,17 @@ concrete classes.
 sometimes cause.
 
 ## Implementation Details
-- Clone Method: The pattern is implemented using a 'clone()' method. 
-- Virtual Constructor: Because C++ does not provide built-in virtual 
+- **Clone Method:** The pattern is implemented using a 'clone()' method. 
+- **Virtual Constructor:** Because C++ does not provide built-in virtual 
 constructors, the 'clone()' method acts as one, allowing us to duplicate 
 an object polymorphically through a base class pointer.
 
 ## Key Benefits
-- Efficiency: Saves costly resources and time by avoiding redundant 
+- **Efficiency:** Saves costly resources and time by avoiding redundant 
 initialization.
-- Dynamic Configuration: You can add or remove products at runtime by 
+- **Dynamic Configuration:** You can add or remove products at runtime by 
 registering prototypes.
-- Decoupling: The client is decoupled from the concrete classes of the 
+- **Decoupling:** The client is decoupled from the concrete classes of the 
 objects it creates.
 
 ---

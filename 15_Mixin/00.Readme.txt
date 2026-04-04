@@ -19,23 +19,23 @@ create a generic 'Entity' class that inherits from a pack of 'Mixins'
 simultaneously.
 
 Mixin vs. Decorator:
-- Decorator (Vertical Composition): Wraps an object inside another
+- **Decorator (Vertical Composition):** Wraps an object inside another
 (Layered/Recursive). Ideal for modifying existing behavior at runtime
 (see 11_Decorator/Static_Mixin).
-- Mixin (Horizontal Composition): Inherits from multiple classes at the 
+- **Mixin (Horizontal Composition):** Inherits from multiple classes at the 
 same level (Parallel). Ideal for composing a final type with a fixed set 
 of features at compile-time (see 26_Strategy/03_Static_Strategy).
 
 ## Our Examples
 This folder contains two levels of complexity
 
-1. Simple/:
+1. **Simple/:**
 Demonstrates basic horizontal composition. We define features like 'Fly', 
 'Walk', 'Laser', and 'Gun'. Then, we use template aliases (using) to 
 instantiate specific entities like 'Dragon' or 'Airplane' by simply
 listing their required capabilities.
 
-2. Advanced/:
+2. **Advanced/:**
 Introduces inter-mixin communication and advanced C++ features:
 - Dependency: The 'Fly' mixin checks the 'Tank' mixin for fuel.
 - Static Visitor Pattern: Implements a 'visitFeatures' method using 
@@ -49,11 +49,11 @@ statically without losing the ability to process them as a group.
 See: 11_Decorator/Static_Mixin/
 
 ## Key Benefits
-- Granular Reusability: Small, focused classes (Mixins) can be combined 
+- **Granular Reusability:** Small, focused classes (Mixins) can be combined 
 in infinite ways.
-- Zero Overhead: The compiler flattens the hierarchy, allowing for 
+- **Zero Overhead:** The compiler flattens the hierarchy, allowing for 
 aggressive inlining and eliminating virtual function overhead.
-- Code Clarity: The resulting types (e.g., Entity<Fly, Tank, Laser>) 
+- **Code Clarity:** The resulting types (e.g., Entity<Fly, Tank, Laser>) 
 document exactly what the object can do.
 
 ---

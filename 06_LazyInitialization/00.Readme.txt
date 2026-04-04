@@ -34,9 +34,9 @@ multiple clients hold a reference to the same object.
 factory needs it, preventing memory leaks or dangling pointers.
 
 ## Key Benefits
-- Improved Startup: Avoids heavy initialization at program launch.
-- Memory Efficiency: Defers resource allocation, keeping the footprint low.
-- Performance: Avoids repeated creation of identical objects by caching 
+- **Improved Startup:** Avoids heavy initialization at program launch.
+- **Memory Efficiency:** Defers resource allocation, keeping the footprint low.
+- **Performance:** Avoids repeated creation of identical objects by caching 
 the results of previous initializations.
 
 ---

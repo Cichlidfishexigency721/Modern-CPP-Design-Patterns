@@ -21,14 +21,14 @@ Define a common interface for both simple and complex objects.
 (both Leaves and other Composites).
 
 ## Key Components
-1. Component: Declares the interface for objects in the composition.
+1. **Component:** Declares the interface for objects in the composition.
 
-2. Leaf: Represents leaf objects in the composition. A leaf has no children.
+2. **Leaf:** Represents leaf objects in the composition. A leaf has no children.
 
-3. Composite: Defines behavior for components having children and stores 
+3. **Composite:** Defines behavior for components having children and stores 
 child components.
 
-4. Client: Manipulates objects in the composition through the Component 
+4. **Client:** Manipulates objects in the composition through the Component 
 interface.
 
 ## Our Example

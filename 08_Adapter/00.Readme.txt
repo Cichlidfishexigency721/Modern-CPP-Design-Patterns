@@ -37,9 +37,9 @@ Then, it redirects the call to the legacy method:
 - legacy->oldDraw(x1, y1, width, height).
 
 ## Benefits
-- Reusability: We can use the legacy library without modifying its source code.
-- Decoupling: The client (our app) remains independent of the legacy library's 
+- **Reusability:** We can use the legacy library without modifying its source code.
+- **Decoupling:** The client (our app) remains independent of the legacy library's 
 specific implementation details.
-- Single Responsibility: The conversion logic is centralized in one place.
+- **Single Responsibility:** The conversion logic is centralized in one place.
 
 ---

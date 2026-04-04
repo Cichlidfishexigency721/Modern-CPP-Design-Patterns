@@ -23,17 +23,17 @@ object. The Proxy:
 it directly.
 
 ## Our Example (Virtual & Protection Proxy):
-- Interface (ICar): Defines the 'drive' method.
-- Real Subject (Car): The heavy object that actually performs the work.
-- Proxy (ProxyCar): Controls access based on the driver's age and 
+- **Interface (ICar):** Defines the 'drive' method.
+- **Real Subject (Car):** The heavy object that actually performs the work.
+- **Proxy (ProxyCar):** Controls access based on the driver's age and 
 implements 'Lazy Initialization'—the real car is only created when 
 the driver is old enough and actually calls the 'drive' method.
 
 ## Key Benefits
-- Lazy Initialization: Defers the creation of expensive objects until 
+- **Lazy Initialization:** Defers the creation of expensive objects until 
 absolutely necessary, saving memory and startup time.
-- Access Control: Centralizes security logic (e.g., driver age check).
-- Transparency: The client interacts with the ICar interface, making it 
+- **Access Control:** Centralizes security logic (e.g., driver age check).
+- **Transparency:** The client interacts with the ICar interface, making it 
 unaware of whether it is communicating with a Proxy or the Real Subject.
 
 ## Modern C++ Note:
