@@ -1,1 +1,51 @@
-00.Readme.txt
+# BRIDGE PATTERN PIMPL IDIOM (STRUCTURAL)
+
+## Intent
+This is a C++ specific implementation of the Bridge pattern, commonly 
+referred to as the "Pimpl" (Pointer to Implementation) idiom. Its primary 
+goal is to hide a class's internal data members from its interface.
+
+## Why use it?
+1. Compilation Firewall: If you change the private members of 'Impl', 
+only 'Employee.cpp' needs to be recompiled. Any code that uses 
+'Employee.h' does NOT need to be recompiled.
+2. ABI Stability: It keeps the binary interface of the class stable.
+3. Clean Headers: The header file doesn't need to include private 
+dependencies (like <vector> or complex third-party headers).
+
+## Differences from GoF Bridge
+- GoF Bridge: Decouples hierarchies to allow independent growth.
+- Pimpl Bridge: Decouples the interface from the implementation to 
+optimize compilation and hide secrets.
+
+## Modern C++ Note:
+We use 'std::unique_ptr' to manage the lifetime of the implementation 
+object, following RAII principles and avoiding manual 'delete' calls.
+
+---
+# Bridge Pattern: Pimpl Idiom
+
+```mermaid
+classDiagram
+   class Employee {
+      -unique_ptr~Impl~ pimpl
+      +getName() string
+      +getId() string
+      +setName(string)
+   }
+
+   class Impl {
+      +string name_
+      +string id_
+   }
+
+   class Client {
+      +main()
+   }
+
+   %% The Bridge (Pimpl): Employee owns the implementation object
+   Employee *-- "1" Impl
+
+   %% Client only knows about the Employee interface
+   Client ..> Employee
+```
