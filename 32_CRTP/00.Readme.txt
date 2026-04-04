@@ -83,9 +83,9 @@ the correct return types for every subclass.
 See 24_Observer/02_CRTP_Basic and 32_Observer/03_CRTP_Topics
 
 ## Key Benefits
-- Zero Runtime Overhead: No virtual tables, enabling aggressive inlining.
-- Code Reusability: Automatically injects specialized behavior into 
+- **Zero Runtime Overhead:** No virtual tables, enabling aggressive inlining.
+- **Code Reusability:** Automatically injects specialized behavior into 
 derived classes.
-- Type Safety: Errors are caught at compile-time rather than at runtime.
+- **Type Safety:** Errors are caught at compile-time rather than at runtime.
 
 ---
