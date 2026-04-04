@@ -21,30 +21,30 @@ without modifying the context itself.
 This folder illustrates three distinct approaches to the Strategy pattern, 
 all centered around the sorting and printing of data:
 
-1. Simple_Strategy/:
+1. **Simple_Strategy/:**
 ## Focuses on the core pattern a 'Sort' strategy used by a Context. It 
 highlights how to decouple the algorithm from the client using simple 
 polymorphism and smart pointers.
 
-2. Advanced_Strategy/:
+2. **Advanced_Strategy/:**
 Shows "Strategy Composition". A single context ('SortAndPrint') uses 
 multiple independent strategies simultaneously (a 'Sort' strategy AND 
 a 'Print' strategy). This demonstrates how complex tasks can be built 
 by composing smaller, interchangeable algorithms.
 
-3. Static_Strategy/:
+3. **Static_Strategy/:**
 A high-performance C++ implementation using 'templates'. Unlike the 
 previous versions, this approach has zero virtual function overhead, 
 as the strategy is selected at compile-time. It is ideal for systems 
 where the strategy is known upfront and performance is critical.
 
 ## Key Benefits
-- Open/Closed Principle: You can introduce new strategies without modifying 
+- **Open/Closed Principle:** You can introduce new strategies without modifying 
 the context class.
-- Runtime Flexibility: You can switch behaviors on the fly (in Dynamic 
+- **Runtime Flexibility:** You can switch behaviors on the fly (in Dynamic 
 versions).
-- Testability: Strategies can be tested in isolation from the context.
-- Separation of Concerns: The context manages the execution flow, while 
+- **Testability:** Strategies can be tested in isolation from the context.
+- **Separation of Concerns:** The context manages the execution flow, while 
 the strategies contain the raw algorithmic logic.
 
 ---

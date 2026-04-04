@@ -18,24 +18,24 @@ Define a "template method" in a base class that outlines the algorithm steps
 steps). This follows the Hollywood Principle: "Don't call us, we will call you".
 
 ## Key Participants
-- Abstract Class (SortAndPrint): Defines the template method (the skeleton) 
+- **Abstract Class (SortAndPrint):** Defines the template method (the skeleton) 
 and declares abstract placeholder methods for the steps.
-- Concrete Classes (BubbleSort, ShellSort): Implement the placeholder 
+- **Concrete Classes (BubbleSort, ShellSort):** Implement the placeholder 
 methods to provide specific behavior.
 
 Strategy vs. Template Method:
-- Strategy Pattern: Uses COMPOSITION. You pass a strategy object to the 
+- **Strategy Pattern:** Uses COMPOSITION. You pass a strategy object to the 
 context. You can change the behavior at runtime by swapping the object.
-- Template Method Pattern: Uses INHERITANCE. The behavior is defined by 
+- **Template Method Pattern:** Uses INHERITANCE. The behavior is defined by 
 overriding methods in subclasses. You define the behavior at compile-time 
 by choosing which subclass to instantiate.
 
 ## Key Benefits
-- Code Reuse: The invariant parts of the algorithm are written once in the 
+- **Code Reuse:** The invariant parts of the algorithm are written once in the 
 base class.
-- Flexibility: Subclasses can easily customize specific steps without 
+- **Flexibility:** Subclasses can easily customize specific steps without 
 altering the overall structure.
-- Open/Closed Principle: You can add new algorithms (subclasses) without 
+- **Open/Closed Principle:** You can add new algorithms (subclasses) without 
 modifying the base class code.
 
 ---
