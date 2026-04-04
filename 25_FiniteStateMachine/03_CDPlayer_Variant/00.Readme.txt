@@ -1,50 +1,60 @@
-# FSM: MODERN VARIANT IMPLEMENTATION (C++17/23)
+# FSM: MODERN VARIANT (C++17/23)
 
 ## Intent
-To implement a Finite State Machine using `std::variant` and `std::visit`
-instead of traditional class inheritance. This version is functionally identical
-to the GoF implementation (`02_CDPlayer_GoF`) but follows a completely different
-architectural paradigm: **Value Semantics**.
+Implement a Finite State Machine using `std::variant` and 
+`std::visit` instead of traditional class inheritance. 
+This version follows a different architectural paradigm: 
+**Value Semantics**.
 
 ## The OCP (Open/Closed Principle) Dilemma
-It is crucial for students to understand that using `std::variant` changes the
-extensibility axis of the Open/Closed Principle:
+Using `std::variant` shifts the extensibility axis of 
+the Open/Closed Principle:
 
 1. **GoF Approach (Traditional Polymorphism)**:
-   - **Open for New States**: You can add a `FastForward` state by creating a new
-   - **file and registering it without touching existing code.  Closed for New
-   - **Events**: Adding a method like `powerConsumption()` requires updating the
-   - **base interface and all existing state classes.
+   - **Open for New States**: Add a `FastForward` state by 
+     creating a new class without touching existing code.
+   - **Closed for New Events**: Adding `powerConsumption()` 
+     requires updating the base interface and all states.
 
 2. **Modern Variant Approach**:
-   - **Closed for New States**: Adding a state requires modifying the
-   - **`StateVariant` definition in `FSM.h`. It is "intrusive" regarding the
-   - **state list.  Open for New Operations**: You can add new behaviors
-   - **(Visitors) in separate files without touching the state structures
-   - **themselves.
+   - **Closed for New States**: Adding a state requires 
+     modifying the `StateVariant` definition (intrusive).
+   - **Open for New Operations**: Add new behaviors 
+     (Visitors) without touching the state structures.
 
 ## Why use std::variant? (Performance & Safety)
-If the GoF version is more "Open" for states, why does the industry prefer
-Variants for critical systems?
-   - **Value Semantics (Stack vs. Heap)**: In the GoF version, every state change
-   - **usually involves `new` and `delete`. In the Variant version, the state lives
-   - **entirely on the **Stack**. Changing states is as fast as copying a small
-   - **structure.  Deterministic RAII**: We use constructors to turn lights ON
-   - **(`onEntry`) and destructors to turn them OFF (`onExit`). By using
-   - **`std::monostate` during transitions, C++ guarantees the old state is
-   - **destroyed completely before the new one is built.  Static Safety
-   - **(Exhaustiveness)**: `std::visit` forces the compiler to verify that every
-   - **possible state is handled. If you add a state but forget to handle an event,
-   - **the program will simply **fail to compile**.
+
+### 1. Value Semantics (Stack vs. Heap)
+* **GoF:** Every state change usually involves dynamic 
+  polymorphism (`new`/`delete`). This causes memory 
+  fragmentation and heap allocation latency.
+* **Variant:** The state lives on the **Stack**. Changing 
+  states is as fast as a move assignment, eliminating 
+  dynamic memory management.
+
+### 2. Deterministic RAII
+* **Lifecycle:** Use constructors to activate resources 
+  (`onEntry`) and destructors to release them (`onExit`).
+* **Safe Transitions:** Reassigning the variant ensures 
+  the old state is destroyed before the new one is built, 
+  preventing inconsistent intermediate states.
+
+### 3. Static Safety (Exhaustiveness)
+* **Runtime vs. Compile-time:** In GoF, forgetting a 
+  method in a new state might only fail at runtime.
+* **std::visit:** Forces the compiler to verify that 
+  **every state** is handled. If you miss one, the 
+  program **fails to compile**, ensuring 100% coverage.
 
 ## Conclusion
-   - **Use the GoF Pattern (02)** for large, modular systems where third-party
-   - **developers need to add their own states at runtime (plugins).  Use the
-   - **Modern Variant (03)** for critical systems (embedded, real-time,
-   - **high-performance) where the set of states is well-known and you prioritize
-   - **memory safety and execution speed.
+
+* **Use GoF Pattern:** For large, modular systems where 
+  third-party developers add states at runtime (plugins).
+* **Use Modern Variant:** For critical systems (embedded, 
+  real-time) where states are well-known and you 
+  prioritize memory safety and execution speed.
 
 ## Implementation Details
-This example unifies the state logic into `States.cpp` to demonstrate the **high
-cohesion** provided by the Variant approach.
+This example unifies logic into `States.cpp` to 
+demonstrate the **high cohesion** of the Variant approach.
 ---
