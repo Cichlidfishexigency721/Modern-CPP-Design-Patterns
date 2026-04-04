@@ -33,11 +33,11 @@ plus a small tag (index).
 Seven" (The Gang of Seven):
    * 1 DC: Default Constructor
    * 2 CC: Copy Constructor
-   * 3. MC: Move Constructor
-   * 4. CA: Copy Assigment
-   * 5. MA: Move Assigment
-   * 6. De: Destructor
-   * 7. PC: Particular Constructor
+   * 3 MC: Move Constructor
+   * 4 CA: Copy Assigment
+   * 5 MA: Move Assigment
+   * 6 De: Destructor
+   * 7 PC: Particular Constructor
 
 to visually trace how the variant safely moves and destroys objects behind the scenes.
 
