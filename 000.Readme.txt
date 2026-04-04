@@ -2,7 +2,7 @@
 
 Welcome to a comprehensive educational repository of **33 Design Patterns and
 C++ Idioms**. This project represents a bridge between classic software
-architecture (the *Gang of Four* legacy) and Modern C++ <nobr(C++17/20/23)</nobr>
+architecture (the *Gang of Four* legacy) and Modern C++ <nobr>(C++17/20/23)</nobr>
 best practices.
 
 ## --- Overview ---
