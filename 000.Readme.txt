@@ -2,8 +2,8 @@
 
 Welcome to a comprehensive educational repository of **33 Design Patterns and
 C++ Idioms**. This project represents a bridge between classic software
-architecture (the *Gang of Four* legacy) and Modern C++
-<nobr><span style="white-space:nowrap;">(C++17/20/23)</span></nobr> best practices.
+architecture (the *Gang of Four* legacy) and Modern C++ <nobr(C++17/20/23)</nobr>
+best practices.
 
 ## --- Overview ---
 This repository is designed as a masterclass for developers who want to master
