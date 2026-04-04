@@ -9,13 +9,13 @@ of traditional error codes.
 ## The Problem
 In traditional C++, we have two main ways to handle failures, both with significant drawbacks:
 1. Error Codes (C-style): Usually an 'int' returned by the function.
-- Drawback: They are easily ignored by developers.
-- Drawback: They force the use of output parameters (e.g., passing a
-            pointer to get the actual result), which makes the API clunky.
+   - Drawback: They are easily ignored by developers.
+   - Drawback: They force the use of output parameters (e.g., passing a
+               pointer to get the actual result), which makes the API clunky.
 2. Exceptions:
-- Drawback: They introduce a hidden control flow that is hard to follow.
-- Drawback: They have a performance cost due to "stack unwinding" when an
-            error actually occurs.
+   - Drawback: They introduce a hidden control flow that is hard to follow.
+   - Drawback: They have a performance cost due to "stack unwinding" when an
+               error actually occurs.
 
 ## The Solution: "Errors as Values"
 Modern C++ leans towards functional-style error handling. Instead of throwing an
@@ -44,10 +44,10 @@ official C++ standard:
    specifically designed for this purpose.
 
 ## Key Benefits
-- Safety: The programmer is explicitly reminded (by the type system) that the
-          operation can fail.
-- Clarity: No more output parameters; the return type tells the whole story.
-- Efficiency: It uses standard control flow (if/else), making it faster than
-              exceptions in error-heavy scenarios.
+- **Safety:** The programmer is explicitly reminded (by the type system) that the
+              operation can fail.
+- **Clarity:** No more output parameters; the return type tells the whole story.
+- **Efficiency:** It uses standard control flow (if/else), making it faster than
+                  exceptions in error-heavy scenarios.
 
 ---
