@@ -31,10 +31,15 @@ classDiagram
 
     Wheel <|-- StandardWheel
     Wheel <|-- HeavyDutyWheel
-    Car *-- Engine
-    Car *-- Wheel
-    Builder o-- Engine
-    Builder o-- Wheel
+    
+    %% Multiplicity: 1 Engine, n Wheels
+    Car "1" *-- "1" Engine
+    Car "1" *-- "n" Wheel
+    
+    %% The Builder temporary aggregation
+    Builder "1" o-- "1" Engine
+    Builder "1" o-- "n" Wheel
+    
     Builder ..> Car
     note for Builder "Nested inside Car"
 ```
@@ -45,12 +50,12 @@ classDiagram
 classDiagram
     direction LR
     class Inheritance { Is_a }
-    class Composition { Has_a }
+    class Composition { Has_a (1 or n) }
     class Aggregation { Creates_a_component }
     class Dependency { Creates_final_object }
 
     Base <|-- Inheritance
-    Owner *-- Composition
+    Owner "1" *-- "1..n" Component
     Builder_Parts o-- Aggregation
     Builder_Final ..> Dependency
 ```
