@@ -17,15 +17,15 @@ Each handler in the chain contains a reference to the 'next' handler.
 This creates a recursive propagation of the request.
 
 ## Key Components
-- Handler Interface: Declares the method to handle requests and the 
+- **Handler Interface:** Declares the method to handle requests and the 
 method to set the next successor in the chain.
-- Concrete Handlers: Implement the specific processing logic. If they can't 
+- **Concrete Handlers:** Implement the specific processing logic. If they can't 
 handle the request, they call the base class implementation to forward it.
 
 ## Benefits
-- Decoupling: The sender doesn't need to know the structure of the chain.
-- Flexibility: You can change the order of handlers or add new ones 
+- **Decoupling:** The sender doesn't need to know the structure of the chain.
+- **Flexibility:** You can change the order of handlers or add new ones 
 dynamically at runtime.
-- Responsability: Each handler has a single responsibility.
+- **Responsability:** Each handler has a single responsibility.
 
 ---

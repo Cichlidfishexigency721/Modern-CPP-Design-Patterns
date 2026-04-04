@@ -5,11 +5,11 @@ This version replaces class inheritance with 'std::variant' and 'std::visit'.
 Commands are no longer classes, but simple "Data Labels".
 
 ## Key Features
-- **Non-Intrusive**: Commands are plain structs. They do not need to inherit 
+- **Non-Intrusive:** Commands are plain structs. They do not need to inherit 
   from any base class.
-- **Value Semantics**: Commands are stored by value in the queue, eliminating 
+- **Value Semantics:** Commands are stored by value in the queue, eliminating 
   the need for 'std::unique_ptr' and heap allocations.
-- **Centralized Logic**: The 'CommandExecutor' acts as a Visitor, gathering 
+- **Centralized Logic:** The 'CommandExecutor' acts as a Visitor, gathering 
   all execution logic in one place.
 
 ## Why use this version?

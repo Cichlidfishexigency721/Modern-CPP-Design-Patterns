@@ -22,19 +22,19 @@ any parameters). This transformation lets you:
 This directory illustrates the evolution of the Command pattern from the 
 classic object-oriented approach to modern functional-style C++:
 
-1. **01_Command_GoF/**:
+1. **01_Command_GoF/:**
    The traditional implementation using class inheritance. Each command is 
    a class that implements a virtual 'execute()' method. It uses 
    'std::unique_ptr' to manage the lifecycle of commands in a queue.
 
-2. **02_Modern_Variant/**:
+2. **02_Modern_Variant/:**
    A modern C++17 approach. Commands are simple data structures (structs), 
    and the execution logic is centralized in a Visitor. This version is 
    "non-intrusive" and uses value semantics (no pointers/heap).
 
 ## Key Benefits
-- Decoupling: The Invoker is separated from the Receiver.
-- Extensibility: Adding new commands doesn't require changing existing code.
-- Composability: Commands can be assembled into 'MacroCommands'.
+- **Decoupling:** The Invoker is separated from the Receiver.
+- **Extensibility:** Adding new commands doesn't require changing existing code.
+- **Composability:** Commands can be assembled into 'MacroCommands'.
 
 ---

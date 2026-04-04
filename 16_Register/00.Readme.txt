@@ -45,7 +45,7 @@ including their files, as they register themselves automatically.
 Cross-Reference:
 This pattern is often used to implement the underlying mechanics of other 
 patterns in this repository:
-- **03_AbstractFactoryMethod:** Registry-based factories replace switch-cases.
+- **03_AbstractFactoryMethod/:** Registry-based factories replace switch-cases.
 - **05_Singleton/Singleton_with_register/:** A registry for Singleton instances.
 - **25_FiniteStateMachine/:** Dynamic state registration for modular machines.
 

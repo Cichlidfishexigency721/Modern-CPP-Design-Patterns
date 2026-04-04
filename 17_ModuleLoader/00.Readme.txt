@@ -38,16 +38,16 @@ module that return pointers to our complex C++ objects.
 We have separated the project into three distinct parts to demonstrate 
 bidirectional communication across the Application Binary Interface (ABI):
 
-1. The Contract (IModule.h):
+1. **The Contract (IModule.h):**
 An abstract C++ interface shared by both the Host and the Plugin.
 
-2. The Plugin (libModule.so / Module.cpp):
+2. **The Plugin (libModule.so / Module.cpp):**
 A compiled shared library containing a concrete C++ class ('Module'). 
 It exposes two flat C functions via `extern "C"`:
 - build_module(): Allocates the C++ object and returns it as an IModule*.
 - destroy_module(): Safely deletes the object.
 
-3. The Host (ModuleLoader.cpp):
+3. **The Host (ModuleLoader.cpp):**
 The main executable. It uses <dlfcn.h> to open 'libModule.so', fetches 
 the factory functions, creates the object, passes parameters to its 
 methods (e.g., processData), and finally destroys it.
@@ -72,13 +72,13 @@ Dynamic loading is not currently part of the standard C++ language (up to
 C++23) because binary executable formats vary drastically between Operating 
 Systems. We must rely on the native OS APIs to load dynamic code.
 
-1. Linux & macOS (POSIX Standard):
+1. **Linux & macOS (POSIX Standard):**
 This example uses the <dlfcn.h> header, which is the standard API for 
 POSIX-compliant systems. It allows us to load Shared Objects (.so) in 
 Linux or Dynamic Libraries (.dylib / .bundle) in macOS using functions 
 like 'dlopen' and 'dlsym'.
 
-2. Windows (Win32 API):
+2. **Windows (Win32 API):**
 Windows is not POSIX-compliant for dynamic linking. To achieve the exact 
 same pattern on Windows, you must use the <windows.h> API:
 - 'LoadLibrary'  (equivalent to 'dlopen') to load a .dll file.
@@ -87,7 +87,7 @@ same pattern on Windows, you must use the <windows.h> API:
 Additionally, Windows compilers require explicit symbol exporting using 
 macros like __declspec(dllexport) and __declspec(dllimport).
 
-3. Industry Solutions:
+3. **Industry Solutions:**
 In professional cross-platform C++ development, writing #ifdef _WIN32 
 blocks to manually switch between 'dlopen' and 'LoadLibrary' is tedious. 
 Instead, developers usually rely on abstraction frameworks (e.g., 
