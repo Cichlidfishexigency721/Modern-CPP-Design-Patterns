@@ -10,6 +10,6 @@ classDiagram
         +talk()
     }
 
-    %% The class maintains a single instance of itself
-    Singleton "1" *-- "1" Singleton : Static instance
+    %% We move the "1" into the label to avoid the visual bug with recursive arrows
+    Singleton *-- Singleton : 1 Static instance
 ```
