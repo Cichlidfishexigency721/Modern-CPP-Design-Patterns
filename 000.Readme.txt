@@ -1,6 +1,9 @@
 # Modern C++ Design Patterns & OO Principles
 
-Welcome to a comprehensive educational repository of **33 Design Patterns and C++ Idioms**. This project represents a bridge between classic software architecture (the *Gang of Four* legacy) and Modern C++ (C++17/20/23) best practices.
+Welcome to a comprehensive educational repository of **33 Design Patterns and
+C++ Idioms**. This project represents a bridge between classic software
+architecture (the *Gang of Four* legacy) and Modern C++
+<span style="white-space:nowrap;">(C++17/20/23)</span> best practices.
 
 ## --- Overview ---
 This repository is designed as a masterclass for developers who want to master
