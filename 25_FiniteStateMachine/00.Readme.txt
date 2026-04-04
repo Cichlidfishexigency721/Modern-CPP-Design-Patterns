@@ -25,13 +25,13 @@ specific state of the Context.
 This folder illustrates the State pattern through two different levels 
 of complexity:
 
-1. 01_SimpleExample/:
+1. **01_SimpleExample/:**
 A theoretical implementation showing the basic "handshake" between a 
 Context (FSM) and its States (State_A, State_B). It demonstrates how 
 transition actions and entry/exit behaviors are triggered during 
 state changes.
 
-2. 02_CDPlayer_GoF (CD Player):
+2. **02_CDPlayer_GoF (CD Player):**
 A realistic scenario simulating a CD Player. This version showcases how 
 complex systems (with states like 'Playing', 'Paused', 'Closed_with_CD') 
 can be managed cleanly. By encapsulating logic in separate files for 
@@ -39,25 +39,23 @@ each state, we avoid a "God Object" anti-pattern and make the machine
 logic modular and easy to extend.
 
 ## Key Benefits
-- Single Responsibility Principle: State-specific logic is localized in 
+- **Single Responsibility Principle:** State-specific logic is localized in 
 its own class.
-- Open/Closed Principle: You can introduce new states without changing the 
+- **Open/Closed Principle:** You can introduce new states without changing the 
 Context class or existing state implementations.
-- Complexity Reduction: Eliminates large conditional statements, making 
+- **Complexity Reduction:** Eliminates large conditional statements, making 
 the system flow easier to understand.
 
----
-NOTE ON AUTO-REGISTRATION TECHNIQUES
----
+## NOTE ON AUTO-REGISTRATION TECHNIQUES
 In our modern implementations, we use a technique to register states 
 automatically when the program starts. You may encounter two ways to do this:
 
-1. Direct initialization:
+1. **Direct initialization:**
 static inline auto something = FSM::registerState<T>("Name");
 This is the simplest form, but it requires 'registerState' to return 
 a value that can be assigned.
 
-2. Lambda-based initialization (Used here):
+2. **Lambda-based initialization (Used here):**
 ```cpp
 static inline bool registered_ = []() {
    FSM:registerState<T>("Name");
@@ -66,10 +64,10 @@ static inline bool registered_ = []() {
 ```
 
 ## This is preferred for two reasons
-- Memory Efficiency: We only store a 'bool' (1 byte) in the static segment, 
+- **Memory Efficiency:** We only store a 'bool' (1 byte) in the static segment, 
 instead of instantiating the entire state object in the heap or static 
 memory before the main starts.
-- Encapsulation: The registration logic is defined outside the class 
+- **Encapsulation:** The registration logic is defined outside the class 
 definition, ensuring the compiler has full knowledge of the type 'T' 
 before it attempts to instantiate it, thus avoiding "incomplete type" 
 errors during compilation.
