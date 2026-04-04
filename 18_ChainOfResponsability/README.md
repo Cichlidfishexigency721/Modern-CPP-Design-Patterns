@@ -62,7 +62,7 @@ classDiagram
 
    %% Recursive Composition: each handler owns the next one
    %% Composition (Has_a) - Multiplicity "1" only at the end
-   IHandler *-- "1" IHandler : next_
+   IHandler *-- IHandler : next_
 
    %% The Chain manager owns the head of the list
    Chain *-- "1" IHandler : head_
