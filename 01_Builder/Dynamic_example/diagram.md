@@ -54,7 +54,7 @@ classDiagram
    class Dependency { Creates_final_object }
 
    Base <|-- Inheritance
-   Owner *-- "1" Composition
+   Owner_One *-- "1" Composition
    Owner_Many *-- "n" Composition
    Builder_Parts o-- "1" Aggregation
    Builder_Final ..> Dependency
