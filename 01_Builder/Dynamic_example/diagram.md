@@ -1,5 +1,3 @@
-# Builder Pattern (Dynamic)
-
 ```mermaid
 classDiagram
     class Engine { -int power_ }
@@ -46,7 +44,7 @@ classDiagram
     class Inheritance { Is_a }
     class Composition { Has_a }
     class Aggregation { Creates_a_component }
-    class Dependency { Produces_final_object }
+    class Dependency { Creates_final_object }
 
     Base <|-- Inheritance
     Owner *-- Composition
