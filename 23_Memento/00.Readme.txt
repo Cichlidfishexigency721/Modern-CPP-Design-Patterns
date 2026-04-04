@@ -35,12 +35,12 @@ Stack for Undo operations).
 ## Our Examples
 This folder demonstrates two different architectural approaches
 
-1. **Memento_Classic_GoF:**
+1. **Memento_Classic_GoF/:**
 The traditional Gang of Four (GoF) implementation. It uses polymorphic 
 base classes and nested structs to ensure that only the Originator can 
 access the Memento's data (strict encapsulation).
 
-2. **Memento_String (Manual Serialization):**
+2. **Memento_String/ (Manual Serialization):**
 A modern, pragmatic approach where the "Memento" is simply a serialized 
 string (e.g., generated using std::stringstream). The Caretaker just 
 holds opaque strings. The Originator knows how to pack its variables 
