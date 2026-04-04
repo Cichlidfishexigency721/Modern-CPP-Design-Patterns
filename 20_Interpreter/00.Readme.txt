@@ -46,15 +46,15 @@ This directory contains two sub-folders solving the exact same problem
 The pure Gang of Four pattern. The parser builds an Abstract Syntax 
 Tree (AST) in memory. Every mathematical operation is a polymorphic 
 C++ object (e.g., AddNode, SinNode). 
-- Pro: Highly extensible, clean OOP design (Easy to add a Visitor).
-- Con: Slower execution due to recursive virtual function calls.
+   - Pro: Highly extensible, clean OOP design (Easy to add a Visitor).
+   - Con: Slower execution due to recursive virtual function calls.
 
 2. **Interpreter_Stack_Machine/ (Legacy Implementation):**
 An industrial-style approach. The parser compiles the string into a 
 linear array of "Bytecode" instructions. A virtual machine uses a Stack 
 and a giant switch-statement to evaluate the bytecode.
-- Pro: Blazing fast, cache-friendly, zero virtual overhead.
-- Con: Harder to extend or manipulate once compiled.
+   - Pro: Blazing fast, cache-friendly, zero virtual overhead.
+   - Con: Harder to extend or manipulate once compiled.
 
 ## BEYOND INTERPRETATION THE ROAD TO MACHINE CODE (AOC / JIT)
 While the Interpreter pattern evaluates expressions directly, the GoF AST 
@@ -78,7 +78,8 @@ registers to each branch.
 raw hexadecimal bytes (machine code) into executable memory, mapping 
 AddNode to the assembly instruction 'addsd'.
 
-## Note Generating native machine code or JIT compilation falls far beyond 
+## Note
+Generating native machine code or JIT compilation falls far beyond 
 the scope of this pattern example. It is mentioned here to illustrate 
 that the Object-Oriented AST approach provides the architectural 
 foundation required for industrial-grade compilers.
