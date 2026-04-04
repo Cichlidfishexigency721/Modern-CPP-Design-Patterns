@@ -14,11 +14,11 @@ state requires modifying every single conditional branch.
 ## The Solution
 The pattern suggests moving the state-specific behavior out of the Context 
 class into a set of separate "State" classes. 
-- Context: Defines the interface for clients and maintains a reference to 
+- **Context:** Defines the interface for clients and maintains a reference to 
 the current State object.
-- State: Defines the interface for encapsulating behavior associated with 
+- **State:** Defines the interface for encapsulating behavior associated with 
 a particular state.
-- Concrete State: Each subclass implements the behavior associated with a 
+- **Concrete State:** Each subclass implements the behavior associated with a 
 specific state of the Context.
 
 ## Our Examples
