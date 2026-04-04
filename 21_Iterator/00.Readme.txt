@@ -19,12 +19,12 @@ separate object called an Iterator.
 getting the first element, moving to the next, checking if it's done).
 
 ## Key Benefits
-1. Encapsulation: The client navigates the collection without knowing how 
+1. **Encapsulation:** The client navigates the collection without knowing how 
 the data is stored internally (Arrays, Nodes, Trees, etc.).
-2. Multiple Traversals: Because the Iterator is a separate object (not a 
+2. **Multiple Traversals:** Because the Iterator is a separate object (not a 
 cursor inside the container), you can have multiple iterators traversing 
 the same collection simultaneously without interfering with each other.
-3. Uniformity: Different containers can provide iterators with the same 
+3. **Uniformity:** Different containers can provide iterators with the same 
 interface, allowing polymorphic traversal algorithms.
 
 Our Examples (The Book Collection):
