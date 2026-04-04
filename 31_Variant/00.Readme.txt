@@ -31,13 +31,13 @@ itself to prove that a variant is roughly the size of its largest member
 plus a small tag (index).
 2. **Memory Tracking:** We use a custom 'Logger' class implementing the "Rule of
 Seven" (The Gang of Seven):
-* 1.DC: Default Constructor
-* 2.CC: Copy Constructor
-* 3.MC: Move Constructor
-* 4.CA: Copy Assigment
-* 5.MA: Move Assigment
-* 6.De: Destructor
-* 7.PC: Particular Constructor
+   * 1 DC: Default Constructor
+   * 2 CC: Copy Constructor
+   * 3.MC: Move Constructor
+   * 4.CA: Copy Assigment
+   * 5.MA: Move Assigment
+   * 6.De: Destructor
+   * 7.PC: Particular Constructor
 
 to visually trace how the variant safely moves and destroys objects behind the scenes.
 
