@@ -1,1 +1,89 @@
-00.Readme.txt
+# FACADE PATTERN (STRUCTURAL)
+
+## Intent
+The Facade pattern provides a simplified interface to a complex subsystem. 
+It hides the internal complexity of the subsystem and makes it easier 
+for clients to interact with the system.
+
+The Facade do not encapsulate the subsystem classes or interfaces; it just
+provides a simplified interface to their functionality. A client can
+access these classes directly. It still exposes the full functionality of
+the system for the clients who may need it.
+
+A Facade is not just only able to simplify an interface, but it also
+decouples a client from a subsystem. It adheres to the Principle of Least
+Knowledge, which avoids tight coupling between the client and the
+subsystem. This provides flexibility: suppose in the above problem, the
+company wants to add some more steps to start or stop the Schedule Server,
+that have their own different interfaces. If you coded your client code to
+the facade rather than the subsystem, your client code doesn’t need to be
+change, just the facade required to be changed, that’s would be delivered
+with a new version to the client.
+
+## The Problem
+When working with a complex subsystem (e.g., a computer, a car engine, a 
+video player), clients must interact with many different classes and 
+interfaces. This can lead to:
+- Increased complexity for the client.
+- Tight coupling between the client and the subsystem.
+- Difficulty in modifying or extending the system.
+
+## The Solution
+Create a "Facade" class that provides a simplified, high-level interface 
+to the subsystem. The Facade:
+1. Knows how to access the subsystem.
+2. Provides a simplified set of methods for the client.
+3. Decouples the client from the internal complexity of the subsystem.
+
+## Our Example
+In this example, we are creating a simplified interface to start a 
+computer:
+- The Facade is the 'ComputerFacade'.
+- The Subsystem consists of 'CPU', 'HardDrive', and 'Memory'.
+- The Client (main) calls 'ComputerFacade::Start()'. The Facade then 
+manages the steps to boot the computer.
+
+## Key Benefits
+- **Simplification:** Reduces the complexity for clients.
+- **Decoupling:** Reduces the dependency between the client and the subsystem.
+- **Flexibility:** You can change the subsystem without affecting the client, 
+as long as the Facade's interface remains the same.
+
+---
+# Facade Pattern
+
+```mermaid
+classDiagram
+   class CPU {
+      +freeze()
+      +jump(long)
+      +execute()
+   }
+
+   class HardDrive {
+      +read(long, int) char*
+   }
+
+   class Memory {
+      +load(long, char*)
+   }
+
+   class ComputerFacade {
+      -unique_ptr~CPU~ cpu_
+      -unique_ptr~Memory~ memory_
+      -unique_ptr~HardDrive~ hard_drive_
+      +start()
+   }
+
+   class Client {
+      +main()
+   }
+
+   %% The Facade owns and manages the subsystem components
+   ComputerFacade *-- "1" CPU
+   ComputerFacade *-- "1" Memory
+   ComputerFacade *-- "1" HardDrive
+
+   %% The Client only interacts with the simple interface
+   Client ..> ComputerFacade
+```
