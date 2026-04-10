@@ -1,0 +1,22 @@
+name: I. Creational Patterns
+description: Ask questions or suggest improvements for Builder, Factory, etc.
+title: "[Pattern Name]: Your Title Here"
+labels: ["discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for contributing to the Creational Patterns discussion!"
+  - type: textarea
+    id: pattern-details
+    attributes:
+      label: Which pattern are you discussing?
+      placeholder: e.g., 01_Builder
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: Your question or suggestion
+      placeholder: Describe your thoughts here...
+    validations:
+      required: true

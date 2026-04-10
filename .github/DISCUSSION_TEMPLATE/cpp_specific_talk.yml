@@ -1,0 +1,21 @@
+name: IV. C++ Specific & Frameworks
+description: Discuss CRTP, Variant, Error Handling (std::expected), or the Framework.
+title: "[C++ Technique]: Your Title Here"
+body:
+  - type: markdown
+    attributes:
+      value: "This space is for modern C++ techniques (C++20/23) and architectural patterns."
+  - type: textarea
+    id: topic-name
+    attributes:
+      label: Topic or Pattern Name
+      placeholder: e.g., 32_CRTP, 33_ErrorHandling, 29_Framework...
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Discussion Topic
+      placeholder: What are your thoughts on this C++ specific implementation?
+    validations:
+      required: true
