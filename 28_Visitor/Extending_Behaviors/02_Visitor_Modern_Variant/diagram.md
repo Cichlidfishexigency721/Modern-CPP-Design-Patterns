@@ -5,37 +5,30 @@ classDiagram
    class Paragraph {
       +string text_
    }
-
    class Image {
       +string url_
    }
-
    class Hyperlink {
       +string url_
       +string label_
    }
-
    class DocumentElement {
-      <<variant>>
+      (std::variant)
    }
-
    class HtmlExporter {
-      +visit(Paragraph)
-      +visit(Image)
-      +visit(Hyperlink)
+      +visit_Paragraph()
+      +visit_Image()
+      +visit_Hyperlink()
    }
-
    class TextExtractor {
-      +visit(Paragraph)
-      +visit(Image)
-      +visit(Hyperlink)
+      +visit_Paragraph()
+      +visit_Image()
+      +visit_Hyperlink()
    }
-
    class Client {
       +main()
    }
 
-   %% Relationships
    DocumentElement ..> Paragraph
    DocumentElement ..> Image
    DocumentElement ..> Hyperlink
@@ -48,18 +41,17 @@ classDiagram
    TextExtractor ..> Image
    TextExtractor ..> Hyperlink
 
-   Client *-- "n" DocumentElement : collection
+   Client *-- "n" DocumentElement
 
-   Client ..> HtmlExporter : via std::visit
-   Client ..> TextExtractor : via std::visit
+   Client ..> HtmlExporter
+   Client ..> TextExtractor
 ```
 
 ### Design Note:
 In this modern C++ version, the Visitor pattern is completely non-intrusive. The
-element classes (Paragraph, Image, Hyperlink) do not need to inherit from a base
-class or implement an 'accept' method; they are treated as pure data. The
-'DocumentElement' is a type-safe union (std::variant) that can hold any of these
-types. New operations like 'HtmlExporter' or 'TextExtractor' are implemented as
-separate functors. The 'Client' processes the entire document using
-'std::visit', which guarantees that all types in the variant are handled,
-providing compile-time safety and high performance.
+element classes (Paragraph, Image, Hyperlink) are treated as pure data and do
+not need a base class. The 'DocumentElement' is a type-safe union
+(std::variant). New operations like 'HtmlExporter' or 'TextExtractor' are
+separate objects. The 'Client' processes the entire collection using
+'std::visit', providing compile-time safety and high performance by avoiding
+virtual function overhead.
