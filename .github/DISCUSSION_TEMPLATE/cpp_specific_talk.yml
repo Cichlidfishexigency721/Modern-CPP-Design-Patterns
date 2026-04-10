@@ -1,4 +1,4 @@
-name: IV. C++ Specific & Frameworks
+name: "IV. C++ Specific & Frameworks"
 description: Discuss CRTP, Variant, Error Handling (std::expected), or the Framework.
 title: "[C++ Technique]: Your Title Here"
 body:
