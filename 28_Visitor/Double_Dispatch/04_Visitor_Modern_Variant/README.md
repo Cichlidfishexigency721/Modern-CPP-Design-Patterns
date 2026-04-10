@@ -1,1 +1,107 @@
-00.Readme.txt
+# VISITOR PATTERN MODERN VARIANT (C++17)
+
+## Introduction
+Since the C++17 standard, the language provides a new way to handle 
+polymorphism and dispatching that does not rely on traditional class 
+inheritance or virtual tables. This is achieved using 'std::variant' 
+and 'std::visit'.
+
+## What is std:variant?
+'std::variant' is a type-safe union. Unlike a traditional C-style union, 
+it knows which type it is currently holding and ensures that you access 
+it safely. It is a "Sum Type" that can store one value from a set of 
+predefined types (e.g., std::variant<Red, Blue>).
+
+## The Modern Visitor
+Even though the implementation is different, this is still a Visitor 
+Pattern. In this version:
+1. The 'Visitable' elements are the types listed inside the variant.
+2. The 'Visitor' is a callable object (usually a struct with overloaded 
+operator()) that defines what to do for each type.
+3. The 'Handshake' (Double Dispatch) is performed by 'std::visit', which 
+automatically generates the dispatch table at compile-time.
+
+## Is std:variant used for other patterns?
+Yes! 'std::variant' is a powerhouse in modern C++ architecture and is 
+frequently used to implement or simplify other patterns:
+
+1. **Finite State Pattern:**
+Instead of a complex hierarchy of State classes, you can define states as simple
+structs and store the current state in a variant.  Transitions are handled by
+updating the variant, see 25_FiniteStateMachine/03_CDPlayer_Variant/.
+
+2. **Null Object Pattern:**
+By including 'std::monostate' in a variant, you can represent the 
+absence of a value in a type-safe way, avoiding null pointer issues,
+see: 30_NullObject/02_Modern_Variant.
+
+3. **Command Pattern:**
+Commands can be stored as a variant of different function objects, 
+making it easy to store them in a history buffer (vector) and 
+execute them using a visitor, see 19_Command/02_Modern_Variant.
+
+4. **Error Handling (Result/Either Pattern):**
+Commonly used to return either a 'Success' value or an 'Error' 
+struct from a function, replacing exceptions for logic flow,
+see 33_ErrorHandling/01_ErrorHandling_Variant.
+
+## Key Advantages
+- Non-Intrusive: You can "visit" classes without modifying their code 
+(no need to add an 'accept' method).
+- Performance: Better cache locality and usually faster than virtual 
+calls because it avoids pointer indirection.
+- Static Safety: The compiler checks that all possible types in the 
+variant are handled by the visitor.
+
+## Requirements
+- Minimum C++17 compiler (e.g., GCC 7+, Clang 4+, MSVC 19.11+).
+
+---
+# Visitor Pattern (Modern Variant Version)
+
+```mermaid
+classDiagram
+    class Circle {
+        +int id_
+    }
+    class Triangle {
+        +int id_
+    }
+
+    class Shape {
+        <<variant>>
+    }
+
+    class CollisionEngine {
+        +operator()(Circle, Circle)
+        +operator()(Triangle, Triangle)
+        +operator()(Circle, Triangle)
+        +operator()(Triangle, Circle)
+        -intersect(int, int, string)
+    }
+
+    class Client {
+        +main()
+    }
+
+    Shape ..> Circle
+    Shape ..> Triangle
+
+    CollisionEngine ..> Circle : processes
+    CollisionEngine ..> Triangle : processes
+
+    Client *-- "n" Shape : collection
+
+    Client ..> CollisionEngine : via std::visit
+```
+
+### Design Note:
+In this modern C++17 implementation, the Visitor pattern achieves Double
+Dispatch through 'std::variant' and 'std::visit'. This approach is
+non-intrusive, as 'Circle' and 'Triangle' are plain data structures that do not
+require inheritance or 'accept' methods. The 'CollisionEngine' acts as the
+visitor, centralizing all interaction logic. By using 'std::visit' with multiple
+arguments, the system automatically handles the dispatch matrix. This version
+also includes an optimization for symmetry (Circle-Triangle being handled the
+same as Triangle-Circle) and improved memory locality by storing objects by
+value in the collection.
