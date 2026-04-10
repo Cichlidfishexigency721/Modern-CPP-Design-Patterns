@@ -2,61 +2,52 @@
 
 ```mermaid
 classDiagram
-   class Observer~ConcreteObservable~
-   {
+   class Observer~T~ {
       <<interface>>
-      +update(ConcreteObservable&)*
+      +update(T&)*
    }
 
-   class Observable~ConcreteObservable~
-   {
-      -vector~weak_ptr~Observer~~ observers_
-      +attach(shared_ptr~Observer~&)
-      +detach(shared_ptr~Observer~&)
+   class Observable~T~ {
+      -vector~weak_ptr~ observers_
+      +attach(shared_ptr~Observer~)
+      +detach(shared_ptr~Observer~)
       #notify()
    }
 
-   class Number
-   {
+   class Number {
       -int val_
       +setVal(int)
       +getVal() int
    }
 
-   class DivObserver
-   {
+   class DivObserver {
       -int div_
       +update(Number&)
    }
 
-   class ModObserver
-   {
+   class ModObserver {
       -int div_
       +update(Number&)
    }
 
-   class Client
-   {
+   class Client {
       +main()
    }
 
-   %% Inheritance (Is_a)
    Observable~Number~ <|-- Number
    Observer~Number~ <|-- DivObserver
    Observer~Number~ <|-- ModObserver
 
-   %% Composition (Has_a) - Multiplicity "n" at the end
-   Observable~ConcreteObservable~ *-- "n" Observer~ConcreteObservable~ : weak_ptr collection
+   Observable~T~ *-- "n" Observer~T~ : weak_ptr collection
 
-   %% Dependency
    Client ..> Number
-   Client ..> Observer~Number~ : owns via shared_ptr
+   Client ..> Observer~Number~ : owns shared_ptr
 ```
 
 ### Design Note:
-This version combines the performance of CRTP with the safety of Modern C++
-memory management. The 'Observable' uses a collection of 'std::weak_ptr' to
-track its observers without claiming ownership. This prevents circular
-references and memory leaks. When 'notify()' is called, the system temporarily
-upgrades the weak pointers to ensure the observers are still alive before
-calling 'update(Number&)'.
+This version introduces memory safety into the CRTP Observer. The Observable
+maintains a collection of 'std::weak_ptr' to its observers. This prevents
+circular dependencies (leaks) and ensures that if an observer is destroyed by
+the Client, the Observable won't attempt to access invalid memory. During
+'notify()', each pointer is temporarily locked to verify the observer's
+existence before calling 'update()'.
