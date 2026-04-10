@@ -2,49 +2,39 @@
 
 ```mermaid
 classDiagram
-   class Paragraph {
-      +string text_
-   }
-   class Image {
-      +string url_
-   }
-   class Hyperlink {
-      +string url_
-      +string label_
-   }
-   class DocumentElement {
-      (std::variant)
-   }
-   class HtmlExporter {
-      +visit_Paragraph()
-      +visit_Image()
-      +visit_Hyperlink()
-   }
-   class TextExtractor {
-      +visit_Paragraph()
-      +visit_Image()
-      +visit_Hyperlink()
-   }
-   class Client {
-      +main()
-   }
+    class Paragraph {
+        +string text_
+    }
+    class Image {
+        +string url_
+    }
+    class Hyperlink {
+        +string url_
+        +string label_
+    }
+    class DocumentElement {
+    }
+    class HtmlExporter {
+        +visit()
+    }
+    class TextExtractor {
+        +visit()
+    }
+    class Client {
+        +main()
+    }
 
-   DocumentElement ..> Paragraph
-   DocumentElement ..> Image
-   DocumentElement ..> Hyperlink
+    DocumentElement ..> Paragraph
+    DocumentElement ..> Image
+    DocumentElement ..> Hyperlink
 
-   HtmlExporter ..> Paragraph
-   HtmlExporter ..> Image
-   HtmlExporter ..> Hyperlink
+    HtmlExporter ..> Paragraph
+    HtmlExporter ..> Image
+    HtmlExporter ..> Hyperlink
 
-   TextExtractor ..> Paragraph
-   TextExtractor ..> Image
-   TextExtractor ..> Hyperlink
-
-   Client *-- "n" DocumentElement
-
-   Client ..> HtmlExporter
-   Client ..> TextExtractor
+    Client *-- "n" DocumentElement
+    Client ..> HtmlExporter
+    Client ..> TextExtractor
 ```
 
 ### Design Note:
