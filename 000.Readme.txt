@@ -5,7 +5,7 @@ C++ Idioms**. This project represents a bridge between classic software
 architecture (the *Gang of Four* legacy with C++98/11) and Modern C++ best practices
 (with C++14/17/20/23).
 
-Check out our Interactive Design Patterns Index for community debate and Q&A!
+Check out our Interactive Design Patterns Index for community debate and Q&A.
 
 ## --- Overview ---
 This repository is designed as a masterclass for developers who want to master
