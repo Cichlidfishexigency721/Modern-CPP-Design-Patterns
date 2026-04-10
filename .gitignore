@@ -10,6 +10,7 @@
 !*.sh
 !*.png
 !.gitignore
+!.github
 # Ignore objects and libraries
 *.so
 *.o
