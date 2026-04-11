@@ -74,13 +74,13 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
-   Equipment <|-- Composite : is a
+   Equipment <|-- Composite : Is a
    Equipment <|-- CPU
    Equipment <|-- RAM
    Equipment <|-- SSD
 
    %% Composition (Has_a) - Multiplicity "n" at the end
-   Composite *-- "n" Equipment : children_
+   Composite *-- "n" Equipment : Has many (in children_)
 
    %% Dependency - No numbers
    Client ..> Equipment
