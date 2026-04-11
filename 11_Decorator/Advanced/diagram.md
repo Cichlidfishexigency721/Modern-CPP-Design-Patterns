@@ -54,9 +54,9 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
-   Decorated <|-- Decorator
    Decorated <|-- Coffee
    Decorated <|-- Tea
+   Decorated <|-- Decorator
    Decorator <|-- Milk
    Decorator <|-- Sugar
    Decorator <|-- Vanilla
@@ -64,7 +64,7 @@ classDiagram
 
    %% The "Is a" and "Has a" core logic
    %% Composition (Has_a) - Multiplicity "1" at the end
-   Decorator *-- "1" Decorated : wraps
+   Decorator *-- "   1" Decorated : wraps
 
    %% Dependency - No numbers
    Client ..> Decorated
