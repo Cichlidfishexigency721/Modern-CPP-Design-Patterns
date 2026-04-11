@@ -8,6 +8,7 @@ classDiagram
       -Fred(int)
       +create() unique_ptr~Fred~
       +create(int) unique_ptr~Fred~
+      +create(Fred) unique_ptr~Fred~
       +talk()
    }
 
