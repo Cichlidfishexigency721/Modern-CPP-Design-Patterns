@@ -49,6 +49,10 @@ classDiagram
       +getCost() double
    }
 
+   class Client {
+      +main()
+   }
+
    %% Inheritance (Is_a) - No numbers
    Decorated <|-- Coffee
    Decorated <|-- Tea
@@ -61,4 +65,7 @@ classDiagram
    %% The "Is a" and "Has a" core logic
    %% Composition (Has_a) - Multiplicity "1" at the end
    Decorator *-- "1" Decorated : wraps
+
+   %% Dependency - No numbers
+   Client ..> Decorated
 ```
