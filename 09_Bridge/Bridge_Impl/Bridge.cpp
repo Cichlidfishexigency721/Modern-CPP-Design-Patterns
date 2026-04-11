@@ -143,17 +143,17 @@ Employee::~Employee() = default;
 
 std::string Employee::getName() const
 {
-   return pimpl->name_;
+   return pimpl->name_; // Here the bridge is used
 }
 
 std::string Employee::getId() const
 {
-   return pimpl->id_;
+   return pimpl->id_; // Here the bridge is used
 }
 
 void Employee::setName(std::string name)
 {
-   pimpl->name_ = std::move(name);
+   pimpl->name_ = std::move(name); // Here the bridge is used
 }
 
 //------------------------------------------------------------------------------- Main
