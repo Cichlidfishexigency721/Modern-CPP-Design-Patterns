@@ -80,7 +80,7 @@ classDiagram
    Equipment <|-- SSD
 
    %% Composition (Has_a) - Multiplicity "n" at the end
-   Composite *-- "n" Equipment : children
+   Composite *-- "n" Equipment : children_
 
    %% Dependency - No numbers
    Client ..> Equipment
