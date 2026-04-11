@@ -25,18 +25,18 @@ is compiled.
 ## Our Examples
 This folder contains three approaches using the "Coffee Shop" scenario:
 
-1. **Simple/:**
+1. **01_Simple/:**
 A basic implementation using smart pointers (std::unique_ptr). It shows 
 the fundamental "wrapper" mechanism and how costs and descriptions are 
 accumulated through a recursive chain of calls.
 
-2. **Advanced/:**
+2. **02_Advanced/:**
 A sophisticated version where decorators have internal state and logic. 
 Includes Milk types (Soy, Almond), portions of Sugar/Vanilla, and 
 Temperature (Hot/Iced). It also features advanced string logic to 
 build natural sentences like "Coffee with Milk, Sugar and Vanilla".
 
-3. **Static/:**
+3. **03_Static/:**
 Demonstrates "Static Decorators" using Mixin Inheritance (Templates). 
 This approach represents a "Coffee Machine Factory" where recipes are 
 pre-defined. It provides maximum performance (zero-overhead) because 
