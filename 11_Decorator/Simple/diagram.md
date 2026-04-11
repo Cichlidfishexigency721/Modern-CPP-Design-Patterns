@@ -35,6 +35,10 @@ classDiagram
       +getCost() double
    }
 
+   class Client {
+      +main()
+   }
+
    %% Inheritance (Is_a)
    Decorated <|-- Coffee
    Decorated <|-- Decorator
@@ -43,5 +47,8 @@ classDiagram
    Decorator <|-- Vanilla
 
    %% Composition (Has_a) - Multiplicity "1" at the end
-   Decorator *-- "1" Decorated
+   Decorator "1" *-- Decorated
+
+   %% Dependency - No numbers
+   Client ..> Decorated
 ```
