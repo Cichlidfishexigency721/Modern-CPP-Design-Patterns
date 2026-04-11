@@ -74,10 +74,10 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
+   Equipment <|-- Composite
    Equipment <|-- CPU
    Equipment <|-- RAM
    Equipment <|-- SSD
-   Equipment <|-- Composite
 
    %% Composition (Has_a) - Multiplicity "n" at the end
    Composite *-- "n" Equipment : children_
