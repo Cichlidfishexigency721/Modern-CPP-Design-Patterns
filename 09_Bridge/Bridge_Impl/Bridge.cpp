@@ -62,8 +62,25 @@ struct Employee::Impl
    std::string name_{"No name"};
    std::string id_;
 
-   Impl() = default;
-   Impl(std::string name, std::string id) : name_{std::move(name)}, id_{std::move(id)} {}
+   Impl() = default; // 1 DC: Default constructor
+   Impl(std::string name, std::string id) : name_{std::move(name)}, id_{std::move(id)} {} // 7 PC
+
+   // --- RULE OF FIVE vs. RULE OF ZERO ---
+   // According to the "Rule of Zero", we could leave all five of the following
+   // special member functions undefined, and the compiler would generate them
+   // automatically. However, per the "Rule of Five", if even one is explicitly
+   // defined, it is best practice to define all five to ensure consistent and
+   // safe behavior. In this case, we explicitly default all five functions to
+   // prevent compiler warnings when at least one is defined and to clarify intent,
+   // although defining none of them would also have been a valid approach.
+
+   // (The numbering follows my "Rule of 7" mnemonic system)
+
+   Impl(const Impl&)            = default;  // 2 CC: Copy Constructor
+   Impl(Impl&&)                 = default;  // 3 MC: Move Constructor
+   Impl& operator=(const Impl&) = default;  // 4 CA: Copy Assignment
+   Impl& operator=(Impl&&)      = default;  // 5 MA: Move Assignment
+   ~Impl()                      = default;  // 6 De: Destructor
 };
 
 //------------------------------------------------- Employee Implementation:
@@ -94,17 +111,17 @@ Employee& Employee::operator=(const Employee& other)
    std::cout << "4 CA: Copy assignment\n";
    if (this != &other)
    {
-      *pimpl = *other.pimpl;
+      *pimpl = *other.pimpl; // Uses default Impl copy assignment operator
    }
    return *this;
 }
 
 // 3 MC: Move constructor
 Employee::Employee(Employee&& other) noexcept 
-   : pimpl{std::move(other.pimpl)}
+   : pimpl{std::move(other.pimpl)} // Transfers ownership via unique_ptr move constructor
 {
    std::cout << "3 MC: Move constructor\n";
-// Instead of leaving 'other.pimpl' as nullptr (default behavior), 
+// Instead of leaving 'other.pimpl' as nullptr (default move constructor behavior), 
 // we re-initialize it to maintain our "Can't be nullptr" invariant.
    other.pimpl = std::make_unique<Impl>(); 
 }
@@ -143,19 +160,19 @@ void Employee::setName(std::string name)
 int main()
 {
    std::cout << "1 DC: Employee():\n";   
-   Employee e1;                     // 1 DC Employee()
+   Employee e1;                     // 1 DC: Employee()
 
    std::cout << "\n7 PC: Employee(std::string name, std::string id):\n";
    Employee e2{"Jimmy", "1-653-9"}; // 7 PC: Employee(std::string name, std::string id)
 
    std::cout << "\n2 CC: Employee(Employee const& other):\n";
-   Employee e3{e2};                 // 2 CC Employee(Employee const& other)
+   Employee e3{e2};                 // 2 CC: Employee(Employee const& other)
 
    std::cout << "\n3 MC: Employee(Employee&& other):\n";
-   Employee e4{std::move(e2)};      // 3 MC Employee(Employee&& other)
+   Employee e4{std::move(e2)};      // 3 MC: Employee(Employee&& other)
 
    std::cout << "\n4 CA: operator=(Employee const& other):\n";
-   e2 = e4;                         // 4 CA operator=(Employee const& other) (3 -> 5 -> 7)
+   e2 = e4;                         // 4 CA: operator=(Employee const& other) (3 -> 5 -> 7)
 
    std::cout << "\n5 MA: operator=(Employee&& other):\n";
    e1 = std::move(e4);              // 5 MA: operator=(Employee&& other) (2 -> 6 -> 7)
