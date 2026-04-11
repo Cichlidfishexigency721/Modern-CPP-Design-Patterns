@@ -54,9 +54,9 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
+   Decorated <|-- Decorator
    Decorated <|-- Coffee
    Decorated <|-- Tea
-   Decorated <|-- Decorator
    Decorator <|-- Milk
    Decorator <|-- Sugar
    Decorator <|-- Vanilla
