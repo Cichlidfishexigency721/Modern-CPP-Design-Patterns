@@ -31,7 +31,7 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
-   Equipment <|-- Composite
+   Equipment <|-- Composite : is a
    Equipment <|-- CPU
    Equipment <|-- RAM
    Equipment <|-- SSD
