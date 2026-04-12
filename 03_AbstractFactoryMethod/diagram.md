@@ -24,6 +24,7 @@ classDiagram
 
     class SpaceEnvironment {
         <<Creates Submarine and Sharks>>
+        note "A note"
         +createPlayer() unique_ptr~Player~
         +createHazard() unique_ptr~Hazard~
     }
@@ -46,15 +47,15 @@ classDiagram
     EnvironmentFactory <|.. SpaceEnvironment
     EnvironmentFactory <|.. UnderwaterEnvironment
 
-    %% Creation Dependencies (The Families)
-    %%SpaceEnvironment ..> Spaceship
-    %%SpaceEnvironment ..> Meteor
-    
-    %%UnderwaterEnvironment ..> Submarine
-    %%UnderwaterEnvironment ..> Shark
-
     %% Client interacting with abstractions
     Client ..> EnvironmentFactory
     Client *-- Player
     Client *-- "n" Hazard
+
+    %% Creation Dependencies (The Families)
+    SpaceEnvironment ..> Spaceship
+    %%SpaceEnvironment ..> Meteor
+    
+    %%UnderwaterEnvironment ..> Submarine
+    %%UnderwaterEnvironment ..> Shark
 ```
