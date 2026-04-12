@@ -136,7 +136,7 @@ classDiagram
 
    %% The Client depends on the factory functions exported by the .so
    %% Dependency (..>) - No numbers
-   Client ..> IModule : creates via symbols
+   Client --> IModule : creates via symbols
 ```
 
 ### Design Note:
