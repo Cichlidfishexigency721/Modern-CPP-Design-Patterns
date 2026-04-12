@@ -40,7 +40,7 @@ A similar approach, but the builder is designed to return a
 'std::unique_ptr<Car>'. This is the preferred way when the object 
 is complex, requires polymorphic components, or must live in the heap.
 
-### 3. Memory & Performance Trade-offs (Engineering Note)
+## Memory & Performance Trade-offs (Engineering Note)
 While both examples share a similar "Fluent" interface, they serve different architectural needs:
 
 - **Stack Version (Static):**
@@ -65,10 +65,10 @@ While both examples share a similar "Fluent" interface, they serve different arc
   - **Semantics:** Often Move-Only (Identity Semantics), ensuring that complex
       resources are never accidentally cloned.
 
-**MGQ STANDARDS NOTE:** Both implementations follow the **"Rule of Seven"** for
-  lifecycle management, ensuring that regardless of where the object lives
-  (Stack or Heap), its construction, transfer, and destruction are explicitly
-  controlled and exception-safe (`noexcept`).
+**MGQ NOTE:** Both implementations follow the **"Rule of Seven"** for lifecycle
+  management, ensuring that regardless of where the object lives (Stack or
+  Heap), its construction, transfer, and destruction are explicitly controlled
+  and exception-safe (`noexcept`).
 
 ## Key Benefits
 - **Encapsulation:** Eliminates the need for a client object to deal with the 
