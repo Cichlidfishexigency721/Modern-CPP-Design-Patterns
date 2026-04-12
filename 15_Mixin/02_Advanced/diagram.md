@@ -68,9 +68,9 @@ classDiagram
    Basic_Entity <|-- Entity~Mixins~
    Laser <|-- Entity~Mixins~
    Walk <|-- Entity~Mixins~
-   Gun <|-- Entity~Mixins~
    Fly <|-- Entity~Mixins~
    Tank <|-- Entity~Mixins~
+   Gun <|-- Entity~Mixins~
 
    %% Specific Entities
    Entity~Mixins~ <|-- Dragon
