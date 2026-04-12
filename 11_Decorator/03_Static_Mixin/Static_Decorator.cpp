@@ -39,12 +39,12 @@
 #include <string>
 
 //--------------------------------------------------------- Base Component:
-class Coffee
+class CoffeeToBeDecorated
 {
 public:
    std::string getDescription() const
    {
-      return "Coffee";
+      return "CoffeeToBeDecorated";
    }
 
    double getCost() const
@@ -145,19 +145,19 @@ int main()
 {
    std::cout << "=== INDUSTRIAL COFFEE FACTORY (STATIC DECORATORS) ===\n" << std::endl;
 
-   // Recipe 1: Basic Latte (Milk<Coffee>)
-   Milk<Coffee> latte;
+   // Recipe 1: Basic Latte (Milk<CoffeeToBeDecorated>)
+   Milk<CoffeeToBeDecorated> latte;
    std::cout << " Recipe 1 (Latte): " << latte.getDescription() << std::endl;
    std::cout << " Static Cost: $" << latte.getCost() << std::endl;
 
-   // Recipe 2: Sweet Latte (Sugar<Milk<Coffee>>)
-   Sugar<Milk<Coffee>> sweetLatte;
+   // Recipe 2: Sweet Latte (Sugar<Milk<CoffeeToBeDecorated>>)
+   Sugar<Milk<CoffeeToBeDecorated>> sweetLatte;
    std::cout << "\n Recipe 2 (Sweet Latte): " << sweetLatte.getDescription() << std::endl;
    std::cout << " Static Cost: $" << sweetLatte.getCost() << std::endl;
 
-   // Recipe 3: Vanilla Dream (Vanilla<Sugar<Milk<Coffee>>>)
-   // Now this will correctly print: "Coffee with Milk, Sugar and Vanilla"
-   Vanilla<Sugar<Milk<Coffee>>> vanillaDream;
+   // Recipe 3: Vanilla Dream (Vanilla<Sugar<Milk<CoffeeToBeDecorated>>>)
+   // Now this will correctly print: "CoffeeToBeDecorated with Milk, Sugar and Vanilla"
+   Vanilla<Sugar<Milk<CoffeeToBeDecorated>>> vanillaDream;
    std::cout << "\n Recipe 3 (Vanilla Dream): " << vanillaDream.getDescription() << std::endl;
    std::cout << " Static Cost: $" << vanillaDream.getCost() << std::endl;
 

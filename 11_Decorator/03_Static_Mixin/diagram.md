@@ -2,7 +2,7 @@
 
 ```mermaid
 classDiagram
-   class Coffee {
+   class CoffeeToBeDecorated {
       +getDescription() string
       +getCost() double
    }
@@ -25,9 +25,9 @@ classDiagram
    %% In Static Decorator, the decorator inherits from the template parameter Decorated.
    %% There is NO composition (*--) and NO multiplicity numbers.
    
-   Decorated <|-- Milk~Decorated~ : "is a" Decorated
-   Decorated <|-- Sugar~Decorated~ : "is a" Decorated
-   Decorated <|-- Vanilla~Decorated~ : "is a" Decorated
+   Decorated <|-- Milk~Decorated~
+   Decorated <|-- Sugar~Decorated~
+   Decorated <|-- Vanilla~Decorated~
 
 %% Client instantiates concrete types
    Client ..> Decorated
