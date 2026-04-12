@@ -90,12 +90,12 @@ between classes. The following diagram explains the arrows and multiplicities us
 ```mermaid
 classDiagram
    direction LR
-   A <|-- B : B is an A
+   A --|> B : A is a B
    C *-- D : C Has a D (owner)
    E o-- F : E Has an F (not owner)
    G --> H : G reference H
    I -- J  : Bi-directional reference
    K ..> L : K uses L
-   M <|.. N : N implements M
+   M ..|> N : M implements N
    O .. P : O Interacts with P
 ```
