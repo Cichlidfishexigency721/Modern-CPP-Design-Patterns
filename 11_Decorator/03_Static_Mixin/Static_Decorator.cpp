@@ -39,12 +39,12 @@
 #include <string>
 
 //--------------------------------------------------------- Base Component:
-class CoffeeToBeDecorated
+class Coffee_ToBeDecorated
 {
 public:
    std::string getDescription() const
    {
-      return "CoffeeToBeDecorated";
+      return "Coffee";
    }
 
    double getCost() const
@@ -64,12 +64,12 @@ public:
       size_t andPos = current.find(" and ");
       size_t withPos = current.find(" with ");
 
-      if (andPos != std::string::npos)
+      if(andPos != std::string::npos)
       {
          current.replace(andPos, 5, ", ");
          return current + " and Milk";
       }
-      if (withPos != std::string::npos)
+      if(withPos != std::string::npos)
       {
          return current + " and Milk";
       }
@@ -93,12 +93,12 @@ public:
       size_t andPos = current.find(" and ");
       size_t withPos = current.find(" with ");
 
-      if (andPos != std::string::npos)
+      if(andPos != std::string::npos)
       {
          current.replace(andPos, 5, ", ");
          return current + " and Sugar";
       }
-      if (withPos != std::string::npos)
+      if(withPos != std::string::npos)
       {
          return current + " and Sugar";
       }
@@ -122,12 +122,12 @@ public:
       size_t andPos = current.find(" and ");
       size_t withPos = current.find(" with ");
 
-      if (andPos != std::string::npos)
+      if(andPos != std::string::npos)
       {
          current.replace(andPos, 5, ", ");
          return current + " and Vanilla";
       }
-      if (withPos != std::string::npos)
+      if(withPos != std::string::npos)
       {
          return current + " and Vanilla";
       }
@@ -145,19 +145,19 @@ int main()
 {
    std::cout << "=== INDUSTRIAL COFFEE FACTORY (STATIC DECORATORS) ===\n" << std::endl;
 
-   // Recipe 1: Basic Latte (Milk<CoffeeToBeDecorated>)
-   Milk<CoffeeToBeDecorated> latte;
+   // Recipe 1: Basic Latte (Milk<Coffee_ToBeDecorated>)
+   Milk<Coffee_ToBeDecorated> latte;
    std::cout << " Recipe 1 (Latte): " << latte.getDescription() << std::endl;
    std::cout << " Static Cost: $" << latte.getCost() << std::endl;
 
-   // Recipe 2: Sweet Latte (Sugar<Milk<CoffeeToBeDecorated>>)
-   Sugar<Milk<CoffeeToBeDecorated>> sweetLatte;
+   // Recipe 2: Sweet Latte (Sugar<Milk<Coffee_ToBeDecorated>>)
+   Sugar<Milk<Coffee_ToBeDecorated>> sweetLatte;
    std::cout << "\n Recipe 2 (Sweet Latte): " << sweetLatte.getDescription() << std::endl;
    std::cout << " Static Cost: $" << sweetLatte.getCost() << std::endl;
 
-   // Recipe 3: Vanilla Dream (Vanilla<Sugar<Milk<CoffeeToBeDecorated>>>)
-   // Now this will correctly print: "CoffeeToBeDecorated with Milk, Sugar and Vanilla"
-   Vanilla<Sugar<Milk<CoffeeToBeDecorated>>> vanillaDream;
+   // Recipe 3: Vanilla Dream (Vanilla<Sugar<Milk<Coffee_ToBeDecorated>>>)
+   // Now this will correctly print: "Coffee_ToBeDecorated with Milk, Sugar and Vanilla"
+   Vanilla<Sugar<Milk<Coffee_ToBeDecorated>>> vanillaDream;
    std::cout << "\n Recipe 3 (Vanilla Dream): " << vanillaDream.getDescription() << std::endl;
    std::cout << " Static Cost: $" << vanillaDream.getCost() << std::endl;
 

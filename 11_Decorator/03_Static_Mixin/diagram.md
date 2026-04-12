@@ -2,7 +2,7 @@
 
 ```mermaid
 classDiagram
-   class CoffeeToBeDecorated {
+   class Coffee_ToBeDecorated {
       +getDescription() string
       +getCost() double
    }
