@@ -22,7 +22,7 @@ classDiagram
     Base <|.. Derived
 
     %% The clone method creates a new instance of the same concrete type
-    Derived ..> Derived : Creates copy
+    Derived --> Derived : Creates copy
 
     %% Client depends on the abstraction
     Client ..> Base
