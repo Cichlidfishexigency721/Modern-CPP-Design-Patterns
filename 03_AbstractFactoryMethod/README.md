@@ -66,16 +66,18 @@ classDiagram
     }
 
     class SpaceEnvironment {
+        <<Creates Spaceship and Meteors>>
+        +createPlayer() unique_ptr~Player~
+        +createHazard() unique_ptr~Hazard~
+    }
+    note for SpaceEnvironment "Creates Spaceship and Meteors"
+
+    class UnderwaterEnvironment {
         <<Creates Submarine and Sharks>>
         +createPlayer() unique_ptr~Player~
         +createHazard() unique_ptr~Hazard~
     }
-    note for SpaceEnvironment "Creates Submarine and Sharks"
-
-    class UnderwaterEnvironment {
-        +createPlayer() unique_ptr~Player~
-        +createHazard() unique_ptr~Hazard~
-    }
+    note for UnderwaterEnvironment "Creates Submarine and Sharks"
 
     class Client {
         +runEnvironment(unique_ptr~EnvironmentFactory~)
@@ -96,7 +98,7 @@ classDiagram
     Client *-- "n" Hazard
 
     %% Creation Dependencies (The Families)
-    SpaceEnvironment ..> Spaceship
+    %%SpaceEnvironment ..> Spaceship
     %%SpaceEnvironment ..> Meteor
     
     %%UnderwaterEnvironment ..> Submarine
