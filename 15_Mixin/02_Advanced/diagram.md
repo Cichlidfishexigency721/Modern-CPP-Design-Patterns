@@ -8,7 +8,10 @@ classDiagram
    }
 
 %%---------------------------------------------------- Features (Mixin Parts):
-   class Laser { +laser_fire(), +print() }
+   class Laser {
+      +laser_fire()
+      +print()
+   }
    class Walk { +walk(), +print() }
    class Gun { +gun_fire(), +print() }
    class Tank { +tank_load_fuel(), +tank_get_fuel(), +print() }
@@ -42,6 +45,7 @@ classDiagram
    }
 
 %%----------------------------------------------------------- UML Composition:
+   %% Dependencies
    Client ..> Entity~Mixins~
    PrintVisitor ..> Entity~Mixins~ : visits
    Fly ..> Tank : requires
@@ -58,8 +62,6 @@ classDiagram
    Entity~Mixins~ <|-- Dragon
    Entity~Mixins~ <|-- Elephant
    Entity~Mixins~ <|-- Airplane
-
-   %% Dependencies
 ```
 
 ### Design Note:
