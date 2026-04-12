@@ -44,6 +44,7 @@ classDiagram
 %%----------------------------------------------------------- UML Composition:
    Client ..> Entity~Mixins~
    PrintVisitor ..> Entity~Mixins~ : visits
+   Fly ..> Tank : requires
 
    %% Multiple Inheritance (Horizontal Composition)
    Basic_Entity <|-- Entity~Mixins~
@@ -59,7 +60,6 @@ classDiagram
    Entity~Mixins~ <|-- Airplane
 
    %% Dependencies
-   Fly ..> Tank : requires
 ```
 
 ### Design Note:
