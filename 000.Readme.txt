@@ -32,7 +32,7 @@ concerns such as:
   Polymorphism (CRTP) and Mixins.
 * **Modern Features:** Extensive use of std::variant, std::visit, if constexpr,
   and C++20 Abbreviated Templates.
-* **The "Gang of Seven":** A unique educational approach to tracing an object's
+* **The "Rule of Seven":** A unique educational approach to tracing an object's
   full lifecycle:
    - 1 DC: Default Constructor
    - 2 CC: Copy Constructor
