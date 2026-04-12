@@ -39,9 +39,12 @@ classDiagram
    class Elephant { <<Entity~Walk, Gun~>> }
    class Airplane { <<Entity~Fly, Laser, Gun~>> }
 
+%%----------------------------------------------------------- UML Composition:
+   %% The client has an Entity<Mixins>>
+   Client ..> Entity~Mixins~
+
    %% Multiple Inheritance (Horizontal Composition)
    %% Inheritance arrows do not use multiplicity numbers
-   Basic_Entity <|-- Entity~Mixins~
    Laser <|-- Entity~Mixins~
    Walk <|-- Entity~Mixins~
    Gun <|-- Entity~Mixins~
@@ -56,9 +59,6 @@ classDiagram
    Laser <|-- Elephant
    Gun <|-- Elephant
    Entity~Mixins~ <|-- Airplane
-
-   %% Dependency - No numbers
-   Client ..> Entity~Mixins~
 ```
 
 ### Design Note:
