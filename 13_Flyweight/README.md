@@ -48,18 +48,19 @@ classDiagram
       -string name_
       -int capacity_
       -int speed_
+      -string deployDate_
       +showDetails()
+      +getName()
       +~Model()
    }
 
    class FlyweightFactory {
-      -map~int, shared_ptr~Model~~ cache_
+      -map modelCache_
       +getModel(int) shared_ptr~Model~
    }
 
    class Airplane {
       -shared_ptr~Model~ model_
-      -string mfgDate_
       -int id_
       +showDetails()
       +~Airplane()
