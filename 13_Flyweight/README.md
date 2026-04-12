@@ -23,7 +23,8 @@ the Flyweight methods by the client object when needed.
 ## Our Example
 This folder illustrates a manual implementation using a 'FlyweightFactory'.
 It shows how to use shared 'Model' objects for 'Airplane' instances, preventing
-redundant storage of model names, capacities, and speeds.
+redundant storage of model names, capacities, speeds and deployment dates; only
+the aircraft id is stored in each Airplane instance.
 
 ## Key Benefits
 - **Memory Efficiency:** Dramatically reduces the RAM footprint when dealing 
@@ -74,7 +75,7 @@ classDiagram
    FlyweightFactory "1" *-- "n" Model : modelCache_
 
    %% Many Airplanes share the same single Model instance
-   Airplane "1" *-- "1" Model : intrinsic state
+   Airplane "1" *-- "1" Model : model_ (intrinsic state)
 
    %% Client interacts with the factory to get models and creates airplanes
    Client ..> FlyweightFactory
