@@ -26,7 +26,7 @@ int main()
 {
    std::cout << "=== REGISTRY PATTERN SIMULATION ===\n" << std::endl;
 
-   std::string image = "I am an image";
+   Image image = "I am an image";
    std::cout << "Original: " << image << "\n\n";
 
    try
@@ -48,8 +48,8 @@ int main()
       std::cout << " Pointer 1 (p1): " << p1.get() << "\n";
       std::cout << " Pointer 2 (p3): " << p3.get() << "\n";
       
-      if (p1 == p3) std::cout << " Policy: Singleton (Instance shared)";
-      else          std::cout << " Policy: Prototype (New instance created)";
+      if(p1 == p3) std::cout << " Policy: Singleton (Instance shared)";
+      else         std::cout << " Policy: Prototype (New instance created)";
       std::cout << " - Defined in Register.h\n";
 
       // Testing non-existent processor

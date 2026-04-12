@@ -43,12 +43,14 @@
 #include <functional>
 #include <stdexcept>
 
+using Image = std::string;
+
 //--------------------------------------------------------- Processor Interface:
 class Processor
 {
 public:
    virtual ~Processor() = default;
-   virtual std::string process(const std::string& input) const = 0;
+   virtual std::string process(const Image& image) const = 0;
    virtual std::string getName() const = 0;
 };
 

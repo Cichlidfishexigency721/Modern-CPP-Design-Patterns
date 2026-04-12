@@ -95,6 +95,8 @@ classes. It simply executes the stored function when needed.
 
 ```mermaid
 classDiagram
+   class Image
+
    class Processor {
       <<interface>>
       +process(string) string*
@@ -125,7 +127,7 @@ classDiagram
       +main()
    }
 
-   %% Inheritance (Is_a) - No numbers
+   %% Inheritance (Implements)
    Processor <|.. GrayscaleProcessor
    Processor <|.. BlurProcessor
 
@@ -140,8 +142,9 @@ classDiagram
    BlurProcessor ..> Register~ConcreteProcessor~ : static auto-reg
 
    %% Client interactions
-   Client ..> Registry : look up
-   Client ..> Processor : execute
+   Client *-- Image
+   Client ..> Registry : call create(processorName)
+   Client *-- "n" Processor : process(image)
 ```
 
 ### Design Note:

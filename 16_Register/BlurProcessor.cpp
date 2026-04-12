@@ -14,9 +14,9 @@
 class BlurProcessor : public Processor
 {
 public:
-   std::string process(const std::string& input) const override
+   Image process(const Image& image) const override
    {
-      return input + " blured";
+      return image + " blured";
    }
 
    std::string getName() const override 

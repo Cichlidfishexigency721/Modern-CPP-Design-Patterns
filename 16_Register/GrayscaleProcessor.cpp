@@ -13,9 +13,9 @@
 class GrayscaleProcessor : public Processor
 {
 public:
-   std::string process(const std::string& input) const override
+   Image process(const Image& image) const override
    {
-      return input + " grayscaled";
+      return image + " grayscaled";
    }
 
    std::string getName() const override 
