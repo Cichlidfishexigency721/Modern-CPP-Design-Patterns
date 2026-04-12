@@ -36,9 +36,9 @@ classDiagram
     MeteorFactory ..> LargeMeteor
     
     %% The Factory returns abstract products
-    MeteorFactory ..> "n" Meteor
+    MeteorFactory --> "n" Meteor : creates
 
     %% Client relies on the single concrete factory and the abstract product
     Client ..> MeteorFactory
-    Client ..> "n" Meteor
+    Client *-- "n" Meteor
 ```
