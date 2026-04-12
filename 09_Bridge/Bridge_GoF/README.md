@@ -80,12 +80,12 @@ classDiagram
    }
 
    %% Implementer hierarchy
-   Renderer <|-- VectorRenderer
-   Renderer <|-- RasterRenderer
+   Renderer <|.. VectorRenderer
+   Renderer <|.. RasterRenderer
 
    %% Abstraction hierarchy
-   Shape <|-- Circle
-   Shape <|-- Square
+   Shape <|.. Circle
+   Shape <|.. Square
 
    %% The Bridge: Shape owns a Renderer
    Shape *-- Renderer : the bridge

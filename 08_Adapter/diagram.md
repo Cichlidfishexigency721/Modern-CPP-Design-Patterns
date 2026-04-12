@@ -20,12 +20,12 @@ classDiagram
       +render(ModernRectangle)
    }
 
-   %% Inheritance (Is_a) - No numbers
-   ModernRectangle <|-- RectangleAdapter
+   %% Inheritance (Implements)
+   ModernRectangle <|.. RectangleAdapter
 
    %% Composition (Has_a)
    RectangleAdapter *-- LegacyRectangle
 
-   %% Dependency - No numbers
+   %% Dependency
    Client ..> ModernRectangle
 ```

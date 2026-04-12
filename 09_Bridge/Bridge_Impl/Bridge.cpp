@@ -76,11 +76,11 @@ struct Employee::Impl
 
    // (The numbering follows my "Rule of 7" mnemonic system)
 
-   Impl(const Impl&)            = default;  // 2 CC: Copy Constructor
-   Impl(Impl&&)                 = default;  // 3 MC: Move Constructor
-   Impl& operator=(const Impl&) = default;  // 4 CA: Copy Assignment
-   Impl& operator=(Impl&&)      = default;  // 5 MA: Move Assignment
-   ~Impl()                      = default;  // 6 De: Destructor
+   Impl(const Impl&)                = default;  // 2 CC: Copy Constructor
+   Impl(Impl&&) noexcept            = default;  // 3 MC: Move Constructor
+   Impl& operator=(const Impl&)     = default;  // 4 CA: Copy Assignment
+   Impl& operator=(Impl&&) noexcept = default;  // 5 MA: Move Assignment
+   ~Impl()                          = default;  // 6 De: Destructor
 };
 
 //------------------------------------------------- Employee Implementation:

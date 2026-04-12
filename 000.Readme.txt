@@ -41,6 +41,7 @@ concerns such as:
    - 5 MA: Move Assigment
    - 6 De: Destructor
    - 7 PC: Particular Constructor
+See 004_Rule_of_Seven.txt for a more detailed explanation.
 
 ## --- Repository Structure ---
 The project is organized into four logical blocks:
@@ -72,7 +73,7 @@ This repository is provided as an open educational resource.
       projects/courses, I would greatly appreciate a mention or a link back to
       this repository.
 
-**Author:** Mario Galindo Queralt, Ph.D.
+**Author:** Mario Galindo Queralt, Ph.D. (MGQ)
 
 ## --- Philosophical Note ---
 > "The code is the vehicle, but the comments are the gold."
@@ -100,10 +101,10 @@ classDiagram
    E *-- F     : E Has an F (owner)
    G *-- "n" H : G Has several Hs (owner)
 
-   J o-- K     : J Has an K (not owner)
+   J o-- K     : J Has a K (not owner)
    L o-- "n" M : L Has several Ms (not owner)
 
-   N --> P     : N reference P
+   N --> P     : N creates P
    Q ..> R     : Q uses R
 
    S -- T      : Bi-directional reference

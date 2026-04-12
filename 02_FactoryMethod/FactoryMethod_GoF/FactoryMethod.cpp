@@ -38,21 +38,21 @@ public:
 class SmallMeteor : public Meteor {
 public:
     void showInfo() const override {
-        std::cout << " -> Meteor spawned![Size: Small | Speed: Slow]" << std::endl;
+        std::cout << " -> Meteor spawned [Size: Small | Speed: Slow]" << std::endl;
     }
 };
 
 class MediumMeteor : public Meteor {
 public:
     void showInfo() const override {
-        std::cout << " -> Meteor spawned![Size: Medium | Speed: Normal]" << std::endl;
+        std::cout << " -> Meteor spawned [Size: Medium | Speed: Normal]" << std::endl;
     }
 };
 
 class LargeMeteor : public Meteor {
 public:
     void showInfo() const override {
-        std::cout << " -> Meteor spawned! [Size: Large | Speed: Fast]" << std::endl;
+        std::cout << " -> Meteor spawned [Size: Large | Speed: Fast]" << std::endl;
     }
 };
 
