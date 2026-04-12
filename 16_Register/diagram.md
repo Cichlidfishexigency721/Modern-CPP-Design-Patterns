@@ -24,7 +24,7 @@ classDiagram
       +create(string) shared_ptr~Processor~
    }
 
-   class Register~T~ {
+   class Register~ConcreteProcessor~ {
       +Register(string)
    }
 
@@ -42,9 +42,9 @@ classDiagram
 
    %% Auto-registration mechanism
    %% Dependency (..>) - No numbers
-   Register~T~ ..> Registry : registers T
-   GrayscaleProcessor ..> Register~T~ : static auto-reg
-   BlurProcessor ..> Register~T~ : static auto-reg
+   Register~ConcreteProcessor~ ..> Registry : registers ConcreteProcessor
+   GrayscaleProcessor ..> Register~ConcreteProcessor~ : static auto-reg
+   BlurProcessor ..> Register~ConcreteProcessor~ : static auto-reg
 
    %% Client interactions
    Client ..> Registry : look up
