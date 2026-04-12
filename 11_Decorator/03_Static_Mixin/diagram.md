@@ -22,6 +22,10 @@ classDiagram
       +getCost() double
    }
 
+   class Client {
+      +main()
+   }
+
    %% In Static Decorator, the decorator inherits from the template parameter Decorated.
    %% There is NO composition (*--) and NO multiplicity numbers.
    
