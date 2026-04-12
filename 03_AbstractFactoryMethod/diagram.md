@@ -27,14 +27,12 @@ classDiagram
         +createPlayer() unique_ptr~Player~
         +createHazard() unique_ptr~Hazard~
     }
-    note for SpaceEnvironment "Creates Spaceship and Meteors"
 
     class UnderwaterEnvironment {
         <<Creates Submarine and Sharks>>
         +createPlayer() unique_ptr~Player~
         +createHazard() unique_ptr~Hazard~
     }
-    note for UnderwaterEnvironment "Creates Submarine and Sharks"
 
     class Client {
         +runEnvironment(unique_ptr~EnvironmentFactory~)
@@ -60,4 +58,6 @@ classDiagram
     
     %%UnderwaterEnvironment ..> Submarine
     %%UnderwaterEnvironment ..> Shark
+    note for SpaceEnvironment "Creates Spaceship and Meteors"
+    note for UnderwaterEnvironment "Creates Submarine and Sharks"
 ```
