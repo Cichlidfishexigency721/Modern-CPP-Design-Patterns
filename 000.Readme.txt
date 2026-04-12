@@ -85,14 +85,16 @@ over the last four decades.
 ## UML Symbology Reference
 
 The class diagrams in this repository use Mermaid notation to represent the relationships
-between classes. The following diagram explains the arrows and multiplicities used:
+between classes. The following diagram explains the arrows an multiplicities used:
 
 ```mermaid
 classDiagram
    direction LR
    A --|> B : A is a B
    C *-- D : C Has a D (owner)
+   C *-- "n" D : C Has several Ds (owner)
    E o-- F : E Has an F (not owner)
+   E o-- "n" F : E Has several Fs (not owner)
    G --> H : G reference H
    I -- J  : Bi-directional reference
    K ..> L : K uses L
