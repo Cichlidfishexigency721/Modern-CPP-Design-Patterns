@@ -89,11 +89,11 @@ classDiagram
     EnvironmentFactory <|.. UnderwaterEnvironment
 
     %% Creation Dependencies (The Families)
-    SpaceEnvironment ..> Spaceship
-    SpaceEnvironment ..> Meteor
+    %%SpaceEnvironment ..> Spaceship
+    %%SpaceEnvironment ..> Meteor
     
-    UnderwaterEnvironment ..> Submarine
-    UnderwaterEnvironment ..> Shark
+    %%UnderwaterEnvironment ..> Submarine
+    %%UnderwaterEnvironment ..> Shark
 
     %% Client interacting with abstractions
     Client ..> EnvironmentFactory
