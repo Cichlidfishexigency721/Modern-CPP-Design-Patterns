@@ -2,11 +2,12 @@
 
 ```mermaid
 classDiagram
-   class Basic_Entity {
-      -string name_
-      +print_name()
+%%---------------------------------------------------------------------- Main:
+   class Client {
+      +main()
    }
 
+%%---------------------------------------------------- Features (Mixin Parts):
    class Laser {
       +laser_fire()
       +laser_set_intensity(int)
@@ -27,16 +28,14 @@ classDiagram
       +fly_load_fuel(int)
    }
 
+%%--------------------------------------------------------------------- Entity:
    class Entity~Mixins~ {
       +Entity(string)
    }
 
-   class Client {
-      +main()
-   }
-
-   %% Specific Entities defined by type aliases in the code
-   class Dragon { Entity~Fly, Laser~ }
+%%------------------------------------------------------------ Mixin Entities:
+   %% Mixin entities defined by type aliases in the code
+   class Dragon { << Entity~Fly, Laser~ >> }
    class Elephant { <<Entity~Walk, Gun~>> }
    class Airplane { <<Entity~Fly, Laser, Gun~>> }
 

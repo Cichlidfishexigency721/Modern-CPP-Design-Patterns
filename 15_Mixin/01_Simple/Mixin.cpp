@@ -16,8 +16,9 @@
 #include <string>
 #include <utility> // std::move
 
-//--------------------------------------------------------- Features (Mixins):
+//---------------------------------------------------- Features (Mixin Parts):
 
+//---------------------------------- Laser:
 class Laser
 {
 private:
@@ -27,16 +28,17 @@ public:
    void laser_fire()
    {
       std::cout << "\tLaser fire intensity " << intensity_ << "\n";
-      if (intensity_ > 2) --intensity_;
+      if(intensity_ > 2) --intensity_;
    }
 
    void laser_set_intensity(int i) 
    {
-      if (i < 2) i = 2; 
+      if(i < 2) i = 2; 
       intensity_ = i;
    }
 };
 
+//----------------------------------- Walk:
 class Walk
 {
 private:
@@ -54,6 +56,7 @@ public:
    }
 };
 
+//------------------------------------ Gun:
 class Gun
 {
 private:
@@ -62,7 +65,7 @@ private:
 public:
    void gun_fire()
    {
-      if (bullets_ > 0)
+      if(bullets_ > 0)
       {
          std::cout << "\tGun fire\n"; 
          --bullets_;
@@ -79,6 +82,7 @@ public:
    }
 };
 
+//------------------------------------ Fly:
 class Fly
 {
 private:
@@ -87,7 +91,7 @@ private:
 public:
    void fly()
    {
-      if (fuel_ > 0)
+      if(fuel_ > 0)
       {
          std::cout << "\tFlying\n";
          --fuel_;
@@ -104,15 +108,16 @@ public:
    }
 };
 
-//------------------------------------------------------------- Generic Entity:
+//--------------------------------------------------------------------- Entity:
 
-class Basic_Entity
+template<class ... Mixins> // Inheriting from a pack of templates
+class Entity : public Mixins...
 {
 private:
    std::string name_;
 
 public:
-   explicit Basic_Entity(std::string n) : name_{std::move(n)} { }
+   explicit Entity(std::string n) : name_{std::move(n)} { }
 
    void print_name() const 
    {
@@ -120,17 +125,7 @@ public:
    }
 };
 
-
-//--------------------------------------------------------------- Mixin Entity:
-
-template<class ... Mixins> // Inheriting from a pack of templates
-class Entity : public Basic_Entity, public Mixins...
-{
-public:
-   explicit Entity(std::string name) : Basic_Entity{std::move(name)} { }
-};
-
-//--------------------------------------------------------- Specific Entities:
+//------------------------------------------------------------ Mixin Entities:
 
 // Using aliases to define new types by combining mixins
 using Dragon = Entity<Fly, Laser>;
