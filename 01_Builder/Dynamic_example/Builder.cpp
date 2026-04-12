@@ -33,6 +33,7 @@ private:
    int power_;
 public:
    explicit Engine(int power) : power_{power} { }
+   int get_power() {return power_;}
 };
 
 class Wheel {/*...*/};
@@ -53,6 +54,7 @@ private:
    using Wheels_vector = std::vector<Wheel_ptr>;
 
    float         weight_;
+   float         length_;
    float         width_;
    int           doorCount_;
    std::string   color_;
@@ -61,9 +63,9 @@ private:
    Wheels_vector wheels_;
 
    // Very complicated constructor (intentionally private):
-   Car(float weight,  float width,  int doorCount,  std::string color, Type type,
+   Car(float weight, float length,  float width,  int doorCount,  std::string color, Type type,
        Engine_ptr engine,  Wheels_vector wheels)
-      : weight_{weight},  width_{width},  doorCount_{doorCount},  color_{std::move(color)},
+      : weight_{weight}, length_{length},  width_{width},  doorCount_{doorCount},  color_{std::move(color)},
         type_{type},  engine_{std::move(engine)},  wheels_{std::move(wheels)} { }
 
    friend class Builder; // Only Builder can build Cars
@@ -71,20 +73,22 @@ private:
 public:
    void print()
    {
-      std::cout << "Car: weight = " << weight_    << ", width = " << width_
-                << ", doorCount = " << doorCount_ << ", color = " << color_
-                << std::endl;
+      std::cout << "Car: weight = " << weight_ << ", length = " << length_ << ", width = " << width_
+                << ", doorCount = " << doorCount_ << ", wheels = " << wheels_.size() << ", color = " << color_
+                << ", enginePower = " << engine_->get_power() << ", type = "
+                << (type_==Type::Family ? "Family" : type_==Type::Truck ? "Truck" : "Sport") << std::endl;
    }
 
    class Builder final // Use Builder to manage such complicated constructor.
    {
    private:
-      float       weight_{2}; // default values
-      float       width_{4};
-      int         doorCount_{4};
-      std::string color_{"black"};
-      int         power_{100};
-      int         wheelCount_{4};
+      float       weight_     {1.3}; // default values
+      float       length_     {2.2};
+      float       width_      {1.8};
+      int         doorCount_  {4};
+      std::string color_      {"black"};
+      int         power_      {100};
+      int         wheelCount_ {4};
 
       template<class T, typename=std::enable_if_t<std::is_base_of_v<Wheel, T>>>
       Wheels_vector buildWheels() const
@@ -97,51 +101,49 @@ public:
 
    public:
       Builder& setWeight     (float we)       noexcept {weight_     = we;            return *this;}
+      Builder& setLength     (float le)       noexcept {length_     = le;            return *this;}
       Builder& setWidth      (float wi)       noexcept {width_      = wi;            return *this;}
       Builder& setDoorCount  (int dc)         noexcept {doorCount_  = dc;            return *this;}
       Builder& setColor      (std::string co) noexcept {color_      = std::move(co); return *this;}
       Builder& setPower      (int po)         noexcept {power_      = po;            return *this;}
       Builder& setWheelCount (int wc)         noexcept {wheelCount_ = wc;            return *this;}
 
-      operator std::unique_ptr<Car>() // This operator converts a Builder into a std::unique_ptr<Car>
+      std::unique_ptr<Car> build()
       {
          Type type;
-         if(power_ > 500) type = (wheelCount_>4) ? Type::Truck : Type::Sport;
+         if(power_ > 400) type = (wheelCount_>4) ? Type::Truck : Type::Sport;
          else             type = Type::Family;
       
          Wheels_vector wheels;
          if(wheelCount_>4) wheels = buildWheels<HeavyDutyWheel>();
          else              wheels = buildWheels<StandardWheel>();
       
-         return std::unique_ptr<Car>(new Car{weight_, width_, doorCount_, std::move(color_),
-                                                type, std::make_unique<Engine>(power_),
-                                                std::move(wheels)}
-            );
-      }
-
-      std::unique_ptr<Car> build()
-      {
-         return std::unique_ptr<Car>(*this);
+         return std::unique_ptr<Car>(new Car{weight_, length_, width_, doorCount_, std::move(color_),
+                                             type, std::make_unique<Engine>(power_),
+                                             std::move(wheels)});
       }
    }; // Builder
 }; // Car
 
 int main()
 {
-   std::unique_ptr<Car> car1 = Car::Builder{}.setColor("blue")
-                                             .setDoorCount(2)
-                                             .setWidth(3.5f)
-                                             .setWheelCount(4)
-                                             .setPower(800); //.build();// is not necessary here
-   car1->print();
+   auto car = Car::Builder{}.build();
+   car->print();
 
-   auto car2 = Car::Builder{}.setColor("black")
-                             .setWeight(3)
-                             .setDoorCount(3)
-                             .setWidth(4.1f)
-                             .setWheelCount(6)
-                             .setPower(1200).build(); // But here build() is necessary
-   car2->print();
+   car = Car::Builder{}.setColor("white")
+                       .setDoorCount(3)
+                       .setWidth(1.6)
+                       .setWheelCount(4)
+                       .setPower(500).build();
+   car->print();
+
+   car = Car::Builder{}.setLength(5.5)
+                       .setWidth(2.6)
+                       .setWeight(3.1)
+                       .setDoorCount(2)
+                       .setWheelCount(6)
+                       .setPower(900).build();
+   car->print();
 }
 
 //============================================================================================= END
