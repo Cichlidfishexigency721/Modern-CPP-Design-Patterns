@@ -48,9 +48,9 @@ classDiagram
     %%FactoryLevel3 ..> LargeMeteor
 
     %% Abstract creator conceptually creates abstract products
-    FactoryMethod *-- "n" Meteor
+    FactoryMethod --> "n" Meteor : creates
 
     %% Client uses the abstractions
     Client ..> FactoryMethod
-    Client ..> Meteor
+    Client *-- "n" Meteor
 ```
