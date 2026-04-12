@@ -66,15 +66,13 @@ classDiagram
     }
 
     class SpaceEnvironment {
-        <<Only creates Spaceship and Meteors>>
-        +createPlayer() unique_ptr~Player~
-        +createHazard() unique_ptr~Hazard~
+        +createPlayer() unique_ptr~Spaceship~
+        +createHazard() unique_ptr~Meteor~
     }
 
     class UnderwaterEnvironment {
-        <<Only creates Submarine and Sharks>>
-        +createPlayer() unique_ptr~Player~
-        +createHazard() unique_ptr~Hazard~
+        +createPlayer() unique_ptr~Submarine~
+        +createHazard() unique_ptr~Shark~
     }
 
     class Client {
