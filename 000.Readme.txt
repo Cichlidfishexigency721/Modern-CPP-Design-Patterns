@@ -96,8 +96,8 @@ classDiagram
    G o-- H : G Has an H (not owner)
    I o-- "n" J : I Has several Js (not owner)
    K --> L : K reference L
-   L -- M  : Bi-directional reference
-   N ..> O : N uses O
-   P ..|> Q : P implements Q
-   R .. S : R Interacts with S
+   M -- N  : Bi-directional reference
+   P ..> Q : P uses Q
+   R ..|> S : R implements S
+   T .. U : T Interacts with U
 ```
