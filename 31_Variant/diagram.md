@@ -4,7 +4,7 @@
 classDiagram
    class Logger {
       +string s
-      +Logger_ GangOfSeven
+      +Logger_ RuleOfSeven
    }
 
    class Visitor {

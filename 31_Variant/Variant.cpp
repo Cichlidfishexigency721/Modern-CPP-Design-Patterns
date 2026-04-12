@@ -4,7 +4,7 @@
  * 
  * --- DESIGN OVERVIEW:
  * Demonstrates the use of std::variant and std::visit (C++17).
- * Includes a custom 'Logger' class implementing "The Gang of Seven" to
+ * Includes a custom 'Logger' class implementing "The Rule of Seven" to
  * trace memory lifecycle and ownership changes within the variant.
  * 
  * --- MANUAL ACCESS:
@@ -28,7 +28,7 @@ struct Logger
 {
    std::string s;
   
-   // Define the Gang of seven:
+   // Define the Rule of seven:
    Logger()
    {
       std::cout << "----- Logger 1 DC: Default Constructor\n";

@@ -30,7 +30,7 @@ This program demonstrates how 'std::variant' manages memory and types:
 itself to prove that a variant is roughly the size of its largest member 
 plus a small tag (index).
 2. **Memory Tracking:** We use a custom 'Logger' class implementing the "Rule of
-Seven" (The Gang of Seven):
+Seven":
    * 1 DC: Default Constructor
    * 2 CC: Copy Constructor
    * 3 MC: Move Constructor
@@ -64,7 +64,7 @@ While not a GoF pattern itself, 'std::variant' is the modern foundation for:
 classDiagram
    class Logger {
       +string s
-      +Logger_ GangOfSeven
+      +Logger_ RuleOfSeven
    }
 
    class Visitor {
