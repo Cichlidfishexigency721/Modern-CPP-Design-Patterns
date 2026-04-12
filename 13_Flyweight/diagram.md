@@ -13,7 +13,7 @@ classDiagram
    }
 
    class FlyweightFactory {
-      -map~int, shared_ptr~Model~ -> cache_
+      -map~int,shared_ptr~Model~~ cache_
       +getModel(int) shared_ptr~Model~
    }
 
