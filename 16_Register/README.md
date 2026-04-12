@@ -99,15 +99,15 @@ classDiagram
 
    class Processor {
       <<interface>>
-      +process(image) string*
+      +process(image) image
    }
 
    class GrayscaleProcessor {
-      +process(image) string
+      +process(image) image
    }
 
    class BlurProcessor {
-      +process(image) string
+      +process(image) image
    }
 
    class Registry {
