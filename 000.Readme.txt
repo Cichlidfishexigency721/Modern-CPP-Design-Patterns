@@ -94,10 +94,10 @@ classDiagram
    C *-- D : C Has a D (owner)
    E *-- "n" F : E Has several Fs (owner)
    G o-- H : G Has an H (not owner)
-   I o-- "n" J : I Has several Js (not owner)
-   K --> L : K reference L
-   M -- N  : Bi-directional reference
-   P ..> Q : P uses Q
-   R ..|> S : R implements S
-   T .. U : T Interacts with U
+   J o-- "n" K : J Has several Ks (not owner)
+   L --> M : L reference M
+   N -- P  : Bi-directional reference
+   Q ..> R : Q uses R
+   S ..|> T : S implements T
+   U .. V : U Interacts with V
 ```
