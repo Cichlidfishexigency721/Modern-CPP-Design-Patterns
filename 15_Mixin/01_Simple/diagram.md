@@ -32,7 +32,7 @@ classDiagram
    class Entity~Mixins~ {
       +string name_
       +Entity(string)
-      +print_name()
+      +print_name() : string
    }
 
 %%------------------------------------------------------------ Mixin Entities:

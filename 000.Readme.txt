@@ -90,15 +90,12 @@ between classes. The following diagram explains the arrows and multiplicities us
 ```mermaid
 classDiagram
    direction LR
-   class Inheritance { Is_a }
-   class Composition { Has_a }
-   class Aggregation { Creates_component }
-   class Dependency { Creates_final_object }
-
-   Base <|-- Inheritance
-   Owner_One *-- "1" Composition
-   Owner_Many *-- "n" Composition
-   Builder_One_Part o-- "1" Aggregation
-   Builder_Many_Parts o-- "n" Aggregation
-   Builder_Final ..> Dependency
+   A <|-- B : B is an A
+   C *-- D : C Has a D (owner)
+   E o-- F : E Has an F (not owner)
+   G --> H : G reference H
+   I -- J  : Bi-directional reference
+   K ..> L : K uses L
+   M <|.. N : N implements M
+   O .. P : O Interacts with P
 ```
