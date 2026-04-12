@@ -24,10 +24,10 @@ classDiagram
 
     class SpaceEnvironment {
         <<Creates Submarine and Sharks>>
-        note "A note"
         +createPlayer() unique_ptr~Player~
         +createHazard() unique_ptr~Hazard~
     }
+    note for SpaceEnvironment "Creates Submarine and Sharks"
 
     class UnderwaterEnvironment {
         +createPlayer() unique_ptr~Player~
