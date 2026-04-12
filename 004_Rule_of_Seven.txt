@@ -58,7 +58,6 @@ ID | MNEMONIC | FUNCTION NAME            | TECHNICAL SIGNATURE
 ----------------------------------------
 The following implementation demonstrates a MGQ-compliant Move-Only Car class:
 
-```CPP
 class Car {
 public:
    Car() = delete;                          // 1 DC: No unconfigured cars
@@ -72,7 +71,6 @@ private:                                    // 7 PC: Controlled birth
    Car(float w, Engine e, Wheels v);        // (Private: Accessed by Builder)
    friend class Builder;
 };
-```
 
 6. ENGINEERING IMPACT
 ---------------------
