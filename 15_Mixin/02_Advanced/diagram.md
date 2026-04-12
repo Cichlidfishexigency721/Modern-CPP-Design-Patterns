@@ -10,20 +10,37 @@ classDiagram
 %%---------------------------------------------------- Features (Mixin Parts):
    class Laser {
       +laser_fire()
+      +laser_set_intensity(int i)
       +print()
    }
-   class Walk { +walk(), +print() }
-   class Gun { +gun_fire(), +print() }
-   class Tank { +tank_load_fuel(), +tank_get_fuel(), +print() }
-   class Fly { +fly(auto& entity), +print() }
+   class Walk {
+      +walk()
+      +walk_set_speed(int s)
+      +print()
+   }
+   class Gun {
+      +gun_fire()
+      +gun_set_bullets(int b)
+      +print()
+   }
+   class Tank {
+      +tank_load_fuel()
+      +tank_get_fuel()
+      +print()
+   }
+   class Fly {
+      +fly_set_altitude_speed(int altitude, int speed)
+      +fly(auto& entity)
+      +print()
+   }
 
 %%--------------------------------------------------------------------- Entity:
    class Basic_Entity {
       -string name_
       +print_name()
    }
-
    class Entity~Mixins~ {
+      +Entity~Mixins~(std::string name)
       +visitFeatures(Visitor)
    }
 
@@ -39,7 +56,6 @@ classDiagram
       Airplane~Entity~Basic_Entity Fly Tank Laser Gun~~
       +fly()
    }
-
    class PrintVisitor {
       +operator()(Mixins)
    }
