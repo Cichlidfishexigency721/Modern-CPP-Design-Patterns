@@ -123,19 +123,16 @@ classDiagram
       +main()
    }
 
-   %% Inheritance (Is_a) - No numbers
+   %% Inheritance (Is_a)
    IModule <|-- Module
 
    %% The Client owns the RAII wrapper for the library
-   %% Composition (Has_a) - Multiplicity "1" at the end
-   Client *-- "1" DynamicLibrary : manages library
+   Client *-- DynamicLibrary : manages library
 
    %% The Client owns the module instance via unique_ptr
-   %% Composition (Has_a) - Multiplicity "1" at the end
-   Client *-- "1" IModule : uses plugin
+   Client *-- IModule : uses plugin
 
    %% The Client depends on the factory functions exported by the .so
-   %% Dependency (..>) - No numbers
    Client --> IModule : creates via symbols
 ```
 
