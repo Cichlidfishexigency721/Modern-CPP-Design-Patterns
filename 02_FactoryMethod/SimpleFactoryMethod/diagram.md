@@ -26,18 +26,15 @@ classDiagram
         +playLevel(const MeteorFactory&)
     }
 
-    Meteor <|-- SmallMeteor
-    Meteor <|-- MediumMeteor
-    Meteor <|-- LargeMeteor
+    Meteor <|.. SmallMeteor
+    Meteor <|.. MediumMeteor
+    Meteor <|.. LargeMeteor
 
     %% The Factory creates specific concrete products based on its internal state
-    MeteorFactory ..> SmallMeteor
-    MeteorFactory ..> MediumMeteor
-    MeteorFactory ..> LargeMeteor
+    MeteorFactory --> SmallMeteor : creates
+    MeteorFactory --> MediumMeteor : creates
+    MeteorFactory --> LargeMeteor : creates
     
-    %% The Factory returns abstract products
-    MeteorFactory --> "n" Meteor : creates
-
     %% Client relies on the single concrete factory and the abstract product
     Client ..> MeteorFactory
     Client *-- "n" Meteor
