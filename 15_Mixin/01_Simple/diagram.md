@@ -50,6 +50,8 @@ classDiagram
 
    %% Relationships for specific types
    Entity~Mixins~ <|-- Dragon
+   Fly <|-- Dragon
+   Laser <|-- Dragon
    Entity~Mixins~ <|-- Elephant
    Entity~Mixins~ <|-- Airplane
 
