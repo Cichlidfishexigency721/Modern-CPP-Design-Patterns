@@ -69,8 +69,8 @@ classDiagram
    Laser <|-- Entity~Mixins~
    Walk <|-- Entity~Mixins~
    Fly <|-- Entity~Mixins~
-   Gun <|-- Entity~Mixins~
    Tank <|-- Entity~Mixins~
+   Gun <|-- Entity~Mixins~
 
    %% Specific Entities
    Entity~Mixins~ <|-- Dragon
