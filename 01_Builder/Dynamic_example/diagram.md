@@ -4,7 +4,10 @@
 classDiagram
    class Client { +main() }
 
-   class Engine { -int power_ }
+   class Engine {
+      -int power_
+      +int get_power()
+   }
    class Wheel { <<interface>> }
    class StandardWheel
    class HeavyDutyWheel
@@ -18,6 +21,7 @@ classDiagram
       -Type type_
       -unique_ptr~Engine~ engine_
       -vector~unique_ptr~Wheel~~ wheels_
+      -Car()
 
       +print()
    }
@@ -32,12 +36,12 @@ classDiagram
       -int wheelCount_
 
       -buildWheels() Wheels_vector
-      +setWeight(float) Builder&
-      +setLength(float) Builder&
-      +setWidth(float) Builder&
-      +setDoorCount(float) Builder&
-      +setColor(float) Builder&
-      +setPower(float) Builder&
+      +setWeight(float)     Builder&
+      +setLength(float)     Builder&
+      +setWidth(float)      Builder&
+      +setDoorCount(float)  Builder&
+      +setColor(float)      Builder&
+      +setPower(float)      Builder&
       +setWheelCount(float) Builder&
       +build() unique_ptr~Car~
    }
