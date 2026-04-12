@@ -66,6 +66,7 @@ classDiagram
     }
 
     class SpaceEnvironment {
+        <<Creates Submarine and Sharks>>
         +createPlayer() unique_ptr~Player~
         +createHazard() unique_ptr~Hazard~
     }
