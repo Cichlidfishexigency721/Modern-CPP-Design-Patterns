@@ -10,7 +10,7 @@
  * --- RELATIONSHIP NOTE:
  * In the Dynamic Decorator, the relationship is 'is a' AND 'has a' (composition).
  * In the Static Decorator, the relationship is strictly 'is a' (inheritance).
- * The static decorator "is a" T, but it doesn't "have a" T; it wraps the 
+ * The static decorator "is a" Decorated, but it doesn't "have a" Decorated; it wraps the 
  * functionality by becoming part of the class hierarchy itself, eliminating 
  * the need for internal pointers.
  * 
@@ -23,7 +23,7 @@
  * 
  * --- THE SOLUTION:
  * We use templates where decorators inherit from their template argument:
- * 'class Milk : public T'. This allows the compiler to "flatten" the 
+ * 'class Milk : public Decorated'. This allows the compiler to "flatten" the 
  * inheritance chain, enabling aggressive optimizations like inlining.
  * This implementation also ensures that the natural language description 
  * ("with", "and", ",") is maintained with zero runtime overhead.
@@ -54,13 +54,13 @@ public:
 };
 
 //--------------------------------------------------------- Static Decorator A:
-template <typename T>
-class Milk : public T // Static Decorator "is a" T, but doesn't "have a" T
-{
+template <typename Decorated>
+class Milk : public Decorated // Static Decorator "is a" Decorated,
+{                             // but doesn't "have a" Decorated
 public:
    std::string getDescription() const
    {
-      std::string current = T::getDescription();
+      std::string current = Decorated::getDescription();
       size_t andPos = current.find(" and ");
       size_t withPos = current.find(" with ");
 
@@ -78,18 +78,18 @@ public:
 
    double getCost() const
    {
-      return T::getCost() + 0.5;
+      return Decorated::getCost() + 0.5;
    }
 };
 
 //--------------------------------------------------------- Static Decorator B:
-template <typename T>
-class Sugar : public T // Static Decorator "is a" T, but doesn't "have a" T
-{
+template <typename Decorated>
+class Sugar : public Decorated // Static Decorator "is a" Decorated,
+{                              // but doesn't "have a" Decorated
 public:
    std::string getDescription() const
    {
-      std::string current = T::getDescription();
+      std::string current = Decorated::getDescription();
       size_t andPos = current.find(" and ");
       size_t withPos = current.find(" with ");
 
@@ -107,18 +107,18 @@ public:
 
    double getCost() const
    {
-      return T::getCost() + 0.2;
+      return Decorated::getCost() + 0.2;
    }
 };
 
 //--------------------------------------------------------- Static Decorator C:
-template <typename T>
-class Vanilla : public T // Static Decorator "is a" T, but doesn't "have a" T
-{
+template <typename Decorated>
+class Vanilla : public Decorated // Static Decorator "is a" Decorated,
+{                                // but doesn't "have a" Decorated
 public:
    std::string getDescription() const
    {
-      std::string current = T::getDescription();
+      std::string current = Decorated::getDescription();
       size_t andPos = current.find(" and ");
       size_t withPos = current.find(" with ");
 
@@ -136,7 +136,7 @@ public:
 
    double getCost() const
    {
-      return T::getCost() + 0.7;
+      return Decorated::getCost() + 0.7;
    }
 };
 
