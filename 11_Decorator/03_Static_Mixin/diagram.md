@@ -7,27 +7,27 @@ classDiagram
       +getCost() double
    }
 
-   class Milk~Decoraded~ {
+   class Milk~Decorated~ {
       +getDescription() string
       +getCost() double
    }
 
-   class Sugar~Decoraded~ {
+   class Sugar~Decorated~ {
       +getDescription() string
       +getCost() double
    }
 
-   class Vanilla~Decoraded~ {
+   class Vanilla~Decorated~ {
       +getDescription() string
       +getCost() double
    }
 
-   %% In Static Decorator, the decorator inherits from the template parameter Decoraded.
+   %% In Static Decorator, the decorator inherits from the template parameter Decorated.
    %% There is NO composition (*--) and NO multiplicity numbers.
    
-   Decoraded <|-- Milk~Decoraded~ : "is a" Decoraded
-   Decoraded <|-- Sugar~Decoraded~ : "is a" Decoraded
-   Decoraded <|-- Vanilla~Decoraded~ : "is a" Decoraded
+   Decorated <|-- Milk~Decorated~ : "is a" Decorated
+   Decorated <|-- Sugar~Decorated~ : "is a" Decorated
+   Decorated <|-- Vanilla~Decorated~ : "is a" Decorated
 
 %% Client instantiates concrete types
    Client ..> Decorated
