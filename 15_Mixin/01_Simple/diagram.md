@@ -35,7 +35,7 @@ classDiagram
 
 %%------------------------------------------------------------ Mixin Entities:
    %% Mixin entities defined by type aliases in the code
-   class Dragon { << Entity~Fly, Laser~ >> }
+   class Dragon { < Entity~Fly, Laser~ > }
    class Elephant { <<Entity~Walk, Gun~>> }
    class Airplane { <<Entity~Fly, Laser, Gun~>> }
 
