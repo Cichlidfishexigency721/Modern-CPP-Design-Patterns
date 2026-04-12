@@ -41,7 +41,8 @@ concerns such as:
    - 5 MA: Move Assigment
    - 6 De: Destructor
    - 7 PC: Particular Constructor
-See 004_Rule_of_Seven.txt for a more detailed explanation.
+
+See *004_Rule_of_Seven.txt* for a more detailed explanation.
 
 ## --- Repository Structure ---
 The project is organized into four logical blocks:
