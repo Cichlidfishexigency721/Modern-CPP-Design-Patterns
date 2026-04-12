@@ -30,6 +30,7 @@ classDiagram
 
 %%--------------------------------------------------------------------- Entity:
    class Entity~Mixins~ {
+      +string name_
       +Entity(string)
       +print_name()
    }
