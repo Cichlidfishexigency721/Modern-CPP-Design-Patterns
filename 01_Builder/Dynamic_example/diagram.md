@@ -49,8 +49,8 @@ classDiagram
    Car *-- Engine
    Car *-- "n" Wheel
    
-   Builder --> Engine
-   Builder --> "n" Wheel
+   Builder --> Engine : engine_
+   Builder --> "n" Wheel : wheels_
    Builder --> Car
 
    note for Builder "Builder is nested inside Car"
