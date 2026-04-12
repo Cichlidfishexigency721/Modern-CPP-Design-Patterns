@@ -29,13 +29,13 @@ of features at compile-time (see 26_Strategy/03_Static_Strategy).
 ## Our Examples
 This folder contains two levels of complexity
 
-1. **Simple/:**
+1. **01_Simple/:**
 Demonstrates basic horizontal composition. We define features like 'Fly', 
 'Walk', 'Laser', and 'Gun'. Then, we use template aliases (using) to 
 instantiate specific entities like 'Dragon' or 'Airplane' by simply
 listing their required capabilities.
 
-2. **Advanced/:**
+2. **02_Advanced/:**
 Introduces inter-mixin communication and advanced C++ features:
 - Dependency: The 'Fly' mixin checks the 'Tank' mixin for fuel.
 - Static Visitor Pattern: Implements a 'visitFeatures' method using 
