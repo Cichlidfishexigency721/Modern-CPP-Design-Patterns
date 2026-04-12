@@ -98,7 +98,7 @@ public:
       }
    }
 
-   void fly_load_fuel(int f) 
+   void load_fuel(int f) 
    {
       fuel_ = f;
    }
@@ -120,8 +120,10 @@ public:
    }
 };
 
-// The Mixin Core: Inheriting from a pack of templates
-template<class ... Mixins>
+
+//--------------------------------------------------------------- Mixin Entity:
+
+template<class ... Mixins> // Inheriting from a pack of templates
 class Entity : public Basic_Entity, public Mixins...
 {
 public:
@@ -136,7 +138,7 @@ using Dragon = Entity<Fly, Laser>;
 Dragon createDragon(std::string name, int fuel, int intensity)
 {
    Dragon d{std::move(name)};
-   d.fly_load_fuel(fuel);
+   d.load_fuel(fuel);
    d.laser_set_intensity(intensity);
    return d;
 }
@@ -156,7 +158,7 @@ using Airplane = Entity<Fly, Laser, Gun>;
 Airplane createAirplane(std::string name, int fuel, int intensity, int bullets)
 {
    Airplane a{std::move(name)};
-   a.fly_load_fuel(fuel);
+   a.load_fuel(fuel);
    a.laser_set_intensity(intensity);
    a.gun_set_bullets(bullets);
    return a;
@@ -175,7 +177,7 @@ int main()
    dragon.fly();
    dragon.fly();
    std::cout << "\tLoading fuel 1\n";
-   dragon.fly_load_fuel(1);
+   dragon.load_fuel(1);
    dragon.fly();
    dragon.fly();
    dragon.laser_fire();

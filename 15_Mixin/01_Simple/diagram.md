@@ -31,6 +31,10 @@ classDiagram
       +Entity(string)
    }
 
+   class Client {
+      +main()
+   }
+
    %% Specific Entities defined by type aliases in the code
    class Dragon { <<Entity~Fly, Laser~>> }
    class Elephant { <<Entity~Walk, Gun~>> }
@@ -48,6 +52,9 @@ classDiagram
    Entity~Mixins~ <|-- Dragon
    Entity~Mixins~ <|-- Elephant
    Entity~Mixins~ <|-- Airplane
+
+   %% Dependency - No numbers
+   Client ..> ICar
 ```
 
 ### Design Note:
