@@ -18,7 +18,6 @@ classDiagram
 
     class MeteorFactory {
         -int currentLevel
-        +createMeteor() : std::unique_ptr<Meteor> 
         +setLevel(int)
         +createMeteor() unique_ptr~Meteor~
     }
@@ -33,8 +32,6 @@ classDiagram
 
     %% The Factory creates specific concrete products based on its internal state
     MeteorFactory --> Meteor : creates
-    %%MeteorFactory --> MediumMeteor : creates
-    %%MeteorFactory --> LargeMeteor : creates
     
     %% Client relies on the single concrete factory and the abstract product
     Client ..> MeteorFactory
