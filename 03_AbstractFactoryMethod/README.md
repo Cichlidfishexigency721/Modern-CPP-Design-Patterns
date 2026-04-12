@@ -45,7 +45,7 @@ modifying existing client code.
 
 ```mermaid
 classDiagram
-    directio LR
+    direction LR
     class Player {
         <<interface>>
         +spawn()*

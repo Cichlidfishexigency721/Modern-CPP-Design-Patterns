@@ -2,7 +2,7 @@
 
 ```mermaid
 classDiagram
-    directio LR
+    direction LR
     class Player {
         <<interface>>
         +spawn()*
