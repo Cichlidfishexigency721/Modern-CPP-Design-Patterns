@@ -48,7 +48,7 @@ See *004_Rule_of_Seven.txt* for a more detailed explanation.
 The project is organized into four logical blocks:
 
 1.  **Fundamental Principles:** Detailed analysis of SOLID, IoC, Hollywood
-Principle, and more (see 002_OO_Principles.txt).
+Principle, and more (see *002_OO_Principles.txt*).
 2.  **Creational Patterns:** Managing object instantiation and lifecycle
 (Builder, Factory, Singleton, etc.).
 3.  **Structural Patterns:** Compiling classes and objects into larger, flexible
@@ -64,7 +64,7 @@ The author uses a custom gcc3 alias for optimized compilation:
 
 c++ -std=c++23 -O3 -Wfatal-errors -Wall -Wextra -Wpedantic program.cpp -o program -pthread
 
-For detailed instructions, refer to 003_How_to_compile.txt.
+For detailed instructions, refer to *003_How_to_compile.txt*.
 
 ## --- License & Usage ---
 This repository is provided as an open educational resource.
