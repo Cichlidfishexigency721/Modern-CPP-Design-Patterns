@@ -26,7 +26,7 @@ classDiagram
 
 %%------------------------------------------------------------ Mixin Entities:
    class Dragon {
-      Dragon~Entity~Fly Tnak Laser~~
+      Dragon~Entity~Fly Tank Laser~~
       +fly()
    }
    class Elephant {
@@ -59,6 +59,7 @@ classDiagram
    %% Dependencies
    Fly ..> Tank : requires
    PrintVisitor ..> Entity~Mixins~ : visits
+   Clien ..> Entity~Mixins~
 ```
 
 ### Design Note:
