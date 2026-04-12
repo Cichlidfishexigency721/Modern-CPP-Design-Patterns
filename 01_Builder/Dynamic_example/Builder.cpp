@@ -21,10 +21,10 @@
  * ============================================================================
  */
 
+#include <iostream>
 #include <string>
 #include <memory>
 #include <vector>
-#include <iostream>
 
 // -------------------------- Components of a Car:
 class Engine
@@ -33,13 +33,11 @@ private:
    int power_;
 public:
    explicit Engine(int power) : power_{power} { }
-   int get_power() {return power_;}
+   int get_power() const { return power_; }
 };
 
 class Wheel {/*...*/};
-
 class StandardWheel  : public Wheel {/*...*/};
-
 class HeavyDutyWheel : public Wheel {/*...*/};
 
 //--------------------------------------- The Car:
@@ -47,6 +45,14 @@ class Car
 {
 public:
    enum class Type {Family, Truck, Sport};
+
+   // --- THE RULE OF SEVEN (MGQ Mnemonic System) ---
+   Car()                          = delete;  // 1 DC: No default car to force the use of the Builder
+   Car(const Car&)                = delete;  // 2 CC: Not possible because unique_ptrs can't be moved
+   Car(Car&&) noexcept            = default; // 3 MC: Possible because unique_ptrs can be moved
+   Car& operator=(const Car&)     = delete;  // 4 CA: Not possible because unique_ptrs can't be moved
+   Car& operator=(Car&&) noexcept = default; // 5 MA: Possible because unique_ptrs can be moved
+   ~Car()                         = default; // 6 De: Destructor
 
 private:
    using Engine_ptr    = std::unique_ptr<Engine>; // These are necessary because Engine and
@@ -62,16 +68,17 @@ private:
    Engine_ptr    engine_;
    Wheels_vector wheels_;
 
-   // Very complicated constructor (intentionally private):
-   Car(float weight, float length,  float width,  int doorCount,  std::string color, Type type,
-       Engine_ptr engine,  Wheels_vector wheels)
-      : weight_{weight}, length_{length},  width_{width},  doorCount_{doorCount},  color_{std::move(color)},
-        type_{type},  engine_{std::move(engine)},  wheels_{std::move(wheels)} { }
+   // 7 PC: Very complicated particular constructor (intentionally private):
+   Car(float weight, float length, float width, int doorCount, std::string color,
+       Type type, Engine_ptr engine, Wheels_vector wheels)
+      : weight_{weight}, length_{length}, width_{width}, doorCount_{doorCount},
+        color_{std::move(color)}, type_{type}, engine_{std::move(engine)},
+        wheels_{std::move(wheels)} { }
 
    friend class Builder; // Only Builder can build Cars
 
 public:
-   void print()
+   void print() const
    {
       std::cout << "Car: weight = " << weight_ << ", length = " << length_ << ", width = " << width_
                 << ", doorCount = " << doorCount_ << ", wheels = " << wheels_.size() << ", color = " << color_
@@ -82,9 +89,9 @@ public:
    class Builder final // Use Builder to manage such complicated constructor.
    {
    private:
-      float       weight_     {1.3}; // default values
-      float       length_     {2.2};
-      float       width_      {1.8};
+      float       weight_     {1.3f}; // default values
+      float       length_     {2.2f};
+      float       width_      {1.8f};
       int         doorCount_  {4};
       std::string color_      {"black"};
       int         power_      {100};
@@ -108,10 +115,10 @@ public:
       Builder& setPower      (int po)         noexcept {power_      = po;            return *this;}
       Builder& setWheelCount (int wc)         noexcept {wheelCount_ = wc;            return *this;}
 
-      std::unique_ptr<Car> build()
+      std::unique_ptr<Car> build() const
       {
          Type type;
-         if(power_ > 400) type = (wheelCount_>4) ? Type::Truck : Type::Sport;
+         if(power_ > 400) type = (wheelCount_ > 4) ? Type::Truck : Type::Sport;
          else             type = Type::Family;
       
          Wheels_vector wheels;
@@ -121,28 +128,38 @@ public:
          return std::unique_ptr<Car>(new Car{weight_, length_, width_, doorCount_, std::move(color_),
                                              type, std::make_unique<Engine>(power_),
                                              std::move(wheels)});
-      }
+      } // Build
+
+      // Conversion Operator
+      operator std::unique_ptr<Car>() const { return build(); }
+
    }; // Builder
 }; // Car
 
+//------------------------------------------------------------------------------- Main
 int main()
 {
-   auto car = Car::Builder{}.build();
+   // Example 1: Default-ish construction
+   std::unique_ptr<Car> car = Car::Builder{}; // calling .build() is not necessary due to implicit conversion.
    car->print();
 
+   // Example 2: Sport configuration (Fluent interface)
    car = Car::Builder{}.setColor("white")
                        .setDoorCount(3)
-                       .setWidth(1.6)
+                       .setWidth(1.6f)
+                       .setLength(4.0f)
                        .setWheelCount(4)
-                       .setPower(500).build();
+                       .setPower(550)
+                       .build(); // anyway, .build() can be called!
    car->print();
 
-   car = Car::Builder{}.setLength(5.5)
-                       .setWidth(2.6)
-                       .setWeight(3.1)
+   // Example 3: Truck configuration (Fluent interface)
+   car = Car::Builder{}.setLength(5.5f)
+                       .setWidth(2.6f)
+                       .setWeight(3.1f)
                        .setDoorCount(2)
                        .setWheelCount(6)
-                       .setPower(900).build();
+                       .setPower(900);
    car->print();
 }
 
