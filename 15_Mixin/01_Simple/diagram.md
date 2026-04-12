@@ -54,7 +54,7 @@ classDiagram
    Entity~Mixins~ <|-- Airplane
 
    %% Dependency - No numbers
-   Client ..> ICar
+   Client ..> Entity~Mixins~
 ```
 
 ### Design Note:
