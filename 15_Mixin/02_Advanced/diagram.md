@@ -26,14 +26,14 @@ classDiagram
 
 %%------------------------------------------------------------ Mixin Entities:
    class Dragon {
-      Dragon~Entity~Fly Tank Laser~~
+      Dragon~Entity~Basic_Entity Fly Tank Laser~~
       +fly()
    }
    class Elephant {
-      Elephant~Entity~Walk Gun~~
+      Elephant~Entity~Basic_Entity Walk Gun~~
    }
    class Airplane {
-      Airplane~Entity~Fly Tank Laser Gun~~
+      Airplane~Entity~Basic_Entity Fly Tank Laser Gun~~
       +fly()
    }
 

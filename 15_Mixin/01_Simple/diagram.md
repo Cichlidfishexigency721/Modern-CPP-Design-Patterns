@@ -38,8 +38,8 @@ classDiagram
 %%------------------------------------------------------------ Mixin Entities:
    %% Mixin entities defined by type aliases in the code
    class Dragon{Dragon~Entity~Fly Laser~~}
-   class Elephant {Elephant~Entity~Walk Gun~~ }
-   class Airplane {Airplane~Entity~Fly Laser Gun~~ }
+   class Elephant {Elephant~Entity~Walk Gun~~}
+   class Airplane {Airplane~Entity~Fly Laser Gun~~}
 
 %%----------------------------------------------------------- UML Composition:
    %% The client has an Entity<Mixins>>
