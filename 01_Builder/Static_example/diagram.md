@@ -52,7 +52,8 @@ classDiagram
    Car *-- "n" HeavyDutyWheel : wheels_
    
    Builder --> Engine
-   Builder --> "n" Wheel
+   Builder --> "n" StandardWheel
+   Builder --> "n" HeavyDutyWheel
    Builder --> Car
 
    note for Builder "Builder is nested inside Car"
