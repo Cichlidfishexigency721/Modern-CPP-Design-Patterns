@@ -29,8 +29,8 @@ class Model
 {
 private:
    std::string name_;
-   int capacity_;
-   int speed_;
+   int         capacity_;
+   int         speed_;
    std::string deployDate_;
  
 public:
