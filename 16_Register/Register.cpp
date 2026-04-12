@@ -36,12 +36,11 @@ int main()
       auto p2 = Registry::create("Blur");
 
       // Process the image
-      std::string result;
-      result = p1->process(image);
-      std::cout << "Result: " << result << std::endl;
+      image = p1->process(image);
+      std::cout << "Result: " << image << std::endl;
 
-      result = p2->process(result);
-      std::cout << "Result: " << result << std::endl;
+      image = p2->process(image);
+      std::cout << "Result: " << image << std::endl;
 
       // Verification: Check if repeated request returns the same instance
       std::cout << "\n--- Verifying Instance Policy ---\n";

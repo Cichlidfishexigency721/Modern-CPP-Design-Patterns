@@ -33,8 +33,8 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
-   Processor <|-- GrayscaleProcessor
-   Processor <|-- BlurProcessor
+   Processor <|.. GrayscaleProcessor
+   Processor <|.. BlurProcessor
 
    %% The Registry manages the lifecycle of processors (Singleton/Flyweight)
    %% Composition (Has_a) - Multiplicity "n" at the end

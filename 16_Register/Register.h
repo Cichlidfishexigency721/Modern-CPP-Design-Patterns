@@ -29,8 +29,8 @@
 //=============================================================================
 // POLICY: Uncomment exactly one of the lines below to define the policy
 //=============================================================================
-//#define REGISTRY_SINGLETON
-#define REGISTRY_PROTOTYPE
+#define REGISTRY_SINGLETON
+//#define REGISTRY_PROTOTYPE
 
 #if !defined(REGISTRY_SINGLETON) && !defined(REGISTRY_PROTOTYPE)
    #error "You must define either REGISTRY_SINGLETON or REGISTRY_PROTOTYPE in Register.h"
@@ -73,15 +73,15 @@ public:
    // Returns a new instance using the registered factory function
    static std::shared_ptr<Processor> create(const std::string& name)
    {
-      if (registryMap_.find(name) == registryMap_.end())
+      if(registryMap_.find(name) == registryMap_.end())
          throw std::runtime_error("Processor not found: " + name);
       
-      return registryMap_[name]();
+      return registryMap_[name](); // Execute the ConcreteCreator function
    }
 };
 
 //--------------------------------------------------------- Auto-Registration Helper:
-template<class T>
+template<class ConcreteProcessor>
 class Register
 {
 public:
@@ -89,11 +89,11 @@ public:
    {
 #ifdef REGISTRY_SINGLETON
       // Singleton: Cache the instance and return the same one
-      static std::shared_ptr<Processor> instance = std::make_shared<T>();
+      static std::shared_ptr<ConcreteProcessor> instance = std::make_shared<ConcreteProcessor>();
       Registry::registerProcessor(name, []() { return instance; });
-#else
+#else // REGISTRY_PROTOTYPE
       // Prototype: Always return a new instance
-      Registry::registerProcessor(name, []() { return std::make_shared<T>(); });
+      Registry::registerProcessor(name, []() { return std::make_shared<ConcreteProcessor>(); });
 #endif
    }
 };
