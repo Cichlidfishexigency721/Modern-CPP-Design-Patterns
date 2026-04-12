@@ -18,11 +18,6 @@ public:
    {
       return image + " blured";
    }
-
-   std::string getName() const override 
-   { 
-      return "Blur"; 
-   }
 };
 
 // Auto-register using the helper

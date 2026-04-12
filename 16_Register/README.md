@@ -100,17 +100,14 @@ classDiagram
    class Processor {
       <<interface>>
       +process(image) string*
-      +getName() string*
    }
 
    class GrayscaleProcessor {
       +process(image) string
-      +getName() string
    }
 
    class BlurProcessor {
       +process(image) string
-      +getName() string
    }
 
    class Registry {
@@ -145,7 +142,7 @@ classDiagram
    %% Client interactions
    Client *-- Image
    Client ..> Registry : call create(processorName)
-   Client *-- "n" Processor
+   Client o-- "n" Processor
    Client ..> Processor : process(image)
 ```
 

@@ -17,11 +17,6 @@ public:
    {
       return image + " grayscaled";
    }
-
-   std::string getName() const override 
-   { 
-      return "Grayscale"; 
-   }
 };
 
 // Auto-register using the helper

@@ -51,7 +51,6 @@ class Processor
 public:
    virtual ~Processor() = default;
    virtual std::string process(const Image& image) const = 0;
-   virtual std::string getName() const = 0;
 };
 
 //--------------------------------------------------------- Registry:
