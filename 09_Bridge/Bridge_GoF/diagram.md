@@ -46,7 +46,7 @@ classDiagram
    Shape <|-- Square
 
    %% The Bridge: Shape owns a Renderer
-   Shape *-- "1" Renderer : the bridge
+   Shape *-- Renderer : the bridge
 
    %% Client depends on abstractions but instantiates concrete types
    Client ..> Shape

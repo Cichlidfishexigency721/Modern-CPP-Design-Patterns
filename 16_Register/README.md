@@ -99,7 +99,7 @@ classDiagram
 
    class Processor {
       <<interface>>
-      +process(image) image
+      +process(image) image*
    }
 
    class GrayscaleProcessor {

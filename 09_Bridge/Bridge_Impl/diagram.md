@@ -19,7 +19,7 @@ classDiagram
    }
 
    %% The Bridge (Pimpl): Employee owns the implementation object
-   Employee *-- "1" Impl : the pimpl bridge
+   Employee *-- Impl : the pimpl bridge
 
    %% Client only knows about the Employee interface
    Client ..> Employee

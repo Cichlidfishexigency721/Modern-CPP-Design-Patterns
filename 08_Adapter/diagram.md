@@ -23,8 +23,8 @@ classDiagram
    %% Inheritance (Is_a) - No numbers
    ModernRectangle <|-- RectangleAdapter
 
-   %% Composition (Has_a) - Multiplicity "1" only at the end
-   RectangleAdapter *-- "1" LegacyRectangle
+   %% Composition (Has_a)
+   RectangleAdapter *-- LegacyRectangle
 
    %% Dependency - No numbers
    Client ..> ModernRectangle

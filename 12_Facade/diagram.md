@@ -28,9 +28,9 @@ classDiagram
    }
 
    %% The Facade owns and manages the subsystem components
-   ComputerFacade *-- "1" CPU
-   ComputerFacade *-- "1" Memory
-   ComputerFacade *-- "1" HardDrive
+   ComputerFacade *-- CPU
+   ComputerFacade *-- Memory
+   ComputerFacade *-- HardDrive
 
    %% The Client only interacts with the simple interface
    Client ..> ComputerFacade

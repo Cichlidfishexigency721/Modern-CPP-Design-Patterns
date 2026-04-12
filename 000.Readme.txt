@@ -94,15 +94,18 @@ between classes. The following diagram explains the arrows an multiplicities use
       hideEmptyMembersBox: true
 ---
 classDiagram
-   direction LR
-   A --|> B : A is a B
-   C *-- D : C Has a D (owner)
-   E *-- "n" F : E Has several Fs (owner)
-   G o-- H : G Has an H (not owner)
-   J o-- "n" K : J Has several Ks (not owner)
-   L --> M : L reference M
-   N -- P  : Bi-directional reference
-   Q ..> R : Q uses R
-   S ..|> T : S implements T
-   U .. V : U Interacts with V
+   A --|> B    : A is a B
+   C ..|> D    : C implements D
+
+   E *-- F     : E Has an F (owner)
+   G *-- "n" H : G Has several Hs (owner)
+
+   J o-- K     : J Has an K (not owner)
+   L o-- "n" M : L Has several Ms (not owner)
+
+   N --> P     : N reference P
+   Q ..> R     : Q uses R
+
+   S -- T      : Bi-directional reference
+   U .. V      : U Interacts with V
 ```

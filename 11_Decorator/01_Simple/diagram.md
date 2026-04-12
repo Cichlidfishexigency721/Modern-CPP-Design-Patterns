@@ -46,8 +46,8 @@ classDiagram
    Decorator <|-- Sugar
    Decorator <|-- Vanilla
 
-   %% Composition (Has_a) - Multiplicity "1" at the end
-   Decorator "1" *-- Decorated
+   %% Composition (Has_a)
+   Decorator *-- Decorated
 
    %% Dependency - No numbers
    Client ..> Decorated

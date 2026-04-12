@@ -61,11 +61,11 @@ classDiagram
     }
 
     %% Inheritance relationship
-    Base <|-- Derived
+    Base <|.. Derived
 
     %% The clone method creates a new instance of the same concrete type
-    Derived ..> "1" Derived : Creates copy
+    Derived ..> Derived : Creates copy
 
     %% Client depends on the abstraction
-    Client ..> "1" Base
+    Client ..> Base
 ```

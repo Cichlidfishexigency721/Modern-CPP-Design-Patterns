@@ -26,9 +26,9 @@ classDiagram
    ICar <|-- Car
    ICar <|-- ProxyCar
 
-   %% Composition (Has_a) - Multiplicity "1" only at the end
+   %% Composition (Has_a)
    %% The Proxy owns and manages the lifecycle of the Real Subject
-   ProxyCar *-- "1" Car : controls access (realCar_)
+   ProxyCar *-- Car : controls access (realCar_)
 
    %% Dependency - No numbers
    Client ..> ICar

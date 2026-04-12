@@ -29,10 +29,10 @@ classDiagram
    }
 
    %% The Factory owns and manages the pool of shared models
-   FlyweightFactory "1" *-- "n" Model : modelCache_
+   FlyweightFactory *-- "n" Model : modelCache_
 
    %% Many Airplanes share the same single Model instance
-   Airplane "1" *-- "1" Model : model_ (intrinsic state)
+   Airplane *-- Model : model_ (intrinsic state)
 
    %% Client interacts with the factory to get models and creates airplanes
    Client ..> FlyweightFactory
