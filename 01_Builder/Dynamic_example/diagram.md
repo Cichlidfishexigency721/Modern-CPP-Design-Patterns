@@ -46,11 +46,11 @@ classDiagram
    Wheel <|.. HeavyDutyWheel
    
    %% Relations
-   Car *-- Engine
-   Car *-- "n" Wheel
+   Car *-- Engine : engine_
+   Car *-- "n" Wheel : wheels_
    
-   Builder --> Engine : engine_
-   Builder --> "n" Wheel : wheels_
+   Builder --> Engine
+   Builder --> "n" Wheel
    Builder --> Car
 
    note for Builder "Builder is nested inside Car"
