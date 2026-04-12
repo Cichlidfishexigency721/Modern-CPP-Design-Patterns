@@ -51,7 +51,8 @@ classDiagram
    %% Client interactions
    Client *-- Image
    Client ..> Registry : call create(processorName)
-   Client *-- "n" Processor : process(image)
+   Client *-- "n" Processor
+   Client ..> Processor : process(image)
 ```
 
 ### Design Note:
