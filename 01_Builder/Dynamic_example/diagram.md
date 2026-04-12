@@ -2,6 +2,8 @@
 
 ```mermaid
 classDiagram
+   class Client { +main() }
+
    class Engine { -int power_ }
    class Wheel { <<interface>> }
    class StandardWheel
@@ -25,20 +27,28 @@ classDiagram
       -string color_
       -int power_
       -int wheelCount_
+      -buildWheels() : Wheels_vector
       +setWeight(float) Builder&
+      +setWidth(float) Builder&
+      +setDoorCount(float) Builder&
+      +setColor(float) Builder&
+      +setPower(float) Builder&
+      +setWheelCount(float) Builder&
       +build() unique_ptr~Car~
    }
 
-   Wheel <|-- StandardWheel
-   Wheel <|-- HeavyDutyWheel
+   Wheel <|.. StandardWheel
+   Wheel <|.. HeavyDutyWheel
    
-   %% Relations with multiplicity only at the end
-   Car *-- "1" Engine
+   %% Relations
+   Car *-- Engine
    Car *-- "n" Wheel
    
-   Builder o-- "1" Engine
+   Builder o-- Engine
    Builder o-- "n" Wheel
    
    Builder ..> Car
-   note for Builder "Nested inside Car"
+   note for Builder "Builder is nested inside Car"
+
+   Client --> Car
 ```
