@@ -13,7 +13,7 @@ classDiagram
    }
 
    class FlyweightFactory {
-      -map ~int, Model~ modelCache_
+      -map~int, Model~ modelCache_
       +getModel(int) shared_ptr~Model~
    }
 
@@ -29,7 +29,7 @@ classDiagram
    }
 
    %% The Factory owns and manages the pool of shared models
-   FlyweightFactory "1" *-- "n" Model : cache_
+   FlyweightFactory "1" *-- "n" Model : modelCache_
 
    %% Many Airplanes share the same single Model instance
    Airplane "1" *-- "1" Model : intrinsic state
