@@ -59,7 +59,7 @@ classDiagram
    %% Dependencies
    Fly ..> Tank : requires
    PrintVisitor ..> Entity~Mixins~ : visits
-   Clien ..> Entity~Mixins~
+   Client ..> Entity~Mixins~
 ```
 
 ### Design Note:
