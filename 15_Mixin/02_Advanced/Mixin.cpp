@@ -30,12 +30,12 @@ public:
    void laser_fire()
    {
       std::cout << "\tLaser fire intensity " << intensity_ << "\n";
-      if (intensity_ > 2) --intensity_;
+      if(intensity_ > 2) --intensity_;
    }
 
    void laser_set_intensity(int i) 
    {
-      if (i < 2) i = 2; 
+      if(i < 2) i = 2; 
       intensity_ = i;
    }
 
@@ -77,7 +77,7 @@ private:
 public:
    void gun_fire()
    {
-      if (bullets_ > 0) 
+      if(bullets_ > 0) 
       {
          std::cout << "\tGun fire\n"; 
          --bullets_;
@@ -113,7 +113,7 @@ public:
 
    bool tank_get_fuel(int quantity)
    {
-      if (fuel_ < quantity) return false;
+      if(fuel_ < quantity) return false;
       fuel_ -= quantity;
       return true;
    }
@@ -155,7 +155,7 @@ public:
    // The Entity type isn't know inside fly() method.
    void fly(auto& entity)
    {
-      if (entity.tank_get_fuel(1)) std::cout << "\tFlying at " << altitude_ << " ft\n";
+      if(entity.tank_get_fuel(1)) std::cout << "\tFlying at " << altitude_ << " ft\n";
       else                         std::cout << "\tNo fuel to Fly\n";
    }
 
