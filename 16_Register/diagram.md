@@ -6,31 +6,32 @@ classDiagram
 
    class Processor {
       <<interface>>
-      +process(string) string*
+      +process(image) string*
       +getName() string*
    }
 
    class GrayscaleProcessor {
-      +process(string) string
+      +process(image) string
       +getName() string
    }
 
    class BlurProcessor {
-      +process(string) string
+      +process(image) string
       +getName() string
    }
 
    class Registry {
       -static registryMap_
-      +registerProcessor(string, Creator)
-      +create(string) shared_ptr~Processor~
+      +registerProcessor(string processorName, processorCreator)
+      +create(string processorName) shared_ptr~Processor~
    }
 
    class Register~ConcreteProcessor~ {
-      +Register(string)
+      +Register(string processorName)
    }
 
    class Client {
+      +image
       +main()
    }
 

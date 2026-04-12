@@ -66,19 +66,19 @@ private:
 
 public:
    // Registers a creation function for a given processor name
-   static void registerProcessor(const std::string& name, Creator creator)
+   static void registerProcessor(const std::string& processorName, Creator creator)
    {
-      registryMap_[name] = std::move(creator);
-      std::cout << " [Registry] Registered: " << name << "\n";
+      registryMap_[processorName] = std::move(creator);
+      std::cout << " [Registry] Registered: " << processorName << "\n";
    }
 
    // Returns a new instance using the registered factory function
-   static std::shared_ptr<Processor> create(const std::string& name)
+   static std::shared_ptr<Processor> create(const std::string& processorName)
    {
-      if(registryMap_.find(name) == registryMap_.end())
-         throw std::runtime_error("Processor not found: " + name);
+      if(registryMap_.find(processorName) == registryMap_.end())
+         throw std::runtime_error("Processor not found: " + processorName);
       
-      return registryMap_[name](); // Execute the ConcreteCreator function
+      return registryMap_[processorName](); // Execute the ConcreteCreator function
    }
 };
 
@@ -87,15 +87,15 @@ template<class ConcreteProcessor>
 class Register
 {
 public:
-   Register(const std::string& name)
+   Register(const std::string& processorName)
    {
 #ifdef REGISTRY_SINGLETON
       // Singleton: Cache the instance and return the same one
       static std::shared_ptr<ConcreteProcessor> instance = std::make_shared<ConcreteProcessor>();
-      Registry::registerProcessor(name, []() { return instance; });
+      Registry::registerProcessor(processorName, []() { return instance; });
 #else // REGISTRY_PROTOTYPE
       // Prototype: Always return a new instance
-      Registry::registerProcessor(name, []() { return std::make_shared<ConcreteProcessor>(); });
+      Registry::registerProcessor(processorName, []() { return std::make_shared<ConcreteProcessor>(); });
 #endif
    }
 };
