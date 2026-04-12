@@ -88,6 +88,11 @@ The class diagrams in this repository use Mermaid notation to represent the rela
 between classes. The following diagram explains the arrows an multiplicities used:
 
 ```mermaid
+---
+  config:
+    class:
+      hideEmptyMembersBox: true
+---
 classDiagram
    direction LR
    A --|> B : A is a B
