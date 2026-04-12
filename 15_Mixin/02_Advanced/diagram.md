@@ -66,10 +66,10 @@ classDiagram
 
    %% Multiple Inheritance (Horizontal Composition)
    Basic_Entity <|-- Entity~Mixins~
-   Laser <|-- Entity~Mixins~
    Walk <|-- Entity~Mixins~
    Fly <|-- Entity~Mixins~
    Tank <|-- Entity~Mixins~
+   Laser <|-- Entity~Mixins~
    Gun <|-- Entity~Mixins~
 
    %% Specific Entities
