@@ -92,12 +92,12 @@ classDiagram
    direction LR
    A --|> B : A is a B
    C *-- D : C Has a D (owner)
-   C *-- "n" D : C Has several Ds (owner)
-   E o-- F : E Has an F (not owner)
-   E o-- "n" F : E Has several Fs (not owner)
-   G --> H : G reference H
-   I -- J  : Bi-directional reference
-   K ..> L : K uses L
-   M ..|> N : M implements N
-   O .. P : O Interacts with P
+   E *-- "n" F : E Has several Fs (owner)
+   G o-- H : G Has an H (not owner)
+   I o-- "n" J : I Has several Js (not owner)
+   K --> L : K reference L
+   L -- M  : Bi-directional reference
+   N ..> O : N uses O
+   P ..|> Q : P implements Q
+   R .. S : R Interacts with S
 ```
