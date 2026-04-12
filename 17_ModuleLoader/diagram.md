@@ -2,6 +2,10 @@
 
 ```mermaid
 classDiagram
+   class Client {
+      +main()
+   }
+
    class IModule {
       <<interface>>
       +processData(int)*
@@ -13,16 +17,13 @@ classDiagram
    }
 
    class DynamicLibrary {
+      <<interface>>
       -void* handle_
       +getSymbol(string) void*
    }
 
-   class Client {
-      +main()
-   }
-
-   %% Inheritance (Is_a)
-   IModule <|-- Module
+   %% Inheritance (Implements)
+   IModule <|.. Module
 
    %% The Client owns the RAII wrapper for the library
    Client *-- DynamicLibrary : manages library
