@@ -48,8 +48,8 @@ classDiagram
 
    %% Relations
    Car *-- Engine : engine_
-   Car *-- "n" StandardWheel/HeavyDutyWheel : wheels_
-   %%Car *-- "n" HeavyDutyWheel : wheels_
+   Car *-- "n" StandardWheel : wheels_
+   Car *-- "n" HeavyDutyWheel : wheels_
    
    Builder --> Engine
    Builder --> "n" Wheel
