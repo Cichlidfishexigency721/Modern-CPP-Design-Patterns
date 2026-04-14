@@ -2,7 +2,7 @@
 
 ```mermaid
 classDiagram
-   class Expression {
+   class IExpression {
       <<interface>>
       +evaluate()* double
       +print(int)*
@@ -53,18 +53,18 @@ classDiagram
    }
 
    %% Inheritance
-   Expression <|-- NumberNode
-   Expression <|-- UnaryMinusNode
-   Expression <|-- MathFunctionNode
-   Expression <|-- BinaryExpression
+   Expression <|.. NumberNode
+   Expression <|.. UnaryMinusNode
+   Expression <|.. MathFunctionNode
+   Expression <|.. BinaryExpression
    BinaryExpression <|-- AddNode
    BinaryExpression <|-- MulNode
 
    %% Composition
    BinaryExpression *-- "n" Expression : left_ / right_
-   UnaryMinusNode *-- "1" Expression : expr_
-   MathFunctionNode *-- "1" Expression : expr_
-   Parser *-- "1" Lexer : lexer_
+   UnaryMinusNode *-- Expression : expr_
+   MathFunctionNode *-- Expression : expr_
+   Parser *-- Lexer : lexer_
 
    %% Dependency
    Parser ..> Expression : creates AST

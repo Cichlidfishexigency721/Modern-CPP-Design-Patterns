@@ -38,7 +38,7 @@ classDiagram
         +main()
     }
 
-    Compiler *-- "1" Lexer
+    Compiler *-- Lexer
     Compiler *-- "n" Instruction
     
     VirtualMachine ..> Instruction
