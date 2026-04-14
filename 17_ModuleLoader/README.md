@@ -134,7 +134,7 @@ classDiagram
       +void* getSymbol(const char*)
    }
 
-   class extern_C {
+   class extern_C["extern C"] {
       +IModule* build_module(char* name, int factor)
       +void destroy_module(IModule* module_ptr)
    }
