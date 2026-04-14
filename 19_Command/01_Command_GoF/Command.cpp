@@ -42,13 +42,9 @@ private:
    bool engineOn_{false};
 
 public:
-   void turnOn() { engineOn_ = true; std::cout << " [Receiver] Car engine ON.\n"; }
-   void turnOff() { engineOn_ = false; std::cout << " [Receiver] Car engine OFF.\n"; }
-   void rev() const
-   {
-      if(engineOn_) std::cout << " [Receiver] Car: Vroom, vroom!\n";
-      else std::cout << " [Receiver] Car: Silence!\n";
-   }
+   void turnOn()  const { std::cout << " [Receiver] Car engine ON.\n"; }
+   void turnOff() const { std::cout << " [Receiver] Car engine OFF.\n"; }
+   void rev()     const { std::cout << " [Receiver] Car: Vroom, vroom!\n"; }
 };
 
 //--------------------------------------------------------- Command Interface:
