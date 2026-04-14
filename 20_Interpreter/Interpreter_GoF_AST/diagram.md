@@ -1,48 +1,75 @@
-# Interpreter Pattern (Abstract Syntax Tree (AST) Machine Version)
+# Interpreter Pattern (GoF AST Version)
 
 ```mermaid
 classDiagram
-    class OpCode {
-        <<enumeration>>
-    }
+   class Expression {
+      <<interface>>
+      +evaluate()* double
+      +print(int)*
+   }
 
-    class Instruction {
-        <<struct>>
-        +OpCode code
-        +double value
-    }
+   class NumberNode {
+      -double value_
+      +evaluate() double
+      +print(int)
+   }
 
-    class Lexer {
-        -string input_
-        -size_t pos_
-        +nextToken()
-        +getToken() Token
-    }
+   class UnaryMinusNode {
+      -ExprPtr expr_
+      +evaluate() double
+      +print(int)
+   }
 
-    class Compiler {
-        -Lexer lexer_
-        -vector~Instruction~ program_
-        +compile() vector~Instruction~
-    }
+   class MathFunctionNode {
+      -string func_
+      -ExprPtr expr_
+      +evaluate() double
+      +print(int)
+   }
 
-    class VirtualMachine {
-        +evaluate(vector~Instruction~) double
-        +printProgram(vector~Instruction~)
-    }
+   class BinaryExpression {
+      <<abstract>>
+      #ExprPtr left_
+      #ExprPtr right_
+   }
 
-    class Client {
-        +main()
-    }
+   class AddNode {
+      +evaluate() double
+      +print(int)
+   }
 
-    %% Relationships using your symbology reference:
+   class MulNode {
+      +evaluate() double
+      +print(int)
+   }
 
-    Compiler *-- Lexer
-    Compiler *-- "n" Instruction
-    
-    VirtualMachine ..> Instruction
-    
-    Client ..> Compiler
-    Client ..> VirtualMachine
+   class Parser {
+      -Lexer lexer_
+      +parse() ExprPtr
+   }
+
+   class Client {
+      +main()
+   }
+
+   %% Inheritance
+   Expression <|-- NumberNode
+   Expression <|-- UnaryMinusNode
+   Expression <|-- MathFunctionNode
+   Expression <|-- BinaryExpression
+   BinaryExpression <|-- AddNode
+   BinaryExpression <|-- MulNode
+
+   %% Composition
+   BinaryExpression *-- "n" Expression : left_ / right_
+   UnaryMinusNode *-- "1" Expression : expr_
+   MathFunctionNode *-- "1" Expression : expr_
+   Parser *-- "1" Lexer : lexer_
+
+   %% Dependency
+   Parser ..> Expression : creates AST
+   Client ..> Parser
+   Client ..> Expression : calls evaluate()
 ```
 
 ### Design Note:
