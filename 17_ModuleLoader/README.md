@@ -134,7 +134,7 @@ classDiagram
       +getSymbol(const char*) void*
    }
 
-   class Functions['extern "C"'] {
+   class Functions["extern C"] {
       IModule* build_module(const char* name, const int factor)
       void destroy_module(IModule* module_ptr)
    }
