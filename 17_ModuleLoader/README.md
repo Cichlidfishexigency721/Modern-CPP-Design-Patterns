@@ -152,7 +152,7 @@ classDiagram
    Client --> IModule : creates via build_module
 
    %%Module is managed via extern "C" funcions
-   Module .. extern_C
+   Module .. `extern "C"`
 ```
 
 ### Design Note:
