@@ -83,6 +83,11 @@ classDiagram
 
    %% Client orchestrates everything
    Client *-- CommandQueue
+
+   %% Client is the owner of the Receivers
+   Client *-- Cow
+   Client *-- Dog
+   Client *-- Car
 ```
 
 ### Design Note:
