@@ -83,7 +83,7 @@ classDiagram
 
    %% Client orchestrates everything
    Client *-- CommandQueue
-   Client --> Command
+   Client --> ICommand
 ```
 
 ### Design Note:
