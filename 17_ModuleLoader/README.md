@@ -59,14 +59,14 @@ The main executable. It uses `<dlfcn.h>` to open 'libModule.so', fetches
 the factory functions, creates the object, passes parameters to its 
 methods (e.g., processData), and finally destroys it.
 
-## The Golden Rule of Memory across ABIs
-Notice that the Host does NOT call `delete` on the module pointer. Instead, 
-it passes the pointer back to the Plugin's `destroy_module()` function. 
-
-## Rule: "Who allocates, deallocates."
+## The Golden Rule of Memory across ABIs:
+**"Who allocates, deallocates":**
 Memory allocated inside a .so file must be deallocated by the same .so file
 to prevent heap corruption, especially on Windows or across different compiler
 versions.
+
+Notice that the Host does NOT call `delete` on the module pointer. Instead, 
+it passes the pointer back to the Plugin's `destroy_module()` function. 
 
 ## Modern C++ Note:
 In our implementation, we will use modern C++ features (RAII and Smart 
