@@ -55,7 +55,7 @@ classDiagram
 
    %% The CommandQueue owns the commands
    %% Composition (Has_a) - Multiplicity "n" at the end
-   CommandQueue *-- "n" Command : queue_
+   CommandQueue *-- "n" ICommand : queue_
 
    %% Commands depend on their Receivers to do the work
    CowCommand *-- Cow
