@@ -21,7 +21,7 @@ public:
    virtual ~IModule() = default;
    
    // Updated to accept a parameter for bidirectional communication
-   virtual void processData(int data) = 0;
+   virtual int processData(int data) = 0;
 };
 
 #endif

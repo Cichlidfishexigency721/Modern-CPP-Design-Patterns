@@ -13,12 +13,15 @@ classDiagram
 
    class Module {
       -string name_
+      -int factor_
+      +Module(const char* name, const int factor)
       +processData(int)
    }
 
    class DynamicLibrary {
       <<interface>>
       -void* handle_
+      +DynamicLibrary(const char* filename)
       +getSymbol(string) void*
    }
 
@@ -32,7 +35,7 @@ classDiagram
    Client *-- IModule : uses plugin
 
    %% The Client depends on the factory functions exported by the .so
-   Client --> IModule : creates via symbols
+   Client --> IModule : creates via build_module
 ```
 
 ### Design Note:

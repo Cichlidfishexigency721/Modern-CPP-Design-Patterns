@@ -11,7 +11,8 @@ the classes and functions beforehand. However, modern systems (like game
 engines, audio workstations, or web browsers) need to load "Plugins" 
 (third-party extensions) while the program is already running. 
 
-The C++ Challenge (Name Mangling & The ABI Boundary):
+##The C++ Challenge (Name Mangling & The ABI Boundary):
+
 Loading a pure C library dynamically is easy. But C++ supports function 
 overloading, namespaces, and classes. To make this work, C++ compilers 
 change the names of your functions behind the scenes into complex strings 
@@ -19,7 +20,7 @@ change the names of your functions behind the scenes into complex strings
 names differently, you cannot easily search for a C++ class or method 
 inside a compiled Shared Object (.so) or Dynamic Link Library (.dll).
 
-The Solution & The <dlfcn.h> API:
+##The Solution & The `<dlfcn.h>` API:
 To solve this, we use the POSIX standard C library `<dlfcn.h>` (Dynamic 
 Linking API), which provides four main functions:
 
@@ -34,6 +35,11 @@ Since `dlsym()` expects standard, unmangled C names, we use a C++ feature
 called `extern "C"`. We expose simple C functions (factories) from our 
 module that return pointers to our complex C++ objects.
 
+**Note:** On Linux Debian, to use `<dlfcn.h>`, you should install 'libc6-i386'
+to have the `libdl.so` library, install `libc6-dev` for the include `dlfcn.h`
+and also install 'manpages-posix-dev' to be able to read the `<dlfcn.h>`
+manual. To compile, you should set the '-ldl' flag to link with the library.
+
 ## Our Example The Dynamic Plugin System
 We have separated the project into three distinct parts to demonstrate 
 bidirectional communication across the Application Binary Interface (ABI):
@@ -44,11 +50,12 @@ An abstract C++ interface shared by both the Host and the Plugin.
 2. **The Plugin (libModule.so / Module.cpp):**
 A compiled shared library containing a concrete C++ class ('Module'). 
 It exposes two flat C functions via `extern "C"`:
-- build_module(): Allocates the C++ object and returns it as an IModule*.
-- destroy_module(): Safely deletes the object.
+   - `build_module()`: Allocates the C++ object and returns it as an `IModule*`
+      (a pointer to `IModule`).
+   - `destroy_module()`: Safely deletes the object.
 
 3. **The Host (ModuleLoader.cpp):**
-The main executable. It uses <dlfcn.h> to open 'libModule.so', fetches 
+The main executable. It uses `<dlfcn.h>` to open 'libModule.so', fetches 
 the factory functions, creates the object, passes parameters to its 
 methods (e.g., processData), and finally destroys it.
 
@@ -56,7 +63,7 @@ methods (e.g., processData), and finally destroys it.
 Notice that the Host does NOT call `delete` on the module pointer. Instead, 
 it passes the pointer back to the Plugin's `destroy_module()` function. 
 
-## Rule "He who allocates, deallocates."
+## Rule: "Who allocates, deallocates."
 Memory allocated inside a .so file must be deallocated by the same .so file
 to prevent heap corruption, especially on Windows or across different compiler
 versions.
@@ -72,26 +79,27 @@ Dynamic loading is not currently part of the standard C++ language (up to
 C++23) because binary executable formats vary drastically between Operating 
 Systems. We must rely on the native OS APIs to load dynamic code.
 
-1. **Linux & macOS (POSIX Standard):**
-This example uses the <dlfcn.h> header, which is the standard API for 
+1. **Linux & MacOS (POSIX Standard):**
+This example uses the `<dlfcn.h>` header, which is the standard API for 
 POSIX-compliant systems. It allows us to load Shared Objects (.so) in 
 Linux or Dynamic Libraries (.dylib / .bundle) in macOS using functions 
 like 'dlopen' and 'dlsym'.
 
 2. **Windows (Win32 API):**
 Windows is not POSIX-compliant for dynamic linking. To achieve the exact 
-same pattern on Windows, you must use the <windows.h> API:
-- 'LoadLibrary'  (equivalent to 'dlopen') to load a .dll file.
-- 'GetProcAddress' (equivalent to 'dlsym') to find the factory function.
-- 'FreeLibrary'  (equivalent to 'dlclose') to unload the .dll.
+same pattern on Windows, you must use the `<windows.h>` API:
+   - `LoadLibrary`  (equivalent to `dlopen`) to load a .dll file.
+   - `GetProcAddress` (equivalent to `dlsym`) to find the factory function.
+   - `FreeLibrary`  (equivalent to `dlclose`) to unload the .dll.
+
 Additionally, Windows compilers require explicit symbol exporting using 
-macros like __declspec(dllexport) and __declspec(dllimport).
+macros like `__declspec(dllexport)` and `__declspec(dllimport)`.
 
 3. **Industry Solutions:**
-In professional cross-platform C++ development, writing #ifdef _WIN32 
-blocks to manually switch between 'dlopen' and 'LoadLibrary' is tedious. 
+In professional cross-platform C++ development, writing `#ifdef _WIN32`
+blocks to manually switch between `dlopen` and `LoadLibrary` is tedious. 
 Instead, developers usually rely on abstraction frameworks (e.g., 
-Boost.DLL, Qt's QLibrary, or POCO's SharedLibrary) which wrap these 
+'Boost.DLL', Qt's 'QLibrary', or POCO's 'SharedLibrary') which wrap these 
 native OS calls into a single, clean C++ class.
 
 Regardless of the OS or the wrapper library used, the architectural pattern 
@@ -104,6 +112,10 @@ standard for plugin systems worldwide.
 
 ```mermaid
 classDiagram
+   class Client {
+      +main()
+   }
+
    class IModule {
       <<interface>>
       +processData(int)*
@@ -111,20 +123,20 @@ classDiagram
 
    class Module {
       -string name_
+      -int factor_
+      +Module(const char* name, const int factor)
       +processData(int)
    }
 
    class DynamicLibrary {
+      <<interface>>
       -void* handle_
+      +DynamicLibrary(const char* filename)
       +getSymbol(string) void*
    }
 
-   class Client {
-      +main()
-   }
-
-   %% Inheritance (Is_a)
-   IModule <|-- Module
+   %% Inheritance (Implements)
+   IModule <|.. Module
 
    %% The Client owns the RAII wrapper for the library
    Client *-- DynamicLibrary : manages library
@@ -133,7 +145,7 @@ classDiagram
    Client *-- IModule : uses plugin
 
    %% The Client depends on the factory functions exported by the .so
-   Client --> IModule : creates via symbols
+   Client --> IModule : creates via build_module
 ```
 
 ### Design Note:

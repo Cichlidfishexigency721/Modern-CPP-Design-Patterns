@@ -20,12 +20,14 @@ class Module : public IModule
 {
 private:
    std::string name_;
+   int factor_;
 
 public:
    // Constructor now accepts configuration from the Host
-   explicit Module(const char* name) : name_{name}
+   explicit Module(const char* name, const int factor) : name_{name}, factor_{factor}
    {
       std::cout << "    -> [Plugin] Module '" << name_ << "' initialized.\n";
+      std::cout << "    -> [Plugin] with factor = " << factor_ << "\n";
    }
 
    ~Module() override
@@ -33,10 +35,11 @@ public:
       std::cout << "    -> [Plugin] Module '" << name_ << "' destroyed.\n";
    }
 
-   void processData(int data) override
+   int processData(int data) override
    {
-      std::cout << "    -> [Plugin] Processing data: " << data 
-                << " (Calculated: " << data * 2 << ")\n";
+      std::cout << "    -> [Plugin] Processing data: " << data << "\n";
+      std::cout << "    -> [Plugin] Returning calculated value: " << data*factor_ << "\n";
+      return data*factor_;
    }
 };
 
@@ -44,14 +47,19 @@ public:
 
 extern "C"
 {
-   IModule* build_module(const char* name)
+   IModule* build_module(const char* name, const int factor)
    {
-      return new Module(name);
+      std::cout << "    -> [Plugin] build_module called.\n";
+      return new Module(name, factor);
    }
 
    void destroy_module(IModule* module_ptr)
    {
-      if (module_ptr) delete module_ptr;
+      if(module_ptr)
+      {
+         std::cout << "    -> [Plugin] destroy_module called.\n";
+         delete module_ptr;
+      }
    }
 }
 

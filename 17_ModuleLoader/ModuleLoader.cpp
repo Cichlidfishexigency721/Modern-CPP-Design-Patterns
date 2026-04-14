@@ -35,13 +35,14 @@ public:
    explicit DynamicLibrary(const char* filename)
    {
       std::cout << " [Host] Loading shared library: " << filename << "...\n";
+      // RTLD_LAZY: Relocations are performed at an implementation-defined time.
       handle_ = dlopen(filename, RTLD_LAZY);
-      if (!handle_) throw std::runtime_error(dlerror());
+      if(!handle_) throw std::runtime_error(dlerror());
    }
 
    ~DynamicLibrary()
    {
-      if (handle_)
+      if(handle_)
       {
          std::cout << " [Host] Unloading shared library...\n";
          dlclose(handle_);
@@ -51,7 +52,7 @@ public:
    void* getSymbol(const char* symbolName) const
    {
       void* symbol = dlsym(handle_, symbolName);
-      if (!symbol) throw std::runtime_error(dlerror());
+      if(!symbol) throw std::runtime_error(dlerror());
       return symbol;
    }
 };
@@ -61,7 +62,7 @@ int main(int ac, char** av)
    std::cout << "=== DYNAMIC MODULE LOADER ===\n\n";
 
    //---------------------------------------------------------------- Verify input:
-   if (ac < 2)
+   if(ac < 2)
    {
       std::cerr << "usage: ModuleLoader ./libModule.so\n";
       return 1;
@@ -76,32 +77,39 @@ int main(int ac, char** av)
       DynamicLibrary lib(av[1]);
 
       //---------------------------------------------------------------- Define types:
-      using Module_constructor = IModule*(*)(const char*);
-      using Module_destructor  = void(*)(IModule*);
+      // Module_constructor is a pointer to a function with parameters
+      // (const char*, const int) and returnnig a pointer to IModule:
+      using Module_constructor = IModule* (*)(const char*, const int);
+
+      // Module_destructor is a pointer to a function with parameter
+      // (IModule*) and returning void:
+      using Module_destructor = void (*)(IModule*);
 
       //---------------------------------------- Get build and destroy module symbols:
       std::cout << " [Host] Resolving symbols (build_module, destroy_module)...\n";
       
-      auto build_module = reinterpret_cast<Module_constructor>(lib.getSymbol("build_module"));
-      auto destroy_module = reinterpret_cast<Module_destructor>(lib.getSymbol("destroy_module"));
+      auto build_module   = reinterpret_cast<Module_constructor>(lib.getSymbol("build_module"));
+      auto destroy_module = reinterpret_cast<Module_destructor> (lib.getSymbol("destroy_module"));
 
       //------------------------------------------------ Create a new module instance:
       std::cout << " [Host] Requesting new module instance...\n";
-      IModule* raw_module = build_module("MathProcessor_v1");
+      IModule* raw_module = build_module("MathProcessor_v1", 2);
       
-      if (!raw_module)
+      if(!raw_module)
       {
          std::cerr << "build(): returned NULL instead of a new module\n";
          return 1;
       }
 
-      // Bind the raw pointer to a unique_ptr with a custom deleter.
+      // Bind the raw pointer to a unique_ptr with a custom deleter: 'destroy_module'.
       // This guarantees 'destroy_module' is called when the pointer goes out of scope.
       std::unique_ptr<IModule, Module_destructor> module(raw_module, destroy_module);
 
       //------------------------------------------------------- Call Module functions:
       std::cout << "\n [Host] Executing module operation with data: 42...\n";
-      module->processData(42);
+
+      int answer = module->processData(42);
+      std::cout << " [Host] Module returned value: " << answer << "\n";
 
       std::cout << "\n [Host] Destroying module instance...\n";
       
@@ -109,7 +117,7 @@ int main(int ac, char** av)
       // The unique_ptr will automatically call destroy_module(module.get()) here 
       // when it goes out of scope, right before the DynamicLibrary is destroyed.
    }
-   catch (const std::exception& e)
+   catch(const std::exception& e)
    {
       std::cerr << "[Error] " << e.what() << "\n";
       return 1;
