@@ -3,9 +3,9 @@
  * File: Command.cpp
  * 
  * --- DESIGN OVERVIEW:
- * This implementation uses a generic 'Invoker' that manages a queue of 
+ * This implementation uses a generic 'CommandQueue' that manages a queue of 
  * 'Command' objects. The 'Receivers' (Cow, Dog, Car) remain decoupled from 
- * the 'Invoker' (CommandQueue).
+ * the 'CommandQueue'.
  * 
  * --- MEMORY MANAGEMENT:
  * The 'CommandQueue' owns the commands via 'std::unique_ptr', ensuring 
@@ -46,21 +46,21 @@ public:
    void turnOff() { engineOn_ = false; std::cout << " [Receiver] Car engine OFF.\n"; }
    void rev() const
    {
-      if (engineOn_) std::cout << " [Receiver] Car: Vroom, vroom!\n";
+      if(engineOn_) std::cout << " [Receiver] Car: Vroom, vroom!\n";
       else std::cout << " [Receiver] Car: Silence!\n";
    }
 };
 
 //--------------------------------------------------------- Command Interface:
-class Command
+class ICommand
 {
 public:
-   virtual ~Command() = default;
+   virtual ~ICommand() = default;
    virtual void execute() const = 0;
 };
 
 //--------------------------------------------------------- Concrete Commands:
-class CowCommand : public Command
+class CowCommand : public ICommand
 {
 private:
    Cow& receiver_;
@@ -70,7 +70,7 @@ public:
    void execute() const override { receiver_.moo(); }
 };
 
-class DogCommand : public Command
+class DogCommand : public ICommand
 {
 private:
    Dog& receiver_;
@@ -80,7 +80,7 @@ public:
    void execute() const override { receiver_.bark(); }
 };
 
-class CarCommand : public Command
+class CarCommand : public ICommand
 {
 private:
    Car& receiver_;
@@ -95,18 +95,18 @@ public:
    }
 };
 
-//--------------------------------------------------------- Invoker:
+//---------------------------------------------------- CommandQueue:
 class CommandQueue
 {
 private:
-   std::vector<std::unique_ptr<Command>> queue_;
+   std::vector<std::unique_ptr<ICommand>> queue_;
 
 public:
-   void addCommand(std::unique_ptr<Command> cmd) { queue_.push_back(std::move(cmd)); }
+   void addCommand(std::unique_ptr<ICommand> cmd) { queue_.push_back(std::move(cmd)); }
 
    void runAll() const
    {
-      for (const auto& cmd : queue_) cmd->execute();
+      for(const auto& cmd : queue_) cmd->execute();
    }
 };
 
@@ -119,17 +119,17 @@ int main()
    Dog dog{"Marshall"};
    Car car;
 
-   CommandQueue invoker;
+   CommandQueue commandQueue;
 
-   invoker.addCommand(std::make_unique<CowCommand>(cow));
-   invoker.addCommand(std::make_unique<DogCommand>(dog));
-   invoker.addCommand(std::make_unique<CarCommand>(car));
+   commandQueue.addCommand(std::make_unique<CowCommand>(cow));
+   commandQueue.addCommand(std::make_unique<DogCommand>(dog));
+   commandQueue.addCommand(std::make_unique<CarCommand>(car));
 
    std::cout << "Executing command queue:\n";
-   invoker.runAll();
+   commandQueue.runAll();
 
    std::cout << "\nExecuting command queue (again):\n";
-   invoker.runAll();
+   commandQueue.runAll();
 
    std::cout << "\n--- Executing command outside the queue ---\n";
    std::make_unique<CarCommand>(car)->execute();

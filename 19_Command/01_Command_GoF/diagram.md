@@ -2,7 +2,7 @@
 
 ```mermaid
 classDiagram
-   class Command {
+   class ICommand {
       <<interface>>
       +execute()*
    }
@@ -39,8 +39,8 @@ classDiagram
    }
 
    class CommandQueue {
-      -vector~unique_ptr~Command~~ queue_
-      +addCommand(unique_ptr~Command~)
+      -vector~unique_ptr~ICommand~~ queue_
+      +addCommand(unique_ptr~ICommand~)
       +runAll()
    }
 
@@ -48,31 +48,27 @@ classDiagram
       +main()
    }
 
-   %% Inheritance (Is_a) - No numbers
-   Command <|-- CowCommand
-   Command <|-- DogCommand
-   Command <|-- CarCommand
+   %% Inheritance (Implements)
+   ICommand <|.. CowCommand
+   ICommand <|.. DogCommand
+   ICommand <|.. CarCommand
 
-   %% The Invoker owns the commands
+   %% The CommandQueue owns the commands
    %% Composition (Has_a) - Multiplicity "n" at the end
    CommandQueue *-- "n" Command : queue_
 
    %% Commands depend on their Receivers to do the work
-   %% Dependency (..>) - No numbers
-   CowCommand ..> Cow
-   DogCommand ..> Dog
-   CarCommand ..> Car
+   CowCommand *-- Cow
+   DogCommand *-- Dog
+   CarCommand *-- Car
 
    %% Client orchestrates everything
-   Client ..> CommandQueue
-   Client ..> Command
-   Client ..> Cow
-   Client ..> Dog
-   Client ..> Car
+   Client *-- CommandQueue
+   Client --> Command
 ```
 
 ### Design Note:
 In this traditional version, each 'Command' object acts as a bridge. It knows
-which 'Receiver' method to call. The 'CommandQueue' (Invoker) remains completely
+which 'Receiver' method to call. The 'CommandQueue' remains completely
 decoupled from the 'Receivers', as it only interacts with the 'Command'
 interface to trigger actions.
