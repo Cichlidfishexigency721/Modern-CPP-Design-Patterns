@@ -3,13 +3,13 @@
 ```mermaid
 classDiagram
     class CowCommand {
-        <<struct>>
+        <<empty struct>>
     }
     class DogCommand {
-        <<struct>>
+        <<empty struct>>
     }
     class CarCommand {
-        <<struct>>
+        <<empty struct>>
     }
 
     class Command {
