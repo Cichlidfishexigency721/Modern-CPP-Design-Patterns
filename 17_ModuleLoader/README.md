@@ -118,21 +118,21 @@ classDiagram
 
    class IModule {
       <<interface>>
-      +processData(int)*
+      +processData(int) : int*
    }
 
    class Module {
       -string name_
       -int factor_
       +Module(const char* name, const int factor)
-      +processData(int)
+      +processData(int) : int
    }
 
    class DynamicLibrary {
       <<interface>>
       -void* handle_
       +DynamicLibrary(const char* filename)
-      +getSymbol(string) void*
+      +getSymbol(string) void**
    }
 
    %% Inheritance (Implements)
