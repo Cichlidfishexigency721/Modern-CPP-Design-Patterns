@@ -51,7 +51,7 @@ classDiagram
     }
 
     CommandQueue *-- "n" Command : queue_
-    CommandQueue *-- CommandExecutor
+    CommandQueue *-- CommandExecutor : commandExecutor_
 
     Command ..> CowCommand
     Command ..> DogCommand
@@ -61,7 +61,7 @@ classDiagram
     CommandExecutor *-- Dog
     CommandExecutor *-- Car
 
-    Client *-- CommandQueue
+    Client ..> CommandQueue
 ```
 
 ### Design Note:
