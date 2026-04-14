@@ -11,7 +11,7 @@ the classes and functions beforehand. However, modern systems (like game
 engines, audio workstations, or web browsers) need to load "Plugins" 
 (third-party extensions) while the program is already running. 
 
-##The C++ Challenge (Name Mangling & The ABI Boundary):
+## The C++ Challenge (Name Mangling & The ABI Boundary):
 
 Loading a pure C library dynamically is easy. But C++ supports function 
 overloading, namespaces, and classes. To make this work, C++ compilers 
@@ -20,7 +20,7 @@ change the names of your functions behind the scenes into complex strings
 names differently, you cannot easily search for a C++ class or method 
 inside a compiled Shared Object (.so) or Dynamic Link Library (.dll).
 
-##The Solution & The `<dlfcn.h>` API:
+## The Solution & The `<dlfcn.h>` API:
 To solve this, we use the POSIX standard C library `<dlfcn.h>` (Dynamic 
 Linking API), which provides four main functions:
 
