@@ -102,14 +102,14 @@ public:
 
    void runAll() const
    {
-      for(const auto& cmd : queue_) cmd->execute();
+      for(const auto& command : queue_) command->execute();
    }
 };
 
 //--------------------------------------------------------- Main:
 int main()
 {
-   std::cout << "=== COMMAND PATTERN (COMMAND QUEUE SIMULATION) ===\n" << std::endl;
+   std::cout << "=== COMMAND PATTERN SIMULATION ===\n" << std::endl;
 
    Cow cow;
    Dog dog{"Marshall"};
