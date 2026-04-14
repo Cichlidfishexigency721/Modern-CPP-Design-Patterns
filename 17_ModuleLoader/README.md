@@ -135,8 +135,8 @@ classDiagram
    }
 
    class Functions["extern C"] {
-      IModule* build_module(const char* name, const int factor)
-      void destroy_module(IModule* module_ptr)
+      +build_module(char* name, int factor) IModule* 
+      +destroy_module(IModule* module_ptr) void
    }
 
    %% Inheritance (Implements)
