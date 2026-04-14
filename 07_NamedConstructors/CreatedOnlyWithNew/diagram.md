@@ -17,6 +17,6 @@ classDiagram
    }
 
    %% Dependency: No numbers used here
-   Fred ..> Fred : creates
+   Fred --> Fred : creates
    Client ..> Fred
 ```

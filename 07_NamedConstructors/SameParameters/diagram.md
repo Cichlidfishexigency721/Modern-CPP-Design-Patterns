@@ -16,6 +16,6 @@ classDiagram
    }
 
    %% Dependency: No numbers used as per our symbology
-   Point ..> Point : creates
+   Point --> Point : creates
    Client ..> Point
 ```
