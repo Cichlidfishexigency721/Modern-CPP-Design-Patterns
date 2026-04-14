@@ -9,7 +9,13 @@ classDiagram
       +handle(int) void*
    }
 
-   class Handler {
+   class Handler_1 {
+      -int id_
+      -string name_
+      +handle(int) void
+   }
+
+   class Handler_2 {
       -int id_
       -string name_
       +handle(int) void
@@ -27,7 +33,8 @@ classDiagram
    }
 
    %% Inheritance (Implements)
-   IHandler <|.. Handler
+   IHandler <|.. Handler_1
+   IHandler <|.. Handler_2
 
    %% Recursive Composition: each handler owns the next one
    %% Composition (Has_a) - Multiplicity "1" only at the end

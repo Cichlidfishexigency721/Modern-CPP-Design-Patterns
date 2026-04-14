@@ -46,37 +46,50 @@ public:
 
    virtual void handle(int request)
    {
-      if(next_)
-      {
-         next_->handle(request);
-      }
-      else
-      {
-         std::cout << " [System] Request " << request 
-                   << " reached the end of the chain unhandled.\n";
-      }
+      if(next_) next_->handle(request);
+      else      std::cout << " [System] Request " << request 
+                          << " reached the end of the chain unhandled.\n";
    }
 };
 
-//--------------------------------------------------------- Concrete Handler:
-class Handler : public IHandler
+//-------------------------------------------------------- Concrete Handlers:
+class Handler_1 : public IHandler
 {
 private:
    int id_;
    std::string name_;
 
 public:
-   Handler(int id, std::string name) : id_{id}, name_{std::move(name)} { }
+   Handler_1(int id, std::string name) : id_{id}, name_{std::move(name)} { }
 
    void handle(int request) override
    {
       if(request == id_)
-      {
-         std::cout << " [Handler] " << name_ << " handled request: " << request << "\n";
-      }
+         std::cout << " [Handler_1] " << name_ << " handled request: " << request << "\n";
       else
       {
-         std::cout << " [Handler] " << name_ << " passing request " << request << " forward.\n";
+         std::cout << " [Handler_1] " << name_ << " passing request " << request << " forward.\n";
+         IHandler::handle(request);
+      }
+   }
+};
+
+class Handler_2 : public IHandler
+{
+private:
+   int id_;
+   std::string name_;
+
+public:
+   Handler_2(int id, std::string name) : id_{id}, name_{std::move(name)} { }
+
+   void handle(int request) override
+   {
+      if(request == id_)
+         std::cout << " [Handler_2] " << name_ << " handled request: " << request << "\n";
+      else
+      {
+         std::cout << " [Handler_2] " << name_ << " passing request " << request << " forward.\n";
          IHandler::handle(request);
       }
    }
@@ -116,16 +129,18 @@ int main()
    Chain chain;
 
    // 1. First stage of construction
-   chain.add(std::make_unique<Handler>(3, "Handler-3"))
-        .add(std::make_unique<Handler>(5, "Handler-5"));
+   chain.add(std::make_unique<Handler_1>(3, "Handler-3"))
+        .add(std::make_unique<Handler_2>(5, "Handler-5"));
+
+   // Some code...
 
    // 2. Second stage of construction
-   chain.add(std::make_unique<Handler>(8, "Handler-8"))
-        .add(std::make_unique<Handler>(11, "Handler-11"));
+   chain.add(std::make_unique<Handler_2>(8, "Handler-8"))
+        .add(std::make_unique<Handler_1>(11, "Handler-11"));
 
    // Execute tests
    int requests[] = {3, 5, 4, 8, 11};
-   for (int r : requests)
+   for(int r : requests)
    {
       std::cout << "Testing request " << r << ":\n";
       chain.execute(r);
