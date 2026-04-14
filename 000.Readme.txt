@@ -94,6 +94,7 @@ between classes. The following diagram explains the arrows an multiplicities use
       hideEmptyMembersBox: true
 ---
 classDiagram
+   direction LR
    A --|> B    : A is a B
    C ..|> D    : C implements D
 
