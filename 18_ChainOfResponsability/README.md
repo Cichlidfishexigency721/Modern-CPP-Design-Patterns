@@ -35,30 +35,30 @@ dynamically at runtime.
 classDiagram
    class IHandler {
       <<interface>>
-      #unique_ptr~IHandler~ next_
-      +setNext(unique_ptr~IHandler~)
-      +handle(int)
+      #unique_ptr~IHandler~ next_*
+      +setNext(unique_ptr~IHandler~) void*
+      +handle(int) void*
    }
 
    class Handler {
       -int id_
       -string name_
-      +handle(int)
+      +handle(int) void
    }
 
    class Chain {
       -unique_ptr~IHandler~ head_
       -IHandler* tail_
       +add(unique_ptr~IHandler~) Chain&
-      +execute(int)
+      +execute(int) void
    }
 
    class Client {
       +main()
    }
 
-   %% Inheritance (Is_a) - No numbers
-   IHandler <|-- Handler
+   %% Inheritance (Implements)
+   IHandler <|.. Handler
 
    %% Recursive Composition: each handler owns the next one
    %% Composition (Has_a) - Multiplicity "1" only at the end

@@ -46,7 +46,7 @@ public:
 
    virtual void handle(int request)
    {
-      if (next_)
+      if(next_)
       {
          next_->handle(request);
       }
@@ -70,7 +70,7 @@ public:
 
    void handle(int request) override
    {
-      if (request == id_)
+      if(request == id_)
       {
          std::cout << " [Handler] " << name_ << " handled request: " << request << "\n";
       }
@@ -94,8 +94,8 @@ public:
    {
       IHandler* current = handler.get();
       
-      if (!head_) head_ = std::move(handler);
-      else        tail_->setNext(std::move(handler));
+      if(!head_) head_ = std::move(handler);
+      else       tail_->setNext(std::move(handler));
       
       tail_ = current;
       return *this;
