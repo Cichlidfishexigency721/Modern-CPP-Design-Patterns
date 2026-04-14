@@ -109,7 +109,7 @@ public:
 //--------------------------------------------------------- Main:
 int main()
 {
-   std::cout << "=== COMMAND PATTERN (JOB QUEUE SIMULATION) ===\n" << std::endl;
+   std::cout << "=== COMMAND PATTERN (COMMAND QUEUE SIMULATION) ===\n" << std::endl;
 
    Cow cow;
    Dog dog{"Marshall"};
@@ -120,6 +120,7 @@ int main()
    commandQueue.addCommand(std::make_unique<CowCommand>(cow));
    commandQueue.addCommand(std::make_unique<DogCommand>(dog));
    commandQueue.addCommand(std::make_unique<CarCommand>(car));
+   commandQueue.addCommand(std::make_unique<DogCommand>(dog));
 
    std::cout << "Executing command queue:\n";
    commandQueue.runAll();

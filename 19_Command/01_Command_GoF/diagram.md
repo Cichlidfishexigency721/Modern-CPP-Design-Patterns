@@ -58,9 +58,9 @@ classDiagram
    CommandQueue *-- "n" ICommand : queue_
 
    %% Commands depend on their Receivers to do the work
-   CowCommand *-- Cow
-   DogCommand *-- Dog
-   CarCommand *-- Car
+   CowCommand o-- Cow
+   DogCommand o-- Dog
+   CarCommand o-- Car
 
    %% Client orchestrates everything
    Client *-- CommandQueue
