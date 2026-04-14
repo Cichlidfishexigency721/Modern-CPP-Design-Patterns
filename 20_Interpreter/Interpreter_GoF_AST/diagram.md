@@ -61,7 +61,7 @@ classDiagram
    BinaryExpression <|-- MulNode
 
    %% Composition
-   BinaryExpression *-- "n" IExpression : left_ / right_
+   BinaryExpression *-- "2" IExpression : left_ / right_
    UnaryMinusNode *-- IExpression : expr_
    MathFunctionNode *-- IExpression : expr_
    Parser *-- Lexer : lexer_
