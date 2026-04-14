@@ -61,14 +61,17 @@ classDiagram
     }
 
     class CommandQueue {
-       +vector~Command~
+       -vector~Command~ queue_
+       -CommandExecutor& commandExecutor_
+       +addCommand(Command) void
+        +runAll() void
     }
 
     class Client {
         +main()
     }
 
-    CommandQueue *-- "n" Command
+    CommandQueue *-- "n" Command : queue_
     
     Command ..> CowCommand
     Command ..> DogCommand
