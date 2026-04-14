@@ -29,29 +29,29 @@
 class DynamicLibrary
 {
 private:
-   void* handle_{nullptr};
+   void* libraryHandle_{nullptr};
 
 public:
    explicit DynamicLibrary(const char* filename)
    {
       std::cout << " [Host] Loading shared library: " << filename << "...\n";
       // RTLD_LAZY: Relocations are performed at an implementation-defined time.
-      handle_ = dlopen(filename, RTLD_LAZY);
-      if(!handle_) throw std::runtime_error(dlerror());
+      libraryHandle_ = dlopen(filename, RTLD_LAZY);
+      if(!libraryHandle_) throw std::runtime_error(dlerror());
    }
 
    ~DynamicLibrary()
    {
-      if(handle_)
+      if(libraryHandle_)
       {
          std::cout << " [Host] Unloading shared library...\n";
-         dlclose(handle_);
+         dlclose(libraryHandle_);
       }
    }
 
    void* getSymbol(const char* symbolName) const
    {
-      void* symbol = dlsym(handle_, symbolName);
+      void* symbol = dlsym(libraryHandle_, symbolName);
       if(!symbol) throw std::runtime_error(dlerror());
       return symbol;
    }

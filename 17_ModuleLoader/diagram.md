@@ -15,14 +15,19 @@ classDiagram
       -string name_
       -int factor_
       +Module(const char* name, const int factor)
-      +processData(int) : int
+      +processData(int) int
    }
 
    class DynamicLibrary {
-      <<interface>>
-      -void* handle_
+      -void* libraryHandle_
       +DynamicLibrary(const char* filename)
-      +getSymbol(string) void**
+      +getSymbol(const char*) void*
+   }
+
+   class extern "C"
+   {
+      IModule* build_module(const char* name, const int factor)
+      void destroy_module(IModule* module_ptr)
    }
 
    %% Inheritance (Implements)
