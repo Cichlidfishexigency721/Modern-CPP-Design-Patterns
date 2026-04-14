@@ -42,7 +42,7 @@ concerns such as:
    - 6 De: Destructor
    - 7 PC: Particular Constructor
 
-For more information about author's "Rule of seven", refer to '004_Rule_of_Seven.txt'
+For more information about author's "Rule of Seven", refer to '004_Rule_of_Seven.txt'
 
 ## --- Repository Structure ---
 The project is organized into four logical blocks:
