@@ -51,11 +51,9 @@ struct CarCommand { };
 
 using Command = std::variant<CowCommand, DogCommand, CarCommand>;
 
-using CommandQueue = std::vector<Command>;
-
 //--------------------------------------------------------- Command Executor:
-// This is the "Visitor" that knows how to execute each command data type.
-// It owns the receivers.
+// This is the "Visitor" that knows how to execute
+// each command data type and owns the receivers.
 class CommandExecutor
 {
 private:
@@ -74,29 +72,46 @@ public:
    }
 };
 
+//---------------------------------------------------- CommandQueue:
+class CommandQueue
+{
+private:
+   std::vector<Command> queue_;
+   CommandExecutor& commandExecutor_;
+
+public:
+   CommandQueue(CommandExecutor& commandExecutor) : commandExecutor_{commandExecutor} {}
+
+   void addCommand(Command cmd) { queue_.push_back(std::move(cmd)); }
+
+   void runAll() const
+   {
+      for(const auto& command : queue_) std::visit(commandExecutor_, command);
+   }
+};
+
 //--------------------------------------------------------- Main Simulation:
 int main()
 {
-   std::cout << "=== COMMAND PATTERN (MODERN VARIANT COMMAND QUEUE SIMULATION) ===\n" << std::endl;
+   std::cout << "=== MODERN VARIANT COMMAND PATTERN SIMULATION ===\n" << std::endl;
 
    CommandExecutor commandExecutor;
 
-   CommandQueue commandQueue;
+   CommandQueue commandQueue{commandExecutor};
 
-   commandQueue.emplace_back(CowCommand{});
-   commandQueue.emplace_back(DogCommand{});
-   commandQueue.emplace_back(CarCommand{});
-   commandQueue.emplace_back(DogCommand{});
+   commandQueue.addCommand(CowCommand{});
+   commandQueue.addCommand(DogCommand{});
+   commandQueue.addCommand(CarCommand{});
+   commandQueue.addCommand(DogCommand{});
 
-   std::cout << "Executing command commandQueue via std::visit:\n";
-   for(const auto& command : commandQueue) std::visit(commandExecutor, command);
+   std::cout << "Executing command queue:\n";
+   commandQueue.runAll();
 
    std::cout << "\nExecuting command queue (again):\n";
-   for(const auto& command : commandQueue) std::visit(commandExecutor, command);
+   commandQueue.runAll();
 
    std::cout << "\n--- Executing command outside the queue ---\n";
-   Command carCommand = CarCommand{};
-   std::visit(commandExecutor, carCommand);
+   std::visit(commandExecutor, Command{CarCommand{}});
 
    std::cout << "\n=== SIMULATION COMPLETED ===" << std::endl;
 }
