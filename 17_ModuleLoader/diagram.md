@@ -8,7 +8,7 @@ classDiagram
 
    class IModule {
       <<interface>>
-      +processData(int) : int*
+      +int* processData(int) int*
    }
 
    class Module {
@@ -25,7 +25,7 @@ classDiagram
    }
 
    class Functions["extern C"] {
-      +build_module(char* name, int factor) IModule* 
+      +build_module(char* name, int factor) IModule*
       +destroy_module(IModule* module_ptr) void
    }
 
