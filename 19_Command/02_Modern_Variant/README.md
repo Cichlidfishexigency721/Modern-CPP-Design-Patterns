@@ -70,9 +70,9 @@ classDiagram
     Command ..> DogAction
     Command ..> CarAction
 
-    CommandExecutor *-- "1" Cow
-    CommandExecutor *-- "1" Dog
-    CommandExecutor *-- "1" Car
+    CommandExecutor *-- Cow
+    CommandExecutor *-- Dog
+    CommandExecutor *-- Car
 
     Client *-- "n" Command
     Client ..> CommandExecutor

@@ -18,7 +18,6 @@
 #include <vector>
 #include <string>
 #include <variant>
-#include <utility>
 
 //--------------------------------------------------------- Receivers:
 class Cow
@@ -45,24 +44,29 @@ public:
 };
 
 //--------------------------------------------------------- Command Data:
-// Commands are now just simple structs (Data markers)
-struct CowAction { };
-struct DogAction { };
-struct CarAction { };
+// Commands are now just simple empty structs (Data markers)
+struct CowCommand { };
+struct DogCommand { };
+struct CarCommand { };
 
-using Command = std::variant<CowAction, DogAction, CarAction>;
+using Command = std::variant<CowCommand, DogCommand, CarCommand>;
+
+using CommandQueue = std::vector<Command>;
 
 //--------------------------------------------------------- Command Executor:
 // This is the "Visitor" that knows how to execute each command data type.
-struct CommandExecutor
+// It owns the receivers.
+class CommandExecutor
 {
-   Cow& cow;
-   Dog& dog;
-   Car& car;
+private:
+   Cow cow;
+   Dog dog{"Marshall"};
+   Car car;
 
-   void operator()(const CowAction&) const { cow.moo(); }
-   void operator()(const DogAction&) const { dog.bark(); }
-   void operator()(const CarAction&) const
+public:
+   void operator()(const CowCommand&) const { cow.moo(); }
+   void operator()(const DogCommand&) const { dog.bark(); }
+   void operator()(const CarCommand&) const
    {
       car.turnOn();
       car.rev();
@@ -73,27 +77,26 @@ struct CommandExecutor
 //--------------------------------------------------------- Main Simulation:
 int main()
 {
-   std::cout << "=== COMMAND PATTERN (MODERN VARIANT) ===\n" << std::endl;
+   std::cout << "=== COMMAND PATTERN (MODERN VARIANT COMMAND QUEUE SIMULATION) ===\n" << std::endl;
 
-   // 1. Create Receivers
-   Cow cow;
-   Dog dog{"Marshall"};
-   Car car;
+   CommandExecutor commandExecutor;
 
-   // 2. Create a Queue of commands (Stored by value!)
-   std::vector<Command> queue;
-   queue.emplace_back(CowAction{});
-   queue.emplace_back(DogAction{});
-   queue.emplace_back(CarAction{});
-   queue.emplace_back(DogAction{});
+   CommandQueue commandQueue;
 
-   // 3. Setup the Executor (Visitor)
-   CommandExecutor executor{cow, dog, car};
+   commandQueue.emplace_back(CowCommand{});
+   commandQueue.emplace_back(DogCommand{});
+   commandQueue.emplace_back(CarCommand{});
+   commandQueue.emplace_back(DogCommand{});
 
-   // 4. Dispatch and Execute
-   std::cout << "Executing command queue via std::visit:\n";
-   for (const auto& cmd : queue)
-      std::visit(executor, cmd);
+   std::cout << "Executing command commandQueue via std::visit:\n";
+   for(const auto& command : commandQueue) std::visit(commandExecutor, command);
+
+   std::cout << "\nExecuting command queue (again):\n";
+   for(const auto& command : commandQueue) std::visit(commandExecutor, command);
+
+   std::cout << "\n--- Executing command outside the queue ---\n";
+   Command carCommand = CarCommand{};
+   std::visit(commandExecutor, carCommand);
 
    std::cout << "\n=== SIMULATION COMPLETED ===" << std::endl;
 }
