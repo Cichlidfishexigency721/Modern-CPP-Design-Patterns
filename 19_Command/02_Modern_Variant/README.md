@@ -60,12 +60,16 @@ classDiagram
         +operator()(CarCommand)
     }
 
+    class CommandQueue {
+       +vector~Command~
+    }
+
     class Client {
         +main()
     }
 
-    %% Relationships using only your defined symbology:
-
+    CommandQueue *-- "n" Command
+    
     Command ..> CowCommand
     Command ..> DogCommand
     Command ..> CarCommand
@@ -74,7 +78,7 @@ classDiagram
     CommandExecutor *-- Dog
     CommandExecutor *-- Car
 
-    Client *-- "n" Command
+    Client *-- CommandQueue
     Client ..> CommandExecutor
 ```
 
