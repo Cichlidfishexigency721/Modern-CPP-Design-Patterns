@@ -53,23 +53,23 @@ classDiagram
    }
 
    %% Inheritance
-   Expression <|.. NumberNode
-   Expression <|.. UnaryMinusNode
-   Expression <|.. MathFunctionNode
-   Expression <|.. BinaryExpression
+   IExpression <|.. NumberNode
+   IExpression <|.. UnaryMinusNode
+   IExpression <|.. MathFunctionNode
+   IExpression <|.. BinaryExpression
    BinaryExpression <|-- AddNode
    BinaryExpression <|-- MulNode
 
    %% Composition
-   BinaryExpression *-- "n" Expression : left_ / right_
-   UnaryMinusNode *-- Expression : expr_
-   MathFunctionNode *-- Expression : expr_
+   BinaryExpression *-- "n" IExpression : left_ / right_
+   UnaryMinusNode *-- IExpression : expr_
+   MathFunctionNode *-- IExpression : expr_
    Parser *-- Lexer : lexer_
 
    %% Dependency
-   Parser ..> Expression : creates AST
+   Parser ..> IExpression : creates AST
    Client ..> Parser
-   Client ..> Expression : calls evaluate()
+   Client ..> IExpression : calls evaluate()
 ```
 
 ### Design Note:
