@@ -1,4 +1,4 @@
-# Interpreter Pattern (Stack Machine Version)
+# Interpreter Pattern (Abstract Syntax Tree (AST) Machine Version)
 
 ```mermaid
 classDiagram
@@ -36,7 +36,7 @@ classDiagram
 
     %% Relationships using your symbology reference:
 
-    Compiler *-- "1" Lexer
+    Compiler *-- Lexer
     Compiler *-- "n" Instruction
     
     VirtualMachine ..> Instruction
@@ -46,9 +46,10 @@ classDiagram
 ```
 
 ### Design Note:
-In the Stack Machine version, the architecture is linear. The 'Compiler'
-performs a recursive descent to translate the input string into a flat sequence
-of 'Instruction' objects (Bytecode). This bytecode is stored in a vector and
-then passed to the 'VirtualMachine', which executes it using an internal
-stack. Unlike the AST version, this design prioritizes execution speed and
-memory efficiency over object-oriented structure.
+In the GoF AST version, the architecture is hierarchical and recursive. The 
+'Parser' performs a recursive descent to translate the input string into a 
+tree of polymorphic objects (nodes) in memory. Unlike the Stack Machine, there 
+is no bytecode or Virtual Machine; evaluation is a decentralized process 
+triggered by calling 'evaluate()' on the root node, which recursively 
+calculates the result by traversing its children. This design prioritizes 
+structural clarity and extensibility over raw execution speed.

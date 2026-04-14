@@ -31,17 +31,17 @@ enum class TokenType
 
 struct Token 
 {
-   TokenType type;
-   double value{0.0};
-   std::string name{""};
+   TokenType   type;
+   double      value {0.0};
+   std::string name  {""};
 };
 
 class Lexer
 {
 private:
    std::string input_;
-   size_t pos_{0};
-   Token currentToken_;
+   size_t      pos_{0};
+   Token       currentToken_;
 
    void advanceChar() { pos_++; }
    char peek() const { return (pos_ < input_.size()) ? input_[pos_] : '\0'; }
@@ -56,9 +56,9 @@ public:
 
    void nextToken()
    {
-      while (isspace(peek())) advanceChar();
+      while(isspace(peek())) advanceChar();
 
-      if (pos_ >= input_.size())
+      if(pos_ >= input_.size())
       {
          currentToken_ = {TokenType::END_OF_FILE};
          return;
@@ -66,17 +66,17 @@ public:
 
       char c = peek();
 
-      if (isdigit(c) || c == '.')
+      if(isdigit(c) || c == '.')
       {
          size_t length;
          double val = std::stod(input_.substr(pos_), &length);
          pos_ += length;
          currentToken_ = {TokenType::NUMBER, val, ""};
       }
-      else if (isalpha(c))
+      else if(isalpha(c))
       {
          std::string funcName = "";
-         while (isalpha(peek()))
+         while(isalpha(peek()))
          {
             funcName += peek();
             advanceChar();
@@ -85,44 +85,45 @@ public:
       }
       else
       {
-         switch (c)
+         switch(c)
          {
-            case '+': currentToken_ = {TokenType::PLUS}; break;
-            case '-': currentToken_ = {TokenType::MINUS}; break;
-            case '*': currentToken_ = {TokenType::MUL}; break;
-            case '/': currentToken_ = {TokenType::DIV}; break;
-            case '^': currentToken_ = {TokenType::POW}; break;
+            case '+': currentToken_ = {TokenType::PLUS};   break;
+            case '-': currentToken_ = {TokenType::MINUS};  break;
+            case '*': currentToken_ = {TokenType::MUL};    break;
+            case '/': currentToken_ = {TokenType::DIV};    break;
+            case '^': currentToken_ = {TokenType::POW};    break;
             case '(': currentToken_ = {TokenType::LPAREN}; break;
             case ')': currentToken_ = {TokenType::RPAREN}; break;
             default:  throw std::runtime_error(std::string("Syntax error: Unknown character: ") + c);
          }
          advanceChar();
-      }
-   }
-};
+      } // else
+   } // nextToken
+}; // class Lexer
 
 //=============================================================================
 // BLOCK 2: ABSTRACT SYNTAX TREE (GoF Interpreter Nodes)
 //=============================================================================
-class Expression
+class IExpression
 {
 public:
-   virtual ~Expression() = default;
-   virtual double evaluate() const = 0;
+   virtual ~IExpression() = default;
+
+   virtual double evaluate()          const = 0;
    virtual void print(int indent = 0) const = 0;
 
 protected:
    void printIndent(int indent) const
    {
       std::cout << "    ";
-      for (int i = 0; i < indent; ++i) std::cout << "   ";
+      for(int i = 0; i < indent; ++i) std::cout << "   ";
    }
 };
 
-using ExprPtr = std::unique_ptr<Expression>;
+using ExprPtr = std::unique_ptr<IExpression>;
 
-// --- Terminal Expression ---
-class NumberNode : public Expression
+// --- Terminal IExpression ---
+class NumberNode : public IExpression
 {
 private:
    double value_;
@@ -136,8 +137,8 @@ public:
    }
 };
 
-// --- Non-Terminal Expressions ---
-class BinaryExpression : public Expression
+// --- Non-Terminal IExpressions ---
+class BinaryExpression : public IExpression
 {
 protected:
    ExprPtr left_;
@@ -193,7 +194,7 @@ public:
    double evaluate() const override 
    { 
       double r = right_->evaluate();
-      if (r == 0.0) throw std::runtime_error("Error: Division by zero");
+      if(r == 0.0) throw std::runtime_error("Error: Division by zero");
       return left_->evaluate() / r; 
    }
    void print(int indent) const override
@@ -217,7 +218,7 @@ public:
    }
 };
 
-class UnaryMinusNode : public Expression
+class UnaryMinusNode : public IExpression
 {
 private:
    ExprPtr expr_;
@@ -231,7 +232,7 @@ public:
    }
 };
 
-class MathFunctionNode : public Expression
+class MathFunctionNode : public IExpression
 {
 private:
    std::string func_;
@@ -243,23 +244,26 @@ public:
    double evaluate() const override
    {
       double val = expr_->evaluate();
-      if (func_ == "sin")  return std::sin(val);
-      if (func_ == "cos")  return std::cos(val);
-      if (func_ == "tan")  return std::tan(val);
-      if (func_ == "asin") return std::asin(val);
-      if (func_ == "acos") return std::acos(val);
-      if (func_ == "atan") return std::atan(val);
-      if (func_ == "exp")  return std::exp(val);
-      if (func_ == "sqrt") {
-         if (val < 0) throw std::runtime_error("Error: sqrt of negative number");
+      if(func_ == "sin")  return std::sin(val);
+      if(func_ == "cos")  return std::cos(val);
+      if(func_ == "tan")  return std::tan(val);
+      if(func_ == "asin") return std::asin(val);
+      if(func_ == "acos") return std::acos(val);
+      if(func_ == "atan") return std::atan(val);
+      if(func_ == "exp")  return std::exp(val);
+      if(func_ == "sqrt")
+      {
+         if(val < 0) throw std::runtime_error("Error: sqrt of negative number");
          return std::sqrt(val);
       }
-      if (func_ == "ln") {
-         if (val <= 0) throw std::runtime_error("Error: ln of non-positive number");
+      if(func_ == "ln")
+      {
+         if(val <= 0) throw std::runtime_error("Error: ln of non-positive number");
          return std::log(val);
       }
-      if (func_ == "log") {
-         if (val <= 0) throw std::runtime_error("Error: log of non-positive number");
+      if(func_ == "log")
+      {
+         if(val <= 0) throw std::runtime_error("Error: log of non-positive number");
          return std::log10(val);
       }
       throw std::runtime_error("Error: Unknown function: " + func_);
@@ -282,26 +286,26 @@ private:
 
    void match(TokenType expected)
    {
-      if (lexer_.getToken().type == expected) lexer_.nextToken();
+      if(lexer_.getToken().type == expected) lexer_.nextToken();
       else throw std::runtime_error("Syntax error: Unexpected token");
    }
 
    ExprPtr parsePrimary()
    {
       Token t = lexer_.getToken();
-      if (t.type == TokenType::NUMBER)
+      if(t.type == TokenType::NUMBER)
       {
          match(TokenType::NUMBER);
          return std::make_unique<NumberNode>(t.value);
       }
-      if (t.type == TokenType::LPAREN)
+      if(t.type == TokenType::LPAREN)
       {
          match(TokenType::LPAREN);
          ExprPtr expr = parseExpression();
          match(TokenType::RPAREN);
          return expr;
       }
-      if (t.type == TokenType::FUNCTION)
+      if(t.type == TokenType::FUNCTION)
       {
          std::string func = t.name;
          match(TokenType::FUNCTION);
@@ -316,12 +320,12 @@ private:
    ExprPtr parseSigned()
    {
       Token t = lexer_.getToken();
-      if (t.type == TokenType::PLUS)
+      if(t.type == TokenType::PLUS)
       {
          match(TokenType::PLUS);
          return parsePrimary();
       }
-      if (t.type == TokenType::MINUS)
+      if(t.type == TokenType::MINUS)
       {
          match(TokenType::MINUS);
          return std::make_unique<UnaryMinusNode>(parsePrimary());
@@ -332,7 +336,7 @@ private:
    ExprPtr parseExponent()
    {
       ExprPtr left = parseSigned();
-      while (lexer_.getToken().type == TokenType::POW)
+      while(lexer_.getToken().type == TokenType::POW)
       {
          match(TokenType::POW);
          ExprPtr right = parseSigned();
@@ -344,15 +348,15 @@ private:
    ExprPtr parseMultiplicative()
    {
       ExprPtr left = parseExponent();
-      while (lexer_.getToken().type == TokenType::MUL || 
-             lexer_.getToken().type == TokenType::DIV)
+      while(lexer_.getToken().type == TokenType::MUL || 
+            lexer_.getToken().type == TokenType::DIV)
       {
          TokenType op = lexer_.getToken().type;
          match(op);
          ExprPtr right = parseExponent();
          
-         if (op == TokenType::MUL) left = std::make_unique<MulNode>(std::move(left), std::move(right));
-         else left = std::make_unique<DivNode>(std::move(left), std::move(right));
+         if(op == TokenType::MUL) left = std::make_unique<MulNode>(std::move(left), std::move(right));
+         else                     left = std::make_unique<DivNode>(std::move(left), std::move(right));
       }
       return left;
    }
@@ -360,15 +364,15 @@ private:
    ExprPtr parseAdditive()
    {
       ExprPtr left = parseMultiplicative();
-      while (lexer_.getToken().type == TokenType::PLUS || 
-             lexer_.getToken().type == TokenType::MINUS)
+      while(lexer_.getToken().type == TokenType::PLUS || 
+            lexer_.getToken().type == TokenType::MINUS)
       {
          TokenType op = lexer_.getToken().type;
          match(op);
          ExprPtr right = parseMultiplicative();
 
-         if (op == TokenType::PLUS) left = std::make_unique<AddNode>(std::move(left), std::move(right));
-         else left = std::make_unique<SubNode>(std::move(left), std::move(right));
+         if(op == TokenType::PLUS) left = std::make_unique<AddNode>(std::move(left), std::move(right));
+         else                      left = std::make_unique<SubNode>(std::move(left), std::move(right));
       }
       return left;
    }
@@ -384,7 +388,7 @@ public:
    ExprPtr parse()
    {
       ExprPtr tree = parseExpression();
-      if (lexer_.getToken().type != TokenType::END_OF_FILE)
+      if(lexer_.getToken().type != TokenType::END_OF_FILE)
          throw std::runtime_error("Syntax error: Unexpected tokens at end");
       return tree;
    }
@@ -397,7 +401,7 @@ int main(int argc, char* argv[])
 {
    std::cout << "=== INTERPRETER PATTERN (GoF AST VERSION) ===\n" << std::endl;
 
-   if (argc < 2 || argc > 3)
+   if(argc < 2 || argc > 3)
    {
       std::cerr << "Usage: ./calc [-p] \"<math_expression>\"\n"
                 << "Note: Trigonometric functions are in radians\n";
@@ -407,10 +411,10 @@ int main(int argc, char* argv[])
    bool printInternals = false;
    std::string sourceCode;
 
-   if (argc == 3)
+   if(argc == 3)
    {
       std::string flag = argv[1];
-      if (flag == "-p") printInternals = true;
+      if(flag == "-p") printInternals = true;
       else
       {
          std::cerr << "Error: Unknown flag '" << flag << "'. Only '-p' is supported.\n";
@@ -427,7 +431,7 @@ int main(int argc, char* argv[])
       ExprPtr astRoot = parser.parse();
 
       // 2. Optionally print the AST
-      if (printInternals)
+      if(printInternals)
       {
          std::cout << "--- Abstract Syntax Tree ---\n";
          astRoot->print();
@@ -438,7 +442,7 @@ int main(int argc, char* argv[])
       double result = astRoot->evaluate();
       std::cout << "Result: " << result << "\n";
    }
-   catch (const std::exception& e)
+   catch(const std::exception& e)
    {
       std::cerr << e.what() << "\n";
       return 1;

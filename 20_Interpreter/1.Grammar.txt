@@ -12,9 +12,9 @@ naturally enforces standard operator precedence (BODMAS/PEMDAS).
       [0-9]+ ('.' [0-9]+)?      // Positive real numbers
 
 <function_name> ::= 
-      "sin" | "cos" | "tan" | 
+      "sin"  | "cos"  | "tan"  | 
       "asin" | "acos" | "atan" | 
-      "sqrt" | "ln" | "log" | 
+      "sqrt" | "ln"   | "log"  | 
       "exp"
 
 <primary_expression> ::= 
