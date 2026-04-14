@@ -8,7 +8,7 @@ classDiagram
 
    class IModule {
       <<interface>>
-      +int* processData(int) int*
+      +int* processData(int)
    }
 
    class Module {
@@ -21,12 +21,12 @@ classDiagram
    class DynamicLibrary {
       -void* libraryHandle_
       +DynamicLibrary(const char* filename)
-      +getSymbol(const char*) void*
+      +void* getSymbol(const char*)
    }
 
    class Functions["extern C"] {
-      +build_module(char* name, int factor) IModule*
-      +destroy_module(IModule* module_ptr) void
+      +IModule* build_module(char* name, int factor)
+      +void destroy_module(IModule* module_ptr)
    }
 
    %% Inheritance (Implements)
@@ -40,6 +40,9 @@ classDiagram
 
    %% The Client depends on the factory functions exported by the .so
    Client --> IModule : creates via build_module
+
+   %%Module is managed via extern "C" funcions
+   Module .. Functions["extern C"]
 ```
 
 ### Design Note:
