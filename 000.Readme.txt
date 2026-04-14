@@ -32,7 +32,7 @@ concerns such as:
   Polymorphism (CRTP) and Mixins.
 * **Modern Features:** Extensive use of std::variant, std::visit, if constexpr,
   and C++20 Abbreviated Templates.
-* **The "Gang of Seven":** A unique educational approach to tracing an object's
+* **The "Rule of Seven":** A unique educational approach to tracing an object's
   full lifecycle:
    - 1 DC: Default Constructor
    - 2 CC: Copy Constructor
@@ -42,11 +42,13 @@ concerns such as:
    - 6 De: Destructor
    - 7 PC: Particular Constructor
 
+For more information about author's "Rule of seven", refer to '004_Rule_of_Seven.txt'
+
 ## --- Repository Structure ---
 The project is organized into four logical blocks:
 
 1.  **Fundamental Principles:** Detailed analysis of SOLID, IoC, Hollywood
-Principle, and more (see 002_OO_Principles.txt).
+Principle, and more (see '002_OO_Principles.txt').
 2.  **Creational Patterns:** Managing object instantiation and lifecycle
 (Builder, Factory, Singleton, etc.).
 3.  **Structural Patterns:** Compiling classes and objects into larger, flexible
@@ -62,7 +64,7 @@ The author uses a custom gcc3 alias for optimized compilation:
 
 c++ -std=c++23 -O3 -Wfatal-errors -Wall -Wextra -Wpedantic program.cpp -o program -pthread
 
-For detailed instructions, refer to 003_How_to_compile.txt.
+For detailed instructions, refer to '003_How_to_compile.txt'.
 
 ## --- License & Usage ---
 This repository is provided as an open educational resource.
