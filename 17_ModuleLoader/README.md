@@ -134,7 +134,7 @@ classDiagram
       +void* getSymbol(const char*)
    }
 
-   class Functions["extern C"] {
+   class extern_C {
       +IModule* build_module(char* name, int factor)
       +void destroy_module(IModule* module_ptr)
    }
@@ -152,7 +152,7 @@ classDiagram
    Client --> IModule : creates via build_module
 
    %%Module is managed via extern "C" funcions
-   Module .. Functions["extern C"]
+   Module .. extern_C
 ```
 
 ### Design Note:
