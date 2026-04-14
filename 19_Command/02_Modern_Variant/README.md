@@ -23,13 +23,13 @@ executor.
 
 ```mermaid
 classDiagram
-    class CowAction {
+    class CowCommand {
         <<struct>>
     }
-    class DogAction {
+    class DogCommand {
         <<struct>>
     }
-    class CarAction {
+    class CarCommand {
         <<struct>>
     }
 
@@ -52,12 +52,12 @@ classDiagram
     }
 
     class CommandExecutor {
-        -Cow& cow
-        -Dog& dog
-        -Car& car
-        +operator()(CowAction)
-        +operator()(DogAction)
-        +operator()(CarAction)
+        -Cow cow
+        -Dog dog
+        -Car car
+        +operator()(CowCommand)
+        +operator()(DogCommand)
+        +operator()(CarCommand)
     }
 
     class Client {
@@ -66,9 +66,9 @@ classDiagram
 
     %% Relationships using only your defined symbology:
 
-    Command ..> CowAction
-    Command ..> DogAction
-    Command ..> CarAction
+    Command ..> CowCommand
+    Command ..> DogCommand
+    Command ..> CarCommand
 
     CommandExecutor *-- Cow
     CommandExecutor *-- Dog
