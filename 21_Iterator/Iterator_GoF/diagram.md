@@ -53,7 +53,6 @@ classDiagram
     BookIterator ..> BookCollection : references
     BookIterator ..> Node : points to
     
-    Client ..> Aggregate
     Client ..> Iterator
 ```
 
