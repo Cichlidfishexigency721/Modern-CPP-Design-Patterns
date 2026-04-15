@@ -59,23 +59,14 @@ template <typename T>
 class Iterator
 {
 public:
-   virtual ~Iterator() = default;
-   virtual void first() = 0;
-   virtual void next() = 0;
-   virtual bool isDone() const = 0;
+   virtual ~Iterator()           = default;
+   virtual void first()          = 0;
+   virtual void next()           = 0;
+   virtual bool isDone()   const = 0;
    virtual T currentItem() const = 0;
 
    // Prototype-like method to duplicate the iterator state
    virtual std::unique_ptr<Iterator<T>> clone() const = 0;
-};
-
-//--------------------------------------------------------- Aggregate Interface:
-template <typename T>
-class Aggregate
-{
-public:
-   virtual ~Aggregate() = default;
-   virtual std::unique_ptr<Iterator<T>> createIterator() const = 0;
 };
 
 //--------------------------------------------------------- Internal Node:
@@ -88,7 +79,7 @@ struct Node
 };
 
 //--------------------------------------------------------- Concrete Aggregate:
-class BookCollection : public Aggregate<Book>
+class BookCollection
 {
 private:
    std::unique_ptr<Node> head_;
@@ -100,7 +91,7 @@ public:
       auto newNode = std::make_unique<Node>(Book{title, author});
       Node* current = newNode.get();
 
-      if (!head_) head_ = std::move(newNode);
+      if(!head_) head_ = std::move(newNode);
       else        tail_->next = std::move(newNode);
       
       tail_ = current;
@@ -108,7 +99,7 @@ public:
 
    const Node* getHead() const { return head_.get(); }
 
-   std::unique_ptr<Iterator<Book>> createIterator() const override;
+   std::unique_ptr<Iterator<Book>> createIterator() const;
 };
 
 //--------------------------------------------------------- Concrete Iterator:
@@ -130,14 +121,14 @@ public:
 
    void next() override
    {
-      if (current_) current_ = current_->next.get();
+      if(current_) current_ = current_->next.get();
    }
 
    bool isDone() const override { return current_ == nullptr; }
 
    Book currentItem() const override
    {
-      if (isDone()) throw std::out_of_range("Iterator is out of bounds");
+      if(isDone()) throw std::out_of_range("Iterator is out of bounds");
       return current_->book_;
    }
 
@@ -170,7 +161,7 @@ int main()
    std::cout << "--- Library Inventory ---\n";
    auto iterator = library.createIterator();
    
-   for (iterator->first(); !iterator->isDone(); iterator->next())
+   for(iterator->first(); !iterator->isDone(); iterator->next())
    {
       Book book = iterator->currentItem();
       std::cout << " - " << book.getTitle() << " (by " << book.getAuthor() << ")\n";
@@ -183,11 +174,11 @@ int main()
    std::unordered_set<std::string> processedAuthors;
    auto outerIt = library.createIterator();
 
-   for (outerIt->first(); !outerIt->isDone(); outerIt->next())
+   for(outerIt->first(); !outerIt->isDone(); outerIt->next())
    {
       const Book& currentBook = outerIt->currentItem();
 
-      if (!processedAuthors.contains(currentBook.getAuthor()))
+      if(!processedAuthors.contains(currentBook.getAuthor()))
       {
          std::vector<std::string> bookTitlesOfSameAuthor;
 
@@ -198,18 +189,18 @@ int main()
          auto innerIt = outerIt->clone();
          innerIt->next(); // Move one step ahead
 
-         while (!innerIt->isDone())
+         while(!innerIt->isDone())
          {
             const Book& compareBook = innerIt->currentItem();
-            if (currentBook.getAuthor() == compareBook.getAuthor())
+            if(currentBook.getAuthor() == compareBook.getAuthor())
                bookTitlesOfSameAuthor.push_back(compareBook.getTitle());
             innerIt->next();
          }
 
-         if (bookTitlesOfSameAuthor.size() > 1)
+         if(bookTitlesOfSameAuthor.size() > 1)
          {
             std::cout << "Several books found by " << currentBook.getAuthor() << ":\n";
-            for (const auto& title : bookTitlesOfSameAuthor)
+            for(const auto& title : bookTitlesOfSameAuthor)
                std::cout << " - " << title << std::endl;
             std::cout << std::endl;
          }

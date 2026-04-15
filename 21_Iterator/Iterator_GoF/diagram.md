@@ -9,11 +9,6 @@ classDiagram
         +getAuthor() string
     }
 
-    class Node {
-        +Book book_
-        +unique_ptr~Node~ next
-    }
-
     class Iterator~T~ {
         <<interface>>
         +first()*
@@ -23,15 +18,15 @@ classDiagram
         +clone()* unique_ptr~Iterator~
     }
 
-    class Aggregate~T~ {
-        <<interface>>
-        +createIterator()* unique_ptr~Iterator~
+    class Node {
+        +Book book_
+        +unique_ptr~Node~ next
     }
 
     class BookCollection {
         -unique_ptr~Node~ head_
         -Node* tail_
-        +addBook(string, string)
+        +addBook(string title, string author)
         +createIterator() unique_ptr~Iterator~
     }
 
@@ -49,12 +44,11 @@ classDiagram
         +main()
     }
 
-    Aggregate~Book~ <|-- BookCollection
     Iterator~Book~ <|-- BookIterator
 
     BookCollection *-- "n" Node : head_
-    Node *-- "1" Book : book_
-    Node *-- "1" Node : next
+    Node *-- Book : book_
+    Node *-- Node : next
 
     BookIterator ..> BookCollection : references
     BookIterator ..> Node : points to
