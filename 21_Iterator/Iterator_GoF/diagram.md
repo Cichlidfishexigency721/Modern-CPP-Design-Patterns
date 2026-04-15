@@ -47,6 +47,7 @@ classDiagram
     Iterator~Book~ <|.. BookIterator
 
     BookCollection *-- "n" Node : head_
+    BookCollection ..> Node : tail_
     Node *-- Book : book_
     Node *-- Node : next
 

@@ -92,7 +92,7 @@ public:
       Node* current = newNode.get();
 
       if(!head_) head_ = std::move(newNode);
-      else        tail_->next = std::move(newNode);
+      else       tail_->next = std::move(newNode);
       
       tail_ = current;
    }
