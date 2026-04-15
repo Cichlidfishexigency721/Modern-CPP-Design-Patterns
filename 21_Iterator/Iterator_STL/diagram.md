@@ -10,7 +10,7 @@ classDiagram
     }
 
     class Node {
-        +Book book_
+        +Book book
         +unique_ptr~Node~ next
     }
 
@@ -18,7 +18,7 @@ classDiagram
         -Node* current_
         +operator*() Book&
         +operator++() BookIterator&
-        +operator!=(BookIterator) bool
+        +operator!=(BookIterator&) bool
     }
 
     class BookCollection {
@@ -26,7 +26,7 @@ classDiagram
         -Node* tail_
         +addBook(string, string)
         +begin() BookIterator
-        +end() BookIterator
+        +end() BookIterator{nullptr}
     }
 
     class Client {
@@ -36,13 +36,14 @@ classDiagram
     %% Relationships using your symbology reference:
 
     BookCollection *-- Node : head_
+    BookCollection ..> Node : tail_
     Node *-- Book : book
     Node *-- Node : next
 
-    BookIterator ..> Node : points to
+    BookIterator ..> Node : currentNode_
 
-    Client ..> BookCollection : uses range-for
-    Client ..> BookIterator : iterates
+    Client ..> BookCollection
+    Client ..> BookIterator
 ```
 
 ### Design Note:
