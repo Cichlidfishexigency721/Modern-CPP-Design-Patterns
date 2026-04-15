@@ -137,7 +137,7 @@ public:
    }
 };
 
-// --- Non-Terminal IExpressions ---
+//-------------------------------------------------------------------------------- BinaryExpression :
 class BinaryExpression : public IExpression
 {
 protected:

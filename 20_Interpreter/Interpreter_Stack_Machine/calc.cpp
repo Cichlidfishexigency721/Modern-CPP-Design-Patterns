@@ -72,9 +72,9 @@ public:
 
    void nextToken()
    {
-      while (isspace(peek())) advanceChar();
+      while(isspace(peek())) advanceChar();
 
-      if (pos_ >= input_.size())
+      if(pos_ >= input_.size())
       {
          currentToken_ = {TokenType::END_OF_FILE};
          return;
@@ -82,17 +82,17 @@ public:
 
       char c = peek();
 
-      if (isdigit(c) || c == '.')
+      if(isdigit(c) || c == '.')
       {
          size_t length;
          double val = std::stod(input_.substr(pos_), &length);
          pos_ += length;
          currentToken_ = {TokenType::NUMBER, val, ""};
       }
-      else if (isalpha(c))
+      else if(isalpha(c))
       {
          std::string funcName = "";
-         while (isalpha(peek()))
+         while(isalpha(peek()))
          {
             funcName += peek();
             advanceChar();
@@ -101,7 +101,7 @@ public:
       }
       else
       {
-         switch (c)
+         switch(c)
          {
             case '+': currentToken_ = {TokenType::PLUS}; break;
             case '-': currentToken_ = {TokenType::MINUS}; break;
@@ -128,7 +128,7 @@ private:
 
    void match(TokenType expected)
    {
-      if (lexer_.getToken().type == expected) lexer_.nextToken();
+      if(lexer_.getToken().type == expected) lexer_.nextToken();
       else throw std::runtime_error("Syntax error: Unexpected token");
    }
 
@@ -142,18 +142,18 @@ private:
    void parsePrimary()
    {
       Token t = lexer_.getToken();
-      if (t.type == TokenType::NUMBER)
+      if(t.type == TokenType::NUMBER)
       {
          emit(OpCode::PUSH, t.value);
          match(TokenType::NUMBER);
       }
-      else if (t.type == TokenType::LPAREN)
+      else if(t.type == TokenType::LPAREN)
       {
          match(TokenType::LPAREN);
          parseExpression();
          match(TokenType::RPAREN);
       }
-      else if (t.type == TokenType::FUNCTION)
+      else if(t.type == TokenType::FUNCTION)
       {
          std::string func = t.name;
          match(TokenType::FUNCTION);
@@ -161,16 +161,16 @@ private:
          parseExpression();
          match(TokenType::RPAREN);
 
-         if (func == "sin")       emit(OpCode::SIN);
-         else if (func == "cos")  emit(OpCode::COS);
-         else if (func == "tan")  emit(OpCode::TAN);
-         else if (func == "asin") emit(OpCode::ASIN);
-         else if (func == "acos") emit(OpCode::ACOS);
-         else if (func == "atan") emit(OpCode::ATAN);
-         else if (func == "sqrt") emit(OpCode::SQRT);
-         else if (func == "ln")   emit(OpCode::LN);
-         else if (func == "log")  emit(OpCode::LOG);
-         else if (func == "exp")  emit(OpCode::EXP);
+         if(func == "sin")       emit(OpCode::SIN);
+         else if(func == "cos")  emit(OpCode::COS);
+         else if(func == "tan")  emit(OpCode::TAN);
+         else if(func == "asin") emit(OpCode::ASIN);
+         else if(func == "acos") emit(OpCode::ACOS);
+         else if(func == "atan") emit(OpCode::ATAN);
+         else if(func == "sqrt") emit(OpCode::SQRT);
+         else if(func == "ln")   emit(OpCode::LN);
+         else if(func == "log")  emit(OpCode::LOG);
+         else if(func == "exp")  emit(OpCode::EXP);
          else throw std::runtime_error("Error: Unknown function: " + func);
       }
       else throw std::runtime_error("Syntax error in primary expression");
@@ -179,12 +179,12 @@ private:
    void parseSigned()
    {
       Token t = lexer_.getToken();
-      if (t.type == TokenType::PLUS)
+      if(t.type == TokenType::PLUS)
       {
          match(TokenType::PLUS);
          parsePrimary();
       }
-      else if (t.type == TokenType::MINUS)
+      else if(t.type == TokenType::MINUS)
       {
          match(TokenType::MINUS);
          parsePrimary();
@@ -196,7 +196,7 @@ private:
    void parseExponent()
    {
       parseSigned();
-      while (lexer_.getToken().type == TokenType::POW)
+      while(lexer_.getToken().type == TokenType::POW)
       {
          match(TokenType::POW);
          parseSigned();
@@ -207,13 +207,13 @@ private:
    void parseMultiplicative()
    {
       parseExponent();
-      while (lexer_.getToken().type == TokenType::MUL || 
-             lexer_.getToken().type == TokenType::DIV)
+      while(lexer_.getToken().type == TokenType::MUL || 
+            lexer_.getToken().type == TokenType::DIV)
       {
          TokenType op = lexer_.getToken().type;
          match(op);
          parseExponent();
-         if (op == TokenType::MUL) emit(OpCode::MUL);
+         if(op == TokenType::MUL) emit(OpCode::MUL);
          else emit(OpCode::DIV);
       }
    }
@@ -221,13 +221,13 @@ private:
    void parseAdditive()
    {
       parseMultiplicative();
-      while (lexer_.getToken().type == TokenType::PLUS || 
-             lexer_.getToken().type == TokenType::MINUS)
+      while(lexer_.getToken().type == TokenType::PLUS || 
+            lexer_.getToken().type == TokenType::MINUS)
       {
          TokenType op = lexer_.getToken().type;
          match(op);
          parseMultiplicative();
-         if (op == TokenType::PLUS) emit(OpCode::ADD);
+         if(op == TokenType::PLUS) emit(OpCode::ADD);
          else emit(OpCode::SUB);
       }
    }
@@ -243,7 +243,7 @@ public:
    std::vector<Instruction> compile()
    {
       parseExpression();
-      if (lexer_.getToken().type != TokenType::END_OF_FILE)
+      if(lexer_.getToken().type != TokenType::END_OF_FILE)
          throw std::runtime_error("Syntax error: Unexpected tokens at end");
       return program_;
    }
@@ -257,7 +257,7 @@ class VirtualMachine
 private:
    std::string opcodeToString(OpCode code) const
    {
-      switch (code)
+      switch(code)
       {
          case OpCode::PUSH:  return "PUSH";
          case OpCode::ADD:   return "ADD";
@@ -284,10 +284,10 @@ public:
    void printProgram(const std::vector<Instruction>& program) const
    {
       std::cout << "\n--- Bytecode Program ---\n";
-      for (const auto& inst : program)
+      for(const auto& inst : program)
       {
          std::cout << "  " << opcodeToString(inst.code);
-         if (inst.code == OpCode::PUSH) std::cout << " " << inst.value;
+         if(inst.code == OpCode::PUSH) std::cout << " " << inst.value;
          std::cout << "\n";
       }
       std::cout << "------------------------\n\n";
@@ -297,39 +297,39 @@ public:
    {
       std::vector<double> stack;
 
-      for (const auto& inst : program)
+      for(const auto& inst : program)
       {
-         if (inst.code == OpCode::PUSH)
+         if(inst.code == OpCode::PUSH)
          {
             stack.push_back(inst.value);
             continue;
          }
 
          // Handle Unary Operations
-         if (inst.code >= OpCode::CHSGN)
+         if(inst.code >= OpCode::CHSGN)
          {
-            if (stack.empty()) throw std::runtime_error("Error: Stack underflow on unary op");
+            if(stack.empty()) throw std::runtime_error("Error: Stack underflow on unary op");
             double val = stack.back();
             stack.pop_back();
 
-            switch (inst.code)
+            switch(inst.code)
             {
-               case OpCode::CHSGN: stack.push_back(-val); break;
-               case OpCode::SIN:   stack.push_back(std::sin(val)); break;
-               case OpCode::COS:   stack.push_back(std::cos(val)); break;
-               case OpCode::TAN:   stack.push_back(std::tan(val)); break;
+               case OpCode::CHSGN: stack.push_back(-val);           break;
+               case OpCode::SIN:   stack.push_back(std::sin(val));  break;
+               case OpCode::COS:   stack.push_back(std::cos(val));  break;
+               case OpCode::TAN:   stack.push_back(std::tan(val));  break;
                case OpCode::ASIN:  stack.push_back(std::asin(val)); break;
                case OpCode::ACOS:  stack.push_back(std::acos(val)); break;
                case OpCode::ATAN:  stack.push_back(std::atan(val)); break;
-               case OpCode::EXP:   stack.push_back(std::exp(val)); break;
+               case OpCode::EXP:   stack.push_back(std::exp(val));  break;
                case OpCode::SQRT:  
-                  if (val < 0) throw std::runtime_error("Error: sqrt of negative number");
+                  if(val < 0) throw std::runtime_error("Error: sqrt of negative number");
                   stack.push_back(std::sqrt(val)); break;
                case OpCode::LN:
-                  if (val <= 0) throw std::runtime_error("Error: ln of non-positive number");
+                  if(val <= 0) throw std::runtime_error("Error: ln of non-positive number");
                   stack.push_back(std::log(val)); break;
                case OpCode::LOG:
-                  if (val <= 0) throw std::runtime_error("Error: log of non-positive number");
+                  if(val <= 0) throw std::runtime_error("Error: log of non-positive number");
                   stack.push_back(std::log10(val)); break;
                default: break;
             }
@@ -337,24 +337,24 @@ public:
          }
 
          // Handle Binary Operations
-         if (stack.size() < 2) throw std::runtime_error("Error: Stack underflow on binary op");
+         if(stack.size() < 2) throw std::runtime_error("Error: Stack underflow on binary op");
          double right = stack.back(); stack.pop_back();
          double left  = stack.back(); stack.pop_back();
 
-         switch (inst.code)
+         switch(inst.code)
          {
             case OpCode::ADD: stack.push_back(left + right); break;
             case OpCode::SUB: stack.push_back(left - right); break;
             case OpCode::MUL: stack.push_back(left * right); break;
             case OpCode::DIV: 
-               if (right == 0.0) throw std::runtime_error("Error: Division by zero");
+               if(right == 0.0) throw std::runtime_error("Error: Division by zero");
                stack.push_back(left / right); break;
             case OpCode::POW: stack.push_back(std::pow(left, right)); break;
             default: break;
          }
       }
 
-      if (stack.size() != 1) throw std::runtime_error("Error: Unbalanced evaluation stack");
+      if(stack.size() != 1) throw std::runtime_error("Error: Unbalanced evaluation stack");
       return stack.back();
    }
 };
@@ -366,7 +366,7 @@ int main(int argc, char* argv[])
 {
    std::cout << "=== CHAIN OF RESPONSIBILITY (STACK MACHINE) ===\n" << std::endl;
 
-   if (argc < 2 || argc > 3)
+   if(argc < 2 || argc > 3)
    {
       std::cerr << "Usage: calc [-p] \"<math_expression>\"\n"
                 << "Note: Trigonometric functions are in radians\n";
@@ -376,10 +376,10 @@ int main(int argc, char* argv[])
    bool printInternals = false;
    std::string sourceCode;
 
-   if (argc == 3)
+   if(argc == 3)
    {
       std::string flag = argv[1];
-      if (flag == "-p")
+      if(flag == "-p")
       {
          printInternals = true;
          sourceCode = argv[2];
@@ -404,13 +404,13 @@ int main(int argc, char* argv[])
       VirtualMachine vm;
 
       // 2. Optionally print the bytecode
-      if (printInternals) vm.printProgram(program);
+      if(printInternals) vm.printProgram(program);
 
       // 3. Evaluate the bytecode and print the result
       double result = vm.evaluate(program);
       std::cout << "Result: " << result << "\n";
    }
-   catch (const std::exception& e)
+   catch(const std::exception& e)
    {
       std::cerr << e.what() << "\n";
       return 1;
