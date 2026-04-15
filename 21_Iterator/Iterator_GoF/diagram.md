@@ -9,12 +9,12 @@ classDiagram
         +getAuthor() string
     }
 
-    class Iterator~T~ {
+    class Iterator~Book~ {
         <<interface>>
         +first()*
         +next()*
         +isDone()* bool
-        +currentItem()* T
+        +currentItem()* Book
         +clone()* unique_ptr~Iterator~
     }
 
@@ -44,7 +44,7 @@ classDiagram
         +main()
     }
 
-    Iterator~Book~ <|-- BookIterator
+    Iterator~Book~ <|.. BookIterator
 
     BookCollection *-- "n" Node : head_
     Node *-- Book : book_
