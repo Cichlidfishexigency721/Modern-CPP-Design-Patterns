@@ -57,8 +57,8 @@ classDiagram
    IExpression <|.. UnaryMinusNode
    IExpression <|.. MathFunctionNode
    IExpression <|.. BinaryExpression
-   BinaryExpression <|-- AddNode
-   BinaryExpression <|-- MulNode
+   BinaryExpression <|.. AddNode
+   BinaryExpression <|.. MulNode
 
    %% Composition
    BinaryExpression *-- "2" IExpression : left_ / right_
