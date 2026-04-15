@@ -73,9 +73,9 @@ public:
 struct Node
 {
    Book book_;
-   std::unique_ptr<Node> next;
+   std::unique_ptr<Node> next{nullptr};
 
-   explicit Node(Book book) : book_{std::move(book)}, next{nullptr} { }
+   explicit Node(Book book) : book_{std::move(book)} { }
 };
 
 //--------------------------------------------------------- Concrete Aggregate:

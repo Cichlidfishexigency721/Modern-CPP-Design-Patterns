@@ -37,7 +37,7 @@ classDiagram
         +next()
         +isDone() bool
         +currentItem() Book
-        +clone() unique_ptr~Iterator~
+        +clone() unique_ptr~BookIterator~
     }
 
     class Client {
@@ -46,7 +46,7 @@ classDiagram
 
     Iterator~Book~ <|.. BookIterator
 
-    BookCollection *-- "n" Node : head_
+    BookCollection *-- Node : head_
     BookCollection ..> Node : tail_
     Node *-- Book : book_
     Node *-- Node : next
