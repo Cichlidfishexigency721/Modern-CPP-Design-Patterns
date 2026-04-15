@@ -27,7 +27,7 @@ classDiagram
         -unique_ptr~Node~ head_
         -Node* tail_
         +addBook(string title, string author)
-        +createIterator() unique_ptr~Iterator~
+        +createIterator() unique_ptr~BookIterator~
     }
 
     class BookIterator {
