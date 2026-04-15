@@ -26,7 +26,7 @@ classDiagram
         -Node* tail_
         +addBook(string, string)
         +begin() BookIterator
-        +end() BookIterator{nullptr}
+        +end() BookIterator=nullptr
     }
 
     class Client {
