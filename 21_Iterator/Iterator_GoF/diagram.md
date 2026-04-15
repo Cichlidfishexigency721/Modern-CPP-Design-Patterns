@@ -50,9 +50,10 @@ classDiagram
     Node *-- Book : book_
     Node *-- Node : next
 
-    BookIterator ..> BookCollection : references
-    BookIterator ..> Node : points to
+    BookIterator ..> BookCollection : collection_
+    BookIterator ..> Node : current_
     
+    Client ..> BookCollection
     Client ..> Iterator
 ```
 

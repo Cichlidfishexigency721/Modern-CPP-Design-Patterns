@@ -148,18 +148,18 @@ int main()
 {
    std::cout << "=== ITERATOR PATTERN (CLASSIC GOF) ===\n" << std::endl;
 
-   BookCollection library;
-   library.addBook("The C++ Programming Language", "Bjarne Stroustrup");
-   library.addBook("Design Patterns", "Gang of Four");
-   library.addBook("Clean Code", "Robert C. Martin");
-   library.addBook("The Pragmatic Programmer", "Robert C. Martin");
-   library.addBook("Effective C++", "Scott Meyers");
-   library.addBook("Clean Agile: Back to Basics", "Robert C. Martin");
-   library.addBook("Effective Modern C++", "Scott Meyers");
+   BookCollection collection;
+   collection.addBook("The C++ Programming Language", "Bjarne Stroustrup");
+   collection.addBook("Design Patterns", "Gang of Four");
+   collection.addBook("Clean Code", "Robert C. Martin");
+   collection.addBook("The Pragmatic Programmer", "Robert C. Martin");
+   collection.addBook("Effective C++", "Scott Meyers");
+   collection.addBook("Clean Agile: Back to Basics", "Robert C. Martin");
+   collection.addBook("Effective Modern C++", "Scott Meyers");
 
    // --- Test 1: Standard Traversal ---
-   std::cout << "--- Library Inventory ---\n";
-   auto iterator = library.createIterator();
+   std::cout << "--- Collection Inventory ---\n";
+   auto iterator = collection.createIterator();
    
    for(iterator->first(); !iterator->isDone(); iterator->next())
    {
@@ -172,7 +172,7 @@ int main()
    std::cout << "\n--- Finding multiple books by the same author ---\n";
 
    std::unordered_set<std::string> processedAuthors;
-   auto outerIt = library.createIterator();
+   auto outerIt = collection.createIterator();
 
    for(outerIt->first(); !outerIt->isDone(); outerIt->next())
    {
