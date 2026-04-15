@@ -31,8 +31,8 @@ classDiagram
     }
 
     class BookIterator {
-        -BookCollection& collection_
-        -Node* current_
+        -BookCollection& bookCollection_
+        -Node* currentNode_
         +first()
         +next()
         +isDone() bool
@@ -51,8 +51,8 @@ classDiagram
     Node *-- Book : book_
     Node *-- Node : next
 
-    BookIterator ..> BookCollection : collection_
-    BookIterator ..> Node : current_
+    BookIterator ..> BookCollection : bookCollection_
+    BookIterator ..> Node : currentNode_
     
     Client ..> BookCollection
     Client ..> Iterator

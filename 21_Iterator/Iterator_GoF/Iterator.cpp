@@ -106,35 +106,35 @@ public:
 class BookIterator : public Iterator<Book>
 {
 private:
-   const BookCollection& collection_;
-   const Node* current_;
+   const BookCollection& bookCollection_;
+   const Node* currentNode_;
 
 public:
-   explicit BookIterator(const BookCollection& collection) 
-      : collection_{collection}, current_{collection.getHead()} { }
+   explicit BookIterator(const BookCollection& bookCollection) 
+      : bookCollection_{bookCollection}, currentNode_{bookCollection.getHead()} { }
 
    // Internal constructor for cloning
    BookIterator(const BookCollection& col, const Node* curr) 
-      : collection_{col}, current_{curr} { }
+      : bookCollection_{col}, currentNode_{curr} { }
 
-   void first() override { current_ = collection_.getHead(); }
+   void first() override { currentNode_ = bookCollection_.getHead(); }
 
    void next() override
    {
-      if(current_) current_ = current_->next.get();
+      if(currentNode_) currentNode_ = currentNode_->next.get();
    }
 
-   bool isDone() const override { return current_ == nullptr; }
+   bool isDone() const override { return currentNode_ == nullptr; }
 
    Book currentItem() const override
    {
       if(isDone()) throw std::out_of_range("Iterator is out of bounds");
-      return current_->book_;
+      return currentNode_->book_;
    }
 
    std::unique_ptr<Iterator<Book>> clone() const override
    {
-      return std::make_unique<BookIterator>(collection_, current_);
+      return std::make_unique<BookIterator>(bookCollection_, currentNode_);
    }
 };
 
@@ -148,18 +148,18 @@ int main()
 {
    std::cout << "=== ITERATOR PATTERN (CLASSIC GOF) ===\n" << std::endl;
 
-   BookCollection collection;
-   collection.addBook("The C++ Programming Language", "Bjarne Stroustrup");
-   collection.addBook("Design Patterns", "Gang of Four");
-   collection.addBook("Clean Code", "Robert C. Martin");
-   collection.addBook("The Pragmatic Programmer", "Robert C. Martin");
-   collection.addBook("Effective C++", "Scott Meyers");
-   collection.addBook("Clean Agile: Back to Basics", "Robert C. Martin");
-   collection.addBook("Effective Modern C++", "Scott Meyers");
+   BookCollection bookCollection;
+   bookCollection.addBook("The C++ Programming Language", "Bjarne Stroustrup");
+   bookCollection.addBook("Design Patterns", "Gang of Four");
+   bookCollection.addBook("Clean Code", "Robert C. Martin");
+   bookCollection.addBook("The Pragmatic Programmer", "Robert C. Martin");
+   bookCollection.addBook("Effective C++", "Scott Meyers");
+   bookCollection.addBook("Clean Agile: Back to Basics", "Robert C. Martin");
+   bookCollection.addBook("Effective Modern C++", "Scott Meyers");
 
    // --- Test 1: Standard Traversal ---
-   std::cout << "--- Collection Inventory ---\n";
-   auto iterator = collection.createIterator();
+   std::cout << "--- bookCollection Inventory ---\n";
+   auto iterator = bookCollection.createIterator();
    
    for(iterator->first(); !iterator->isDone(); iterator->next())
    {
@@ -172,7 +172,7 @@ int main()
    std::cout << "\n--- Finding multiple books by the same author ---\n";
 
    std::unordered_set<std::string> processedAuthors;
-   auto outerIt = collection.createIterator();
+   auto outerIt = bookCollection.createIterator();
 
    for(outerIt->first(); !outerIt->isDone(); outerIt->next())
    {
