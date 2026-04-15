@@ -10,7 +10,7 @@
  * --- THE "RANGE-BASED FOR" MAGIC:
  * Because our BookCollection provides begin() and end(), and our BookIterator 
  * implements the required operators, we can use the elegant C++11 loop:
- *    for (const auto& book : library) { ... }
+ *    for(const auto& book : library) { ... }
  * 
  * This approach has ZERO virtual overhead and provides maximum performance.
  * ============================================================================
@@ -29,8 +29,16 @@ private:
    std::string title_;
    std::string author_;
 
+   Book()                       = delete;      // 1 DC: Default Constructor
+   Book(const Book&)            = delete;      // 2 CC: Copy Constructor
+   Book& operator=(const Book&) = delete;      // 4 CA: Copy Assignment
+   Book& operator=(Book&&)      = delete;      // 5 MA: Move Assignment
+
 public:
-   Book(std::string title, std::string author) 
+   Book(Book&&)                 = default;     // 3 MC: Move Constructor
+   ~Book()                      = default;     // 6 De: Destructor
+
+   Book(std::string title, std::string author) // 7 PC: Particular Constructor 
       : title_{std::move(title)}, author_{std::move(author)} { }
 
    std::string getTitle()  const { return title_; }
@@ -38,12 +46,13 @@ public:
 };
 
 //--------------------------------------------------------- Internal Node:
-struct Node
+class Node
 {
-   Book book_;
+public:
+   Book book;
    std::unique_ptr<Node> next;
 
-   explicit Node(Book book) : book_{std::move(book)}, next{nullptr} { }
+   explicit Node(Book book) : book{std::move(book)}, next{nullptr} { }
 };
 
 //--------------------------------------------------------- STL-Style Iterator:
@@ -51,29 +60,29 @@ struct Node
 class BookIterator
 {
 private:
-   const Node* current_;
+   const Node* currentNode_;
 
 public:
    // The iterator acts as a lightweight pointer wrapper
-   explicit BookIterator(const Node* node) : current_{node} { }
+   explicit BookIterator(const Node* node) : currentNode_{node} { }
 
    // 1. Dereference operator (replaces currentItem())
    const Book& operator*() const
    {
-      return current_->book_;
+      return currentNode_->book;
    }
 
    // 2. Pre-increment operator (replaces next())
    BookIterator& operator++()
    {
-      if (current_) current_ = current_->next.get();
+      if(currentNode_) currentNode_ = currentNode_->next.get();
       return *this;
    }
 
    // 3. Inequality operator (replaces !isDone())
    bool operator!=(const BookIterator& other) const
    {
-      return current_ != other.current_;
+      return currentNode_ != other.currentNode_;
    }
 };
 
@@ -90,8 +99,8 @@ public:
       auto newNode = std::make_unique<Node>(Book{title, author});
       Node* current = newNode.get();
 
-      if (!head_) head_ = std::move(newNode);
-      else        tail_->next = std::move(newNode);
+      if(!head_) head_ = std::move(newNode);
+      else       tail_->next = std::move(newNode);
       
       tail_ = current;
    }
@@ -114,22 +123,22 @@ int main()
 {
    std::cout << "=== ITERATOR PATTERN (IDIOMATIC C++ / STL) ===\n" << std::endl;
 
-   BookCollection library;
-   library.addBook("The C++ Programming Language", "Bjarne Stroustrup");
-   library.addBook("Design Patterns", "Gang of Four");
-   library.addBook("Clean Code", "Robert C. Martin");
-   library.addBook("The Pragmatic Programmer", "Robert C. Martin");
-   library.addBook("Effective C++", "Scott Meyers");
-   library.addBook("Clean Agile: Back to Basics", "Robert C. Martin");
-   library.addBook("Effective Modern C++", "Scott Meyers");
+   BookCollection bookCollection;
+   bookCollection.addBook("The C++ Programming Language", "Bjarne Stroustrup");
+   bookCollection.addBook("Design Patterns", "Gang of Four");
+   bookCollection.addBook("Clean Code", "Robert C. Martin");
+   bookCollection.addBook("The Pragmatic Programmer", "Robert C. Martin");
+   bookCollection.addBook("Effective C++", "Scott Meyers");
+   bookCollection.addBook("Clean Agile: Back to Basics", "Robert C. Martin");
+   bookCollection.addBook("Effective Modern C++", "Scott Meyers");
 
    // --- Test 1: Standard Traversal (The modern way) ---
-   std::cout << "--- Library Inventory (Range-based for loop) ---\n";
+   std::cout << "--- BookCollection Inventory (Range-based for loop) ---\n";
    
-   // This single line replaces: for (iterator->first(); !iterator->isDone(); iterator->next())
+   // This single line replaces: for(iterator->first(); !iterator->isDone(); iterator->next())
    //                            {
    //                               Book book = iterator->currentItem();
-   for (const auto& book : library)
+   for(const auto& book : bookCollection)
       std::cout << " - " << book.getTitle() << " (by " << book.getAuthor() << ")\n";
 
    // --- Test 2: Multiple Traversals (Finding duplicates) ---
@@ -139,11 +148,11 @@ int main()
    std::unordered_set<std::string> processedAuthors;
 
    // We can still use iterators manually if we need fine-grained control
-   for (auto outerIt = library.begin(); outerIt != library.end(); ++outerIt)
+   for(auto outerIt = bookCollection.begin(); outerIt != bookCollection.end(); ++outerIt)
    {
       const Book& currentBook = *outerIt;
 
-      if (!processedAuthors.contains(currentBook.getAuthor()))
+      if(!processedAuthors.contains(currentBook.getAuthor()))
       {
          std::vector<std::string> bookTitlesOfSameAuthor;
 
@@ -154,18 +163,18 @@ int main()
          auto innerIt = outerIt;
          ++innerIt;
 
-         while (innerIt != library.end())
+         while(innerIt != bookCollection.end())
          {
             const Book& compareBook = *innerIt;
-            if (currentBook.getAuthor() == compareBook.getAuthor())
+            if(currentBook.getAuthor() == compareBook.getAuthor())
                bookTitlesOfSameAuthor.push_back(compareBook.getTitle());
             ++innerIt;
          }
 
-         if (bookTitlesOfSameAuthor.size() > 1)
+         if(bookTitlesOfSameAuthor.size() > 1)
          {
             std::cout << "Several books found by " << currentBook.getAuthor() << ":\n";
-            for (const auto& title : bookTitlesOfSameAuthor)
+            for(const auto& title : bookTitlesOfSameAuthor)
                std::cout << " - " << title << std::endl;
             std::cout << std::endl;
          }

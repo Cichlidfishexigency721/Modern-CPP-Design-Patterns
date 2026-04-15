@@ -46,8 +46,16 @@ private:
    std::string title_;
    std::string author_;
 
+   Book()                       = delete;      // 1 DC: Default Constructor
+   Book(const Book&)            = delete;      // 2 CC: Copy Constructor
+   Book& operator=(const Book&) = delete;      // 4 CA: Copy Assignment
+   Book& operator=(Book&&)      = delete;      // 5 MA: Move Assignment
+
 public:
-   Book(std::string title, std::string author) 
+   Book(Book&&)                 = default;     // 3 MC: Move Constructor
+   ~Book()                      = default;     // 6 De: Destructor
+
+   Book(std::string title, std::string author) // 7 PC: Particular Constructor
       : title_{std::move(title)}, author_{std::move(author)} { }
 
    std::string getTitle()  const { return title_; }
@@ -59,23 +67,24 @@ template <typename T>
 class Iterator
 {
 public:
-   virtual ~Iterator()           = default;
-   virtual void first()          = 0;
-   virtual void next()           = 0;
-   virtual bool isDone()   const = 0;
-   virtual T currentItem() const = 0;
+   virtual ~Iterator()                  = default;
+   virtual void first()                 = 0;
+   virtual void next()                  = 0;
+   virtual bool isDone()          const = 0;
+   virtual const T& currentBook() const = 0;
 
    // Prototype-like method to duplicate the iterator state
    virtual std::unique_ptr<Iterator<T>> clone() const = 0;
 };
 
 //--------------------------------------------------------- Internal Node:
-struct Node
+class Node
 {
-   Book book_;
+public:
+   Book book;
    std::unique_ptr<Node> next{nullptr};
 
-   explicit Node(Book book) : book_{std::move(book)} { }
+   explicit Node(Book book) : book{std::move(book)} { }
 };
 
 //--------------------------------------------------------- Concrete Aggregate:
@@ -89,12 +98,12 @@ public:
    void addBook(const std::string& title, const std::string& author)
    {
       auto newNode = std::make_unique<Node>(Book{title, author});
-      Node* current = newNode.get();
+      Node* currentNode = newNode.get();
 
       if(!head_) head_ = std::move(newNode);
       else       tail_->next = std::move(newNode);
       
-      tail_ = current;
+      tail_ = currentNode;
    }
 
    const Node* getHead() const { return head_.get(); }
@@ -126,10 +135,10 @@ public:
 
    bool isDone() const override { return currentNode_ == nullptr; }
 
-   Book currentItem() const override
+   const Book& currentBook() const override
    {
       if(isDone()) throw std::out_of_range("Iterator is out of bounds");
-      return currentNode_->book_;
+      return currentNode_->book;
    }
 
    std::unique_ptr<Iterator<Book>> clone() const override
@@ -163,7 +172,7 @@ int main()
    
    for(iterator->first(); !iterator->isDone(); iterator->next())
    {
-      Book book = iterator->currentItem();
+      const Book& book = iterator->currentBook();
       std::cout << " - " << book.getTitle() << " (by " << book.getAuthor() << ")\n";
    }
 
@@ -176,7 +185,7 @@ int main()
 
    for(outerIt->first(); !outerIt->isDone(); outerIt->next())
    {
-      const Book& currentBook = outerIt->currentItem();
+      const Book& currentBook = outerIt->currentBook();
 
       if(!processedAuthors.contains(currentBook.getAuthor()))
       {
@@ -191,7 +200,7 @@ int main()
 
          while(!innerIt->isDone())
          {
-            const Book& compareBook = innerIt->currentItem();
+            const Book& compareBook = innerIt->currentBook();
             if(currentBook.getAuthor() == compareBook.getAuthor())
                bookTitlesOfSameAuthor.push_back(compareBook.getTitle());
             innerIt->next();

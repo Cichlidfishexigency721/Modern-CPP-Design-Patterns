@@ -19,7 +19,7 @@ classDiagram
     }
 
     class Node {
-        +Book book_
+        +Book book
         +unique_ptr~Node~ next
     }
 
@@ -48,7 +48,7 @@ classDiagram
 
     BookCollection *-- Node : head_
     BookCollection ..> Node : tail_
-    Node *-- Book : book_
+    Node *-- Book : book
     Node *-- Node : next
 
     BookIterator ..> BookCollection : bookCollection_

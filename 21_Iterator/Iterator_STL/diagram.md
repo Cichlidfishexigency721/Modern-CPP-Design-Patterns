@@ -35,9 +35,9 @@ classDiagram
 
     %% Relationships using your symbology reference:
 
-    BookCollection *-- "n" Node : head_
-    Node *-- "1" Book : book_
-    Node *-- "1" Node : next
+    BookCollection *-- Node : head_
+    Node *-- Book : book
+    Node *-- Node : next
 
     BookIterator ..> Node : points to
 
