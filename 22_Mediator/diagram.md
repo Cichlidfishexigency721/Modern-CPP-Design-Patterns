@@ -51,7 +51,7 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
-   Mediator <|-- Equation
+   Mediator <|-- Expression
    Colleague <|-- Double
    Colleague <|-- Integer
 
@@ -64,7 +64,7 @@ classDiagram
    Equation *-- Integer : d_
 
    %% Dependency - No numbers
-   Client ..> Equation
+   Client ..> Expression
    Client ..> Double
    Client ..> Integer
 ```
