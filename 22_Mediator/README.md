@@ -98,9 +98,9 @@ classDiagram
    }
 
    %% Inheritance (Is_a) - No numbers
-   Mediator <|-- Expression
-   Colleague <|-- Double
-   Colleague <|-- Integer
+   Mediator <|.. Expression
+   Colleague <|.. Double
+   Colleague <|.. Integer
 
    %% Bidirectional Relationship
    %% Composition (Has_a) - Multiplicity only at the end
@@ -112,8 +112,6 @@ classDiagram
 
    %% Dependency - No numbers
    Client ..> Expression
-   Client ..> Double
-   Client ..> Integer
 ```
 
 ### Design Note:
