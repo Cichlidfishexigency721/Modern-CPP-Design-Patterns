@@ -113,6 +113,8 @@ classDiagram
 
    %% Composition (Has a)
    Client *-- Expression
+   Client --> Double : setVal()
+   Client --> Integer : setVal()
 ```
 
 ### Design Note:
