@@ -49,10 +49,10 @@ it easier to alter or extend.
 
 ```mermaid
 classDiagram
-   %% class Mediator {
-   %%    <<interface>>
-   %%    +changed(Colleague*)*
-   %% }
+   class Mediator {
+      <<interface>>
+      +changed(Colleague*)*
+   }
 
    class Colleague {
       <<abstract>>
@@ -104,7 +104,7 @@ classDiagram
    Colleague ..> Expression : notify()
 
    %% Inheritance (Implements)
-   %%Mediator <|.. Expression
+   Mediator <|.. Expression
    Colleague <|.. Double
    Colleague <|.. Integer
 
@@ -115,7 +115,7 @@ classDiagram
    %%Expression *-- "2" Integer : c_,d_
 
    %% Composition (Has a)
-   Client *-- Expression
+   Client *-- Mediator
    %%Client ..> Double : setVal()
    %%Client ..> Integer : setVal()
    Client ..> Colleague : setVal()
