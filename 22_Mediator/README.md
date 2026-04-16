@@ -105,10 +105,10 @@ classDiagram
    %% Bidirectional Relationship
    %% Composition (Has_a) - Multiplicity only at the end
    Colleague *-- Mediator : mediator_
-   Equation *-- Double : a_
-   Equation *-- Double : b_
-   Equation *-- Integer : c_
-   Equation *-- Integer : d_
+   Expression *-- Double : a_
+   Expression *-- Double : b_
+   Expression *-- Integer : c_
+   Expression *-- Integer : d_
 
    %% Dependency - No numbers
    Client ..> Expression
@@ -117,7 +117,7 @@ classDiagram
 ```
 
 ### Design Note:
-In this implementation, the 'Equation' (Mediator) acts as a central coordinator
+In this implementation, the 'Expression' (Mediator) acts as a central coordinator
 for the calculation (1/a) * (b+c) + d. Instead of Colleagues interacting with
 each other, they notify the Mediator when their values change. The Mediator then
 decides which parts of the calculation are "dirty" and need to be recomputed,
