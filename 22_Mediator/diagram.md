@@ -57,10 +57,8 @@ classDiagram
 
    %% Composition (Has_a)
    Colleague o-- Mediator : mediator_
-   Expression *-- Double : a_
-   Expression *-- Double : b_
-   Expression *-- Integer : c_
-   Expression *-- Integer : d_
+   Expression *-- "2" Double : a_,b_
+   Expression *-- "2" Integer : c_,d_
 
    %% Notify
    Double ..> Expression : notify()
