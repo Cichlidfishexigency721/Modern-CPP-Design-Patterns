@@ -98,6 +98,11 @@ classDiagram
       +main()
    }
 
+   %% Notify
+   %%Double ..> Expression : notify()
+   %%Integer ..> Expression : notify()
+   Colleague ..> Expression : notify()
+
    %% Inheritance (Implements)
    %%Mediator <|.. Expression
    Colleague <|.. Double
@@ -105,14 +110,9 @@ classDiagram
 
    %% Composition (Has_a)
    %%Colleague o-- Mediator : mediator_
-   Expression *-- "n" Colleague
+   Expression o-- "n" Colleague
    %%Expression *-- "2" Double : a_,b_
    %%Expression *-- "2" Integer : c_,d_
-
-   %% Notify
-   %%Double ..> Expression : notify()
-   %%Integer ..> Expression : notify()
-   Colleague ..> Expression : notify()
 
    %% Composition (Has a)
    Client *-- Expression
