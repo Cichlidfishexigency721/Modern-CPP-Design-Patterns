@@ -26,6 +26,7 @@ classDiagram
    }
 
    class Expression {
+      <<Mediator>>
       -Double* a_
       -Double* b_
       -Integer* c_
@@ -51,12 +52,12 @@ classDiagram
    }
 
    %% Inheritance (Implements)
-   Mediator <|.. Expression
-   Colleague <|.. Double
-   Colleague <|.. Integer
+   %%Mediator <|.. Expression
+   %%Colleague <|.. Double
+   %%Colleague <|.. Integer
 
    %% Composition (Has_a)
-   Colleague o-- Mediator : mediator_
+   %%Colleague o-- Mediator : mediator_
    Expression *-- "2" Double : a_,b_
    Expression *-- "2" Integer : c_,d_
 
