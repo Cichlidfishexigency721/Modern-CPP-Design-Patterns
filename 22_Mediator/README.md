@@ -58,17 +58,19 @@ classDiagram
       <<abstract>>
       #Mediator* mediator_*
       #notify()*
+      +setVal(double)
+      +setVal(int)
    }
 
    class Double {
       -double val_
-      +setVal(double) void
+      +setVal(double)
       +getVal() double
    }
 
    class Integer {
       -int val_
-      +setVal(int) void
+      +setVal(int)
       +getVal() int
    }
 
