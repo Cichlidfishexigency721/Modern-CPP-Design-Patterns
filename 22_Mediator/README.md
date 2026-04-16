@@ -97,20 +97,23 @@ classDiagram
       +main()
    }
 
-   %% Inheritance (Is_a) - No numbers
+   %% Inheritance (Implements)
    Mediator <|.. Expression
    Colleague <|.. Double
    Colleague <|.. Integer
 
-   %% Bidirectional Relationship
-   %% Composition (Has_a) - Multiplicity only at the end
+   %% Composition (Has_a)
    Colleague *-- Mediator : mediator_
    Expression *-- Double : a_
    Expression *-- Double : b_
    Expression *-- Integer : c_
    Expression *-- Integer : d_
 
-   %% Dependency - No numbers
+   %% Notify
+   Double ..> Mediator : Notify()
+   Integer ..> Mediator : Notify()
+
+   %% Dependency
    Client ..> Expression
 ```
 
