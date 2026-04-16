@@ -2,16 +2,16 @@
 
 ```mermaid
 classDiagram
-   class Mediator {
-      <<interface>>
-      +changed(Colleague*)*
-   }
+   %% class Mediator {
+   %%    <<interface>>
+   %%    +changed(Colleague*)*
+   %% }
 
-   class Colleague {
-      <<abstract>>
-      #Mediator* mediator_*
-      #notify()*
-   }
+   %% class Colleague {
+   %%    <<abstract>>
+   %%    #Mediator* mediator_*
+   %%    #notify()*
+   %% }
 
    class Double {
       -double val_
