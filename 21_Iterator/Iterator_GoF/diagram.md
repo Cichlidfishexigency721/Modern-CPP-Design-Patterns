@@ -44,6 +44,8 @@ classDiagram
         +main()
     }
 
+    note for BookIterator "for(iterator->first(); !iterator->isDone(); iterator->next()) {...}"
+
     Iterator~Book~ <|.. BookIterator
 
     BookCollection *-- Node : head_
