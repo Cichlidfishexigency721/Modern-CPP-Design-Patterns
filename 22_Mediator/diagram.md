@@ -7,11 +7,11 @@ classDiagram
    %%    +changed(Colleague*)*
    %% }
 
-   %% class Colleague {
-   %%    <<abstract>>
-   %%    #Mediator* mediator_*
-   %%    #notify()*
-   %% }
+   class Colleague {
+      <<abstract>>
+      #Mediator* mediator_*
+      #notify()*
+   }
 
    class Double {
       -double val_
@@ -53,22 +53,25 @@ classDiagram
 
    %% Inheritance (Implements)
    %%Mediator <|.. Expression
-   %%Colleague <|.. Double
-   %%Colleague <|.. Integer
+   Colleague <|.. Double
+   Colleague <|.. Integer
 
    %% Composition (Has_a)
    %%Colleague o-- Mediator : mediator_
-   Expression *-- "2" Double : a_,b_
-   Expression *-- "2" Integer : c_,d_
+   Expression *-- "n" Colleague
+   %%Expression *-- "2" Double : a_,b_
+   %%Expression *-- "2" Integer : c_,d_
 
    %% Notify
-   Double ..> Expression : notify()
-   Integer ..> Expression : notify()
+   %%Double ..> Expression : notify()
+   %%Integer ..> Expression : notify()
+   Colleague ..> Expression : notify()
 
    %% Composition (Has a)
    Client *-- Expression
-   Client ..> Double : setVal()
-   Client ..> Integer : setVal()
+   %%Client ..> Double : setVal()
+   %%Client ..> Integer : setVal()
+   Client ..> Colleague : setVal()
 ```
 
 ### Design Note:
