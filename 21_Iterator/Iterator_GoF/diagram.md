@@ -44,7 +44,7 @@ classDiagram
         +main()
     }
 
-    note for Client "auto iterator = bookCollection.createIterator();\nfor(iterator->first(); !iterator->isDone(); iterator->next()) {...}"
+    note for Client "for(iterator->first(); !iterator->isDone(); iterator->next()) {...}"
 
     Iterator~Book~ <|.. BookIterator
 
