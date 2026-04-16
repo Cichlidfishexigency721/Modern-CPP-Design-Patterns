@@ -49,8 +49,6 @@ protected:
 
 public:
    virtual ~Colleague() = default;
-   virtual void setVal(double) {}
-   virtual void setVal(int)    {}
 };
 
 //------------------------------------------------ Double (Concrete Colleague):
@@ -62,7 +60,7 @@ private:
 public:
    Double(Mediator* mediator, double val) : Colleague{mediator}, val_{val} { }
 
-   void setVal(double newVal) override
+   void setVal(double newVal)
    {
       std::cout << " [Variable] Double changed to " << newVal << '\n';
       val_ = newVal;
@@ -81,7 +79,7 @@ private:
 public:
    Integer(Mediator* mediator, int val) : Colleague{mediator}, val_{val} { }
 
-   void setVal(int newVal) override
+   void setVal(int newVal)
    {
       std::cout << " [Variable] Integer changed to " << newVal << '\n';
       val_ = newVal;

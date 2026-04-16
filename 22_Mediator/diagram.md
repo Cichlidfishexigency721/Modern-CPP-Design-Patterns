@@ -28,7 +28,6 @@ classDiagram
    }
 
    class Expression {
-      <<Mediator>>
       -Double* a_
       -Double* b_
       -Integer* c_
