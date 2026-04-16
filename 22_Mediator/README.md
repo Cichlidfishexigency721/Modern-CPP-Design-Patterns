@@ -56,34 +56,41 @@ classDiagram
 
    class Colleague {
       <<abstract>>
-      #Mediator* mediator_
-      #notify()
+      #Mediator* mediator_*
+      #notify()*
    }
 
    class Double {
       -double val_
-      +setVal(double)
+      +setVal(double) void
       +getVal() double
    }
 
    class Integer {
       -int val_
-      +setVal(int)
+      +setVal(int) void
       +getVal() int
    }
 
-   class Equation {
+   class Expression {
       -Double* a_
       -Double* b_
       -Integer* c_
       -Integer* d_
       -bool doInv_
       -bool doMul_
+      -bool doAd1_
+      -bool doAd2_
+      -double invVal_
+      -double mulVal_
+      -double ad1Val_
+      -double ad2Val_
       +setA(Double*)
       +setB(Double*)
       +setC(Integer*)
       +setD(Integer*)
       +evaluate() double
+      +changed(Colleague*)
    }
 
    class Client {
@@ -97,11 +104,11 @@ classDiagram
 
    %% Bidirectional Relationship
    %% Composition (Has_a) - Multiplicity only at the end
-   Colleague *-- "1" Mediator : mediator_
-   Equation *-- "1" Double : a_
-   Equation *-- "1" Double : b_
-   Equation *-- "1" Integer : c_
-   Equation *-- "1" Integer : d_
+   Colleague *-- Mediator : mediator_
+   Equation *-- Double : a_
+   Equation *-- Double : b_
+   Equation *-- Integer : c_
+   Equation *-- Integer : d_
 
    %% Dependency - No numbers
    Client ..> Equation
