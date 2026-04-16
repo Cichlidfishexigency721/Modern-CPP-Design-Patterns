@@ -103,7 +103,7 @@ classDiagram
    Colleague <|.. Integer
 
    %% Composition (Has_a)
-   Colleague *-- Mediator : mediator_
+   Colleague o-- Mediator : mediator_
    Expression *-- Double : a_
    Expression *-- Double : b_
    Expression *-- Integer : c_
@@ -113,8 +113,8 @@ classDiagram
    Double ..> Expression : notify()
    Integer ..> Expression : notify()
 
-   %% Dependency
-   Client ..> Expression
+   %% Composition (Has a)
+   Client *-- Expression
 ```
 
 ### Design Note:
