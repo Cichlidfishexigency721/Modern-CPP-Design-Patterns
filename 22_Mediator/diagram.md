@@ -63,8 +63,8 @@ classDiagram
    Expression *-- Integer : d_
 
    %% Notify
-   Double ..> Mediator : Notify()
-   Integer ..> Mediator : Notify()
+   Double ..> Expression : notify()
+   Integer ..> Expression : notify()
 
    %% Dependency
    Client ..> Expression
