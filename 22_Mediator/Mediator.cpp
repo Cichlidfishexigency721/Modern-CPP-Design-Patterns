@@ -44,7 +44,7 @@ protected:
 
    void notify() 
    {
-      if (mediator_) mediator_->changed(this);
+      if(mediator_) mediator_->changed(this);
    }
 
 public:
@@ -118,41 +118,41 @@ public:
    // The Mediator coordinates the cache invalidation based on memory identity
    void changed(Colleague* colleague) override
    {
-      if      (colleague == a_)                    doInv_ = doMul_ = doAd2_ = true;
-      else if (colleague == b_ || colleague == c_) doAd1_ = doMul_ = doAd2_ = true;
-      else if (colleague == d_)                    doAd2_ = true;
+      if     (colleague == a_)                    doInv_ = doMul_ = doAd2_ = true;
+      else if(colleague == b_ || colleague == c_) doAd1_ = doMul_ = doAd2_ = true;
+      else if(colleague == d_)                    doAd2_ = true;
    }
 
    // Evaluates (1/a)*(b+c) + d
    double evaluate() 
    {
-      if (!verify()) throw std::invalid_argument("Error: Expression not well defined.");
+      if(!verify()) throw std::invalid_argument("Error: Expression not well defined.");
 
-      if (doInv_)
+      if(doInv_)
       {
          invVal_ = 1.0 / a_->getVal(); 
-         std::cout << "\tInverting (1/a)\n";
+         std::cout << "\t\tInverting (1/a)\n";
       }
-      if (doAd1_)
+      if(doAd1_)
       {
          ad1Val_ = b_->getVal() + c_->getVal(); 
-         std::cout << "\tAdding (b+c)\n";
+         std::cout << "\t\tAdding (b+c)\n";
       }
-      if (doMul_)
+      if(doMul_)
       {
          mulVal_ = invVal_ * ad1Val_; 
-         std::cout << "\tMultiplying\n";
+         std::cout << "\t\tMultiplying\n";
       }
-      if (doAd2_)
+      if(doAd2_)
       {
          ad2Val_ = mulVal_ + d_->getVal(); 
-         std::cout << "\tAdding (+d)\n";
+         std::cout << "\t\tAdding (+d)\n";
       }
 
       // Reset flags after evaluation
       doInv_ = doMul_ = doAd1_ = doAd2_ = false;
 
-      std::cout << " Result = ";
+      std::cout << "\tResult = ";
       return ad2Val_;
    }
 };
@@ -178,26 +178,26 @@ int main()
       expression.setC(&c);
       expression.setD(&d);
 
-      std::cout << "Initial Evaluation:\n";
+      std::cout << "\tInitial Evaluation:\n";
       std::cout << expression.evaluate() << "\n\n";
 
-      std::cout << "Second Evaluation (Cache hit, no operations should run):\n";
+      std::cout << "\tSecond Evaluation (Cache hit, no operations should run):\n";
       std::cout << expression.evaluate() << "\n\n";
 
       a.setVal(4.4);
-      std::cout << "Evaluating after 'a' changes:\n";
+      std::cout << "\tEvaluating after 'a' changes:\n";
       std::cout << expression.evaluate() << "\n\n";
 
       c.setVal(10);
-      std::cout << "Evaluating after 'c' changes:\n";
+      std::cout << "\tEvaluating after 'c' changes:\n";
       std::cout << expression.evaluate() << "\n\n";
 
       d.setVal(6);
-      std::cout << "Evaluating after 'd' changes:\n";
+      std::cout << "\tEvaluating after 'd' changes:\n";
       std::cout << expression.evaluate() << "\n\n";
 
       a.setVal(3.1); d.setVal(4);
-      std::cout << "Evaluating after 'a' and 'c' changes:\n";
+      std::cout << "\tEvaluating after 'a' and 'c' changes:\n";
       std::cout << expression.evaluate() << "\n";
    }
    catch(const std::exception& e)
