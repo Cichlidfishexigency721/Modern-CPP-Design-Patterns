@@ -44,7 +44,7 @@ classDiagram
         +main()
     }
 
-    note for BookIterator "for(iterator->first(); !iterator->isDone(); iterator->next()) {...}"
+    note for Client "for(iterator->first(); !iterator->isDone(); iterator->next()) {...}"
 
     Iterator~Book~ <|.. BookIterator
 

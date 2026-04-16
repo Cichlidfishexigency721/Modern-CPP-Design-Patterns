@@ -33,7 +33,7 @@ classDiagram
         +main()
     }
 
-    note for BookIterator "for(const auto& book : bookCollection) {...}"
+    note for Client "for(const auto& book : bookCollection) {...}"
 
     %% Relationships using your symbology reference:
 
